@@ -10,13 +10,8 @@ use Illuminate\Support\Facades\Mail;
 use App\Models\Admin;
 use App\Mail\Websitemail;
 
-class AdminController extends Controller
+class AdminAuthController extends Controller
 {
-    public function dashboard()
-    {
-        return view('admin.dashboard');
-    }
-
     public function login()
     {
         return view('admin.login');
@@ -41,7 +36,7 @@ class AdminController extends Controller
             return redirect()->route('admin_login')->with('error','The information you entered is incorrect! Please try again!');
         }
     }
-    
+
     public function logout()
     {
         Auth::guard('admin')->logout();
@@ -105,11 +100,5 @@ class AdminController extends Controller
     public function profile()
     {
         return view('admin.profile');
-    }
-
-    public function profile_update(Request $request)
-    {
-        // Profile update logic can be added here
-        return redirect()->back()->with('success','Profile updated successfully');
     }
 }

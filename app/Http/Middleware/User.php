@@ -16,7 +16,7 @@ class User
     public function handle(Request $request, Closure $next): Response
     {
         if(!Auth::guard('web')->check()) {
-            return redirect()->route('login');
+            return redirect()->route('login')->with('error','You must be logged in first!');
         }
         return $next($request);
     }

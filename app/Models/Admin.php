@@ -10,4 +10,23 @@ use Illuminate\Notifications\Notifiable;
 class Admin extends Authenticatable
 {
     use HasFactory, Notifiable;
+
+    protected $fillable = [
+        'name',
+        'email',
+        'photo',
+        'password',
+        'token',
+    ];
+
+    protected $hidden = [
+        'password',
+        'remember_token',
+        'token',
+    ];
+
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+    ];
 }

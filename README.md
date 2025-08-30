@@ -152,7 +152,8 @@ This project demonstrates a complete **Multi-Authentication System** built with 
 
 ### Controllers
 - `FrontController` - Handles front-end pages
-- `Admin/AdminController` - Handles admin authentication and dashboard
+- `Admin/AdminAuthController` - Handles admin authentication (login, logout, password reset)
+- `Admin/AdminDashboardController` - Handles admin dashboard and profile management
 - `User/UserController` - Handles user authentication and dashboard
 
 ### Middleware

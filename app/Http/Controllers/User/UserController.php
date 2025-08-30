@@ -42,7 +42,7 @@ class UserController extends Controller
             return redirect()->route('login')->with('error','The information you entered is incorrect! Please try again!');
         }
     }
-    
+
     public function logout()
     {
         Auth::guard('web')->logout();

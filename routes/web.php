@@ -3,14 +3,15 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\User\UserController;
-use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\AdminAuthController;
 
 // Front
 Route::get('/', [FrontController::class, 'home'])->name('home');
 Route::get('/about', [FrontController::class, 'about'])->name('about');
 
 // User
-Route::middleware('auth')->group(function () {    
+Route::middleware('auth')->group(function () {
     Route::get('/dashboard',[UserController::class,'dashboard'])->name('dashboard');
 });
 Route::get('/register',[UserController::class,'register'])->name('register');
@@ -26,19 +27,19 @@ Route::post('/reset-password/{token}/{email}',[UserController::class,'reset_pass
 
 
 // Admin
-Route::middleware('admin')->prefix('admin')->group(function () {    
-    Route::get('/dashboard',[AdminController::class,'dashboard'])->name('admin_dashboard');
-    Route::get('/profile',[AdminController::class,'profile'])->name('admin_profile');
-    Route::post('/profile',[AdminController::class,'profile_update'])->name('admin_profile_update');
+Route::middleware('admin')->prefix('admin')->group(function () {
+    Route::get('/dashboard',[AdminDashboardController::class,'dashboard'])->name('admin_dashboard');
+    Route::get('/profile',[AdminAuthController::class,'profile'])->name('admin_profile');
+    Route::post('/profile',[AdminDashboardController::class,'profile_update'])->name('admin_profile_update');
 
 });
 Route::prefix('admin')->group(function () {
     Route::get('/', function () {return redirect('/admin/login');});
-    Route::get('/login',[AdminController::class,'login'])->name('admin_login');
-    Route::post('/login',[AdminController::class,'login_submit'])->name('admin_login_submit');
-    Route::get('/logout',[AdminController::class,'logout'])->name('admin_logout');
-    Route::get('/forget-password',[AdminController::class,'forget_password'])->name('admin_forget_password');
-    Route::post('/forget_password_submit',[AdminController::class,'forget_password_submit'])->name('admin_forget_password_submit');
-    Route::get('/reset-password/{token}/{email}',[AdminController::class,'reset_password'])->name('admin_reset_password');
-    Route::post('/reset-password/{token}/{email}',[AdminController::class,'reset_password_submit'])->name('admin_reset_password_submit');
+    Route::get('/login',[AdminAuthController::class,'login'])->name('admin_login');
+    Route::post('/login',[AdminAuthController::class,'login_submit'])->name('admin_login_submit');
+    Route::get('/logout',[AdminAuthController::class,'logout'])->name('admin_logout');
+    Route::get('/forget-password',[AdminAuthController::class,'forget_password'])->name('admin_forget_password');
+    Route::post('/forget_password_submit',[AdminAuthController::class,'forget_password_submit'])->name('admin_forget_password_submit');
+    Route::get('/reset-password/{token}/{email}',[AdminAuthController::class,'reset_password'])->name('admin_reset_password');
+    Route::post('/reset-password/{token}/{email}',[AdminAuthController::class,'reset_password_submit'])->name('admin_reset_password_submit');
 });
