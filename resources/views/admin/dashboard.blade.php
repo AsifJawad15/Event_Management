@@ -11,11 +11,15 @@
             </form>
             <ul class="navbar-nav navbar-right justify-content-end rightsidetop">
                 <li class="nav-link">
-                    <a href="" target="_blank" class="btn btn-warning">Front End</a>
+                    <a href="{{ url('/') }}" target="_blank" class="btn btn-warning">Front End</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img alt="image" src="uploads/user.jpg" class="rounded-circle-custom">
+                        @if(Auth::guard('admin')->user()->photo)
+                            <img alt="image" src="{{ asset('uploads/' . Auth::guard('admin')->user()->photo) }}" class="rounded-circle-custom">
+                        @else
+                            <img alt="image" src="{{ asset('uploads/user.jpg') }}" class="rounded-circle-custom">
+                        @endif
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li><a class="dropdown-item" href="{{ route('admin_profile') }}"><i class="far fa-user"></i> Edit Profile</a></li>
@@ -38,7 +42,9 @@
 
                 <ul class="sidebar-menu">
 
-                    <li class="active"><a class="nav-link" href="{{ route('admin_dashboard') }}"><i class="fas fa-hand-point-right"></i> <span>Dashboard</span></a></li>
+                    <li class="{{ Request::is('admin/dashboard') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin_dashboard') }}"><i class="fas fa-hand-point-right"></i> <span>Dashboard</span></a></li>
+
+                    <li class="{{ Request::is('admin/profile') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin_profile') }}"><i class="fas fa-user"></i> <span>Profile</span></a></li>
 
                     <li class="nav-item dropdown active">
                         <a href="#" class="nav-link has-dropdown"><i class="fas fa-hand-point-right"></i><span>Dropdown Items</span></a>
@@ -114,5 +120,33 @@
                 </div>
             </section>
         </div>
+
+<script>
+@if(session('success'))
+    iziToast.show({
+        title: 'Success',
+        message: '{{ session('success') }}',
+        color: 'green',
+        position: 'topRight',
+        timeout: 5000,
+        progressBar: true,
+        close: true,
+        closeOnClick: true
+    });
+@endif
+
+@if(session('error'))
+    iziToast.show({
+        title: 'Error',
+        message: '{{ session('error') }}',
+        color: 'red',
+        position: 'topRight',
+        timeout: 5000,
+        progressBar: true,
+        close: true,
+        closeOnClick: true
+    });
+@endif
+</script>
 
 @endsection
