@@ -10,26 +10,6 @@
                                 <h4 class="text-center">Admin Panel Login</h4>
                             </div>
                             <div class="card-body card-body-auth">
-                                @if($errors->any())
-                                    <div class="alert alert-danger">
-                                        @foreach ($errors->all() as $error)
-                                            {{ $error }}<br>
-                                        @endforeach
-                                    </div>
-                                @endif
-
-                                @if(session('success'))
-                                    <div class="alert alert-success">
-                                        {{ session('success') }}
-                                    </div>
-                                @endif
-
-                                @if(session('error'))
-                                    <div class="alert alert-danger">
-                                        {{ session('error') }}
-                                    </div>
-                                @endif
-
                                 <form method="POST" action="{{ route('admin_login_submit') }}">
                                     @csrf
                                     <div class="form-group">
@@ -57,4 +37,47 @@
                 </div>
             </div>
         </section>
+
+<script>
+@if($errors->any())
+    @foreach ($errors->all() as $error)
+        iziToast.show({
+            title: 'Validation Error',
+            message: '{{ $error }}',
+            color: 'red',
+            position: 'topRight',
+            timeout: 5000,
+            progressBar: true,
+            close: true,
+            closeOnClick: true
+        });
+    @endforeach
+@endif
+
+@if(session('success'))
+    iziToast.show({
+        title: 'Success',
+        message: '{{ session('success') }}',
+        color: 'green',
+        position: 'topRight',
+        timeout: 5000,
+        progressBar: true,
+        close: true,
+        closeOnClick: true
+    });
+@endif
+
+@if(session('error'))
+    iziToast.show({
+        title: 'Error',
+        message: '{{ session('error') }}',
+        color: 'red',
+        position: 'topRight',
+        timeout: 5000,
+        progressBar: true,
+        close: true,
+        closeOnClick: true
+    });
+@endif
+</script>
 @endsection

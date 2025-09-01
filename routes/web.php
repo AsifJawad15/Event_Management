@@ -9,6 +9,8 @@ use App\Http\Controllers\Admin\AdminAuthController;
 // Front
 Route::get('/', [FrontController::class, 'home'])->name('home');
 Route::get('/about', [FrontController::class, 'about'])->name('about');
+Route::get('/contact', [FrontController::class, 'contact'])->name('contact');
+Route::post('/contact', [FrontController::class, 'contact_submit'])->name('contact.submit');
 
 // User
 Route::middleware('auth')->group(function () {

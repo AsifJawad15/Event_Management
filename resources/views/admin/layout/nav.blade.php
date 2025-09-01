@@ -7,7 +7,7 @@
             </form>
             <ul class="navbar-nav navbar-right justify-content-end rightsidetop">
                 <li class="nav-link">
-                    <a href="" target="{{ url('/') }}" class="btn btn-warning">Front End</a>
+                    <a href="{{ url('/') }}" target="_blank" class="btn btn-warning">Front End</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -18,8 +18,8 @@
                         @endif
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="profile.html"><i class="far fa-user"></i> Edit Profile</a></li>
-                        <li><a class="dropdown-item" href="login.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                        <li><a class="dropdown-item" href="{{ route('admin_profile') }}"><i class="far fa-user"></i> Edit Profile</a></li>
+                        <li><a class="dropdown-item" href="{{ route('admin_logout') }}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
                     </ul>
                 </li>
             </ul>

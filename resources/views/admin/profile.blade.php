@@ -118,26 +118,6 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body">
-                                    @if($errors->any())
-                                        <div class="alert alert-danger">
-                                            @foreach ($errors->all() as $error)
-                                                {{ $error }}<br>
-                                            @endforeach
-                                        </div>
-                                    @endif
-
-                                    @if(session('success'))
-                                        <div class="alert alert-success">
-                                            {{ session('success') }}
-                                        </div>
-                                    @endif
-
-                                    @if(session('error'))
-                                        <div class="alert alert-danger">
-                                            {{ session('error') }}
-                                        </div>
-                                    @endif
-
                                     <form action="{{ route('admin_profile_update') }}" method="post" enctype="multipart/form-data">
                                         @csrf
                                         <div class="row">
@@ -145,7 +125,7 @@
                                                 @if(Auth::guard('admin')->user()->photo)
                                                     <img src="{{ asset('uploads/' . Auth::guard('admin')->user()->photo) }}" alt="" class="profile-photo w_100_p">
                                                 @else
-                                                    <img src="{{ asset('uploads/user.jpg') }}" alt="" class="profile-photo w_100_p">
+                                                    <img src="{{ asset('uploads/admin.jpg') }}" alt="" class="profile-photo w_100_p">
                                                 @endif
                                                 <input type="file" class="mt_10" name="photo">
                                             </div>
@@ -187,6 +167,49 @@
 
 <script src="{{ asset('dist/js/scripts.js') }}"></script>
 <script src="{{ asset('dist/js/custom.js') }}"></script>
+
+<script>
+@if($errors->any())
+    @foreach ($errors->all() as $error)
+        iziToast.show({
+            title: 'Validation Error',
+            message: '{{ $error }}',
+            color: 'red',
+            position: 'topRight',
+            timeout: 5000,
+            progressBar: true,
+            close: true,
+            closeOnClick: true
+        });
+    @endforeach
+@endif
+
+@if(session('success'))
+    iziToast.show({
+        title: 'Success',
+        message: '{{ session('success') }}',
+        color: 'green',
+        position: 'topRight',
+        timeout: 5000,
+        progressBar: true,
+        close: true,
+        closeOnClick: true
+    });
+@endif
+
+@if(session('error'))
+    iziToast.show({
+        title: 'Error',
+        message: '{{ session('error') }}',
+        color: 'red',
+        position: 'topRight',
+        timeout: 5000,
+        progressBar: true,
+        close: true,
+        closeOnClick: true
+    });
+@endif
+</script>
 
 </body>
 </html>

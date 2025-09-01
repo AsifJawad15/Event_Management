@@ -22,6 +22,10 @@ class AdminAuthController extends Controller
         $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
+        ], [
+            'email.required' => 'Email field is required',
+            'email.email' => 'Please enter a valid email address',
+            'password.required' => 'Password field is required',
         ]);
 
         $check = $request->all();
@@ -31,7 +35,7 @@ class AdminAuthController extends Controller
         ];
 
         if(Auth::guard('admin')->attempt($data)) {
-            return redirect()->route('admin_dashboard');
+            return redirect()->route('admin_dashboard')->with('success','Login successful! Welcome to admin dashboard.');
         } else {
             return redirect()->route('admin_login')->with('error','The information you entered is incorrect! Please try again!');
         }
@@ -52,11 +56,14 @@ class AdminAuthController extends Controller
     {
         $request->validate([
             'email' => ['required', 'email'],
+        ], [
+            'email.required' => 'Email field is required',
+            'email.email' => 'Please enter a valid email address',
         ]);
 
         $admin = Admin::where('email',$request->email)->first();
         if(!$admin) {
-            return redirect()->back()->with('error','Email is not found');
+            return redirect()->back()->with('error','Email is not found in our records');
         }
 
         $token = hash('sha256',time());
@@ -87,6 +94,10 @@ class AdminAuthController extends Controller
         $request->validate([
             'password' => ['required'],
             'confirm_password' => ['required','same:password'],
+        ], [
+            'password.required' => 'Password field is required',
+            'confirm_password.required' => 'Confirm password field is required',
+            'confirm_password.same' => 'Password and confirm password must match',
         ]);
 
         $admin = Admin::where('email',$email)->where('token',$token)->first();

@@ -19,7 +19,7 @@ class AdminDashboardController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:admins,email,' . auth()->guard('admin')->id(),
-            'new_password' => 'nullable|string|min:8|confirmed:retype_password',
+            'new_password' => 'nullable|string|confirmed:retype_password',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
