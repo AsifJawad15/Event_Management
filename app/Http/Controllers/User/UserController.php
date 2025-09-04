@@ -17,6 +17,54 @@ class UserController extends Controller
         return view('user.dashboard');
     }
 
+    public function profile()
+    {
+        return view('user.profile');
+    }
+
+    public function profile_update(Request $request)
+    {
+        $request->validate([
+            'name' => ['required'],
+            'email' => ['required', 'email'],
+            'phone' => ['required'],
+            'address' => ['required'],
+            'country' => ['required'],
+            'state' => ['required'],
+            'city' => ['required'],
+            'zip' => ['required'],
+            'photo' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:10240'],
+        ]);
+
+        $user = Auth::user();
+
+        // Handle photo upload
+        if ($request->hasFile('photo')) {
+            // Delete old photo if exists
+            if ($user->photo && file_exists(public_path('uploads/' . $user->photo))) {
+                unlink(public_path('uploads/' . $user->photo));
+            }
+
+            $photo = $request->file('photo');
+            $photoName = 'user_' . time() . '.' . $photo->getClientOriginalExtension();
+            $photo->move(public_path('uploads'), $photoName);
+            $user->photo = $photoName;
+        }
+
+        // Update user data
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->address = $request->address;
+        $user->country = $request->country;
+        $user->state = $request->state;
+        $user->city = $request->city;
+        $user->zip = $request->zip;
+        $user->save();
+
+        return redirect()->route('user.profile')->with('success', 'Profile updated successfully!');
+    }
+
     public function login()
     {
         return view('user.login');
@@ -37,7 +85,7 @@ class UserController extends Controller
         ];
 
         if(Auth::guard('web')->attempt($data)) {
-            return redirect()->route('dashboard');
+            return redirect()->route('user.dashboard');
         } else {
             return redirect()->route('login')->with('error','The information you entered is incorrect! Please try again!');
         }

@@ -7,14 +7,16 @@ use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminAuthController;
 
 // Front
-Route::get('/', [FrontController::class, 'home'])->name('home');
-Route::get('/about', [FrontController::class, 'about'])->name('about');
-Route::get('/contact', [FrontController::class, 'contact'])->name('contact');
+Route::get('/', [FrontController::class, 'home'])->name('front.home');
+Route::get('/about', [FrontController::class, 'about'])->name('front.about');
+Route::get('/contact', [FrontController::class, 'contact'])->name('front.contact');
 Route::post('/contact', [FrontController::class, 'contact_submit'])->name('contact.submit');
 
 // User
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard',[UserController::class,'dashboard'])->name('dashboard');
+    Route::get('/dashboard',[UserController::class,'dashboard'])->name('user.dashboard');
+    Route::get('/profile',[UserController::class,'profile'])->name('user.profile');
+    Route::post('/profile',[UserController::class,'profile_update'])->name('user.profile.update');
 });
 Route::get('/register',[UserController::class,'register'])->name('register');
 Route::post('/register_submit',[UserController::class,'register_submit'])->name('register_submit');
