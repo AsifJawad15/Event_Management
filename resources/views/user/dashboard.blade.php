@@ -194,4 +194,37 @@
     font-weight: 600;
 }
 </style>
+
+@section('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    @if(session('success'))
+        iziToast.success({
+            title: 'Success!',
+            message: '{{ session('success') }}',
+            position: 'topRight'
+        });
+    @endif
+
+    @if(session('error'))
+        iziToast.error({
+            title: 'Error!',
+            message: '{{ session('error') }}',
+            position: 'topRight'
+        });
+    @endif
+
+    @if($errors->any())
+        @foreach ($errors->all() as $error)
+            iziToast.warning({
+                title: 'Validation Error!',
+                message: '{{ $error }}',
+                position: 'topRight'
+            });
+        @endforeach
+    @endif
+});
+</script>
+@endsection
+
 @endsection

@@ -5,6 +5,7 @@ use App\Http\Controllers\FrontController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminAuthController;
+use App\Http\Controllers\Admin\AdminHomeBannerController;
 
 // Front
 Route::get('/', [FrontController::class, 'home'])->name('front.home');
@@ -35,7 +36,8 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::get('/dashboard',[AdminDashboardController::class,'dashboard'])->name('admin_dashboard');
     Route::get('/profile',[AdminAuthController::class,'profile'])->name('admin_profile');
     Route::post('/profile',[AdminDashboardController::class,'profile_update'])->name('admin_profile_update');
-
+    Route::get('/home-banner',[AdminHomeBannerController::class,'index'])->name('admin_home_banner');
+    Route::post('/home-banner',[AdminHomeBannerController::class,'update'])->name('admin_home_banner_update');
 });
 Route::prefix('admin')->group(function () {
     Route::get('/', function () {return redirect('/admin/login');});

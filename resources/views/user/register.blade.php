@@ -81,26 +81,6 @@
                 <div class="login-register-bg">
                     <div class="row">
                         <div class="col-lg-12 col-sm-12 col-xs-12">
-                            @if($errors->any())
-                                <div class="alert alert-danger">
-                                    @foreach ($errors->all() as $error)
-                                        <div>{{ $error }}</div>
-                                    @endforeach
-                                </div>
-                            @endif
-
-                            @if(session('success'))
-                                <div class="alert alert-success">
-                                    {{ session('success') }}
-                                </div>
-                            @endif
-
-                            @if(session('error'))
-                                <div class="alert alert-danger">
-                                    {{ session('error') }}
-                                </div>
-                            @endif
-
                             <form action="{{ route('register_submit') }}" class="registerd" method="post">
                                 @csrf
                                 <div class="form-group">
@@ -143,4 +123,36 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    @if(session('success'))
+        iziToast.success({
+            title: 'Success!',
+            message: '{{ session('success') }}',
+            position: 'topRight'
+        });
+    @endif
+
+    @if(session('error'))
+        iziToast.error({
+            title: 'Error!',
+            message: '{{ session('error') }}',
+            position: 'topRight'
+        });
+    @endif
+
+    @if($errors->any())
+        @foreach ($errors->all() as $error)
+            iziToast.warning({
+                title: 'Validation Error!',
+                message: '{{ $error }}',
+                position: 'topRight'
+            });
+        @endforeach
+    @endif
+});
+</script>
 @endsection

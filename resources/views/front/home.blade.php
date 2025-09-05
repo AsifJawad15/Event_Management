@@ -54,15 +54,15 @@
 		</div>
 	</div>
 </div>
-<div class="container-fluid home-banner" style="background-image: url('{{ asset('dist-front/images/banner-home.jpg') }}'); min-height: 500px; background-size: cover; background-position: center; background-repeat: no-repeat;">
+<div class="container-fluid home-banner" style="background-image: url('{{ asset($banner->background) }}'); min-height: 500px; background-size: cover; background-position: center; background-repeat: no-repeat;">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="static-banner-detail">
-					<h4>September 20-24, 2024, California</h4>
-					<h2>Event and Conference Website</h2>
+					<h4>{{ $banner->subheading }}</h4>
+					<h2>{{ $banner->heading }}</h2>
 					<p>
-						Join us at our next networking event and conference! Connect with industry professionals, engage in insightful discussions, and attend hands-on workshops. Learn from experts, collaborate on innovative ideas, and build lasting relationships.
+						{{ $banner->text }}
 					</p>
 					<div class="counter-area">
 						<div class="countDown clearfix">
@@ -94,7 +94,9 @@
 							</div>
 						</div>
 					</div>
-					<a href="{{ url('/buy') }}" class="banner_btn video_btn">BUY TICKETS</a>
+					@if($banner->button_text && $banner->button_url)
+					<a href="{{ url($banner->button_url) }}" class="banner_btn video_btn">{{ $banner->button_text }}</a>
+					@endif
 				</div>
 			</div>
 		</div>
@@ -382,8 +384,8 @@
 @section('scripts')
 <script>
     $(".countDown").downCount({
-        date: '08/25/2024 12:00:00', //month/date/year   HH:MM:SS
-        offset: +6 //+GMT
+        date: '{{ $banner->countdown_date }}', //month/date/year   HH:MM:SS
+        offset: +0 //+GMT (set to 0 for local time)
     });
 </script>
 @endsection

@@ -36,7 +36,7 @@ class UserController extends Controller
             'photo' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:10240'],
         ]);
 
-        $user = Auth::user();
+        $user = User::find(Auth::id());
 
         // Handle photo upload
         if ($request->hasFile('photo')) {
@@ -85,7 +85,7 @@ class UserController extends Controller
         ];
 
         if(Auth::guard('web')->attempt($data)) {
-            return redirect()->route('user.dashboard');
+            return redirect()->route('user.dashboard')->with('success','Welcome! You have successfully logged in.');
         } else {
             return redirect()->route('login')->with('error','The information you entered is incorrect! Please try again!');
         }
@@ -151,11 +151,14 @@ class UserController extends Controller
     {
         $request->validate([
             'email' => ['required', 'email'],
+        ], [
+            'email.required' => 'Email address is required.',
+            'email.email' => 'Please enter a valid email address.',
         ]);
 
         $user = User::where('email',$request->email)->first();
         if(!$user) {
-            return redirect()->back()->with('error','Email is not found');
+            return redirect()->back()->with('error','Email address not found in our records. Please check your email and try again.');
         }
 
         $token = hash('sha256',time());
@@ -169,7 +172,7 @@ class UserController extends Controller
 
         Mail::to($request->email)->send(new Websitemail($subject,$message));
 
-        return redirect()->back()->with('success','We have sent a password reset link to your email. Please check your email. If you do not find the email in your inbox, please check your spam folder.');
+        return redirect()->back()->with('success','Password reset link sent successfully! Please check your email inbox (and spam folder) for the reset link.');
     }
 
     public function reset_password($token,$email)

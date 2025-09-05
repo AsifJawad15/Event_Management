@@ -15,6 +15,8 @@
 		<link href="{{ asset('dist-front/css/responsive.css') }}" type="text/css" rel="stylesheet">
 		<link href="{{ asset('dist-front/css/spacing.css') }}" type="text/css" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,500,700,900" rel="stylesheet">
+		<!-- iziToast CSS -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/izitoast@1.4.0/dist/css/iziToast.min.css">
 		@yield('head')
 	</head>
 	<body data-spy="scroll" data-target=".navbar" data-offset="50">
@@ -110,6 +112,8 @@
 		<script src="{{ asset('dist-front/js/jquery.scrollTo.js') }}"></script>
 		<script src="{{ asset('dist-front/js/typed.js') }}"></script>
 		<script src="{{ asset('dist-front/js/custom.js') }}"></script>
+		<!-- iziToast JS -->
+		<script src="https://cdn.jsdelivr.net/npm/izitoast@1.4.0/dist/js/iziToast.min.js"></script>
 		@yield('scripts')
 	</body>
 </html>

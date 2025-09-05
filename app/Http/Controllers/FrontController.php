@@ -3,12 +3,30 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\HomeBanner;
 
 class FrontController extends Controller
 {
     public function home()
     {
-        return view('front.home');
+        $banner = HomeBanner::active()->ordered()->first();
+
+        // If no banner exists, create a default one
+        if (!$banner) {
+            $banner = new HomeBanner([
+                'heading' => 'Event and Conference Website',
+                'subheading' => 'December 10, 2025, California',
+                'text' => 'Join us at our next networking event and conference! Connect with industry professionals, engage in insightful discussions, and attend hands-on workshops. Learn from experts, collaborate on innovative ideas, and build lasting relationships.',
+                'background' => 'dist-front/images/banner-home.jpg',
+                'event_date' => '2025-12-10',
+                'event_time' => '18:00:00',
+                'button_text' => 'BUY TICKETS',
+                'button_url' => '/buy',
+                'status' => 1
+            ]);
+        }
+
+        return view('front.home', compact('banner'));
     }
 
     public function about()
