@@ -385,7 +385,7 @@
 <script>
     $(".countDown").downCount({
         date: '{{ $banner->countdown_date }}', //month/date/year   HH:MM:SS
-        offset: +0 //+GMT (set to 0 for local time)
+        offset: +6 //+GMT+6 (Bangladesh Standard Time)
     });
 </script>
 @endsection

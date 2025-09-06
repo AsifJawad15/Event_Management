@@ -53,6 +53,6 @@ class AdminHomeBannerController extends Controller
 
         $homeBanner->save();
 
-        return redirect()->back()->with('success', 'Home banner updated successfully!');
+        return redirect()->back()->with('success', 'Home banner updated successfully! The countdown on the home page will now reflect the new event date and time.');
     }
 }

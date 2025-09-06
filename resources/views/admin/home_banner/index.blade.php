@@ -151,13 +151,16 @@
                                                     <div class="col-md-6">
                                                         <div class="mb-4">
                                                             <label class="form-label">Event Date *</label>
-                                                            <input type="date" class="form-control" name="event_date" value="{{ $homeBanner->event_date ?? '2025-12-10' }}" required>
+                                                            <input type="date" class="form-control" name="event_date"
+                                                                   value="{{ $homeBanner && $homeBanner->event_date ? \Carbon\Carbon::parse($homeBanner->event_date)->format('Y-m-d') : '2025-09-07' }}" required>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="mb-4">
                                                             <label class="form-label">Event Time *</label>
-                                                            <input type="time" class="form-control" name="event_time" value="{{ $homeBanner->event_time ?? '18:00' }}" required>
+                                                            <input type="time" class="form-control" name="event_time"
+                                                                   value="{{ $homeBanner && $homeBanner->event_time ? \Carbon\Carbon::parse($homeBanner->event_time)->format('H:i') : '13:00' }}" required>
+                                                            <small class="form-text text-muted">Time in GMT+6 (Bangladesh Standard Time)</small>
                                                         </div>
                                                     </div>
                                                 </div>
