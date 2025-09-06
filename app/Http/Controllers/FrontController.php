@@ -15,11 +15,11 @@ class FrontController extends Controller
         if (!$banner) {
             $banner = new HomeBanner([
                 'heading' => 'Event and Conference Website',
-                'subheading' => 'December 10, 2025, California',
+                'subheading' => 'September 7, 2025, California',
                 'text' => 'Join us at our next networking event and conference! Connect with industry professionals, engage in insightful discussions, and attend hands-on workshops. Learn from experts, collaborate on innovative ideas, and build lasting relationships.',
                 'background' => 'dist-front/images/banner-home.jpg',
-                'event_date' => '2025-12-10',
-                'event_time' => '18:00:00',
+                'event_date' => '2025-09-07',
+                'event_time' => '13:00:00',
                 'button_text' => 'BUY TICKETS',
                 'button_url' => '/buy',
                 'status' => 1
