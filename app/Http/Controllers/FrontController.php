@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\HomeBanner;
+use App\Models\HomeWelcome;
 
 class FrontController extends Controller
 {
@@ -26,7 +27,11 @@ class FrontController extends Controller
             ]);
         }
 
-        return view('front.home', compact('banner'));
+        // Get home welcome data - get first record regardless of status
+        // Force fresh query without any caching
+        $welcome = HomeWelcome::latest('updated_at')->first();
+
+        return view('front.home', compact('banner', 'welcome'));
     }
 
     public function about()

@@ -1,13 +1,55 @@
-@extends('admin.layout.app')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
 
-@section('heading', 'Edit Home Welcome Information')
+    <link rel="icon" type="image/png" href="{{ asset('uploads/favicon.png') }}">
 
-@section('main_content')
+    <title>Admin Panel - Edit Home Welcome Information</title>
 
-<script src="{{ asset('dist-admin/js/bootstrap-tagsinput.min.js') }}"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="{{ asset('dist-admin/css/iziToast.min.css') }}">
-<script src="{{ asset('dist-admin/js/iziToast.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('dist/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('dist/css/font_awesome_5_free.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('dist/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('dist/css/bootstrap-tagsinput.css') }}">
+    <link rel="stylesheet" href="{{ asset('dist/css/duotone-dark.css') }}">
+    <link rel="stylesheet" href="{{ asset('dist/css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('dist/css/iziToast.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('dist/css/fontawesome-iconpicker.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('dist/css/bootstrap4-toggle.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('dist/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('dist/css/components.css') }}">
+    <link rel="stylesheet" href="{{ asset('dist/css/air-datepicker.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('dist/css/spacing.css') }}">
+    <link rel="stylesheet" href="{{ asset('dist/css/custom.css') }}">
+
+    <script src="{{ asset('dist/js/jquery-3.7.0.min.js') }}"></script>
+    <script src="{{ asset('dist/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('dist/js/popper.min.js') }}"></script>
+    <script src="{{ asset('dist/js/select2.min.js') }}"></script>
+    <script src="{{ asset('dist/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('dist/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('dist/js/iziToast.min.js') }}"></script>
+    <script src="{{ asset('dist/js/fontawesome-iconpicker.min.js') }}"></script>
+    <script src="{{ asset('dist/js/bootstrap4-toggle.min.js') }}"></script>
+    <script src="{{ asset('dist/js/air-datepicker.min.js') }}"></script>
+    <script src="{{ asset('dist/js/bootstrap-tagsinput.min.js') }}"></script>
+    <script src="{{ asset('dist/js/select2.min.js') }}"></script>
+    <script src="{{ asset('dist/js/jquery.uploadPreview.min.js') }}"></script>
+    <script src="{{ asset('dist/js/bootstrap-datepicker.min.js') }}"></script>
+    <script src="{{ asset('dist/js/jquery.timepicker.min.js') }}"></script>
+    <script src="{{ asset('dist/js/cleave.min.js') }}"></script>
+    <script src="{{ asset('dist/js/jquery.waypoints.min.js') }}"></script>
+    <script src="{{ asset('dist/js/moment.min.js') }}"></script>
+    <script src="{{ asset('dist/js/stisla.js') }}"></script>
+    <script src="{{ asset('dist/js/scripts.js') }}"></script>
+    <script src="{{ asset('dist/js/image-uploader.min.js') }}"></script>
+
+</head>
+
+<body>
 
 @if($errors->any())
     @foreach($errors->all() as $error)
@@ -157,10 +199,11 @@
                                             </div>
                                             <div class="mb-4">
                                                 <label class="form-label">Status *</label>
-                                                <select class="form-control" name="status" required>
-                                                    <option value="active" {{ ($homeWelcome->status ?? 'active') == 'active' ? 'selected' : '' }}>Active</option>
-                                                    <option value="inactive" {{ ($homeWelcome->status ?? 'active') == 'inactive' ? 'selected' : '' }}>Inactive</option>
+                                                <select class="form-select" name="status" required>
+                                                    <option value="active" {{ ($homeWelcome->status ?? 'active') == 'active' ? 'selected' : '' }}>Active (Show on Homepage)</option>
+                                                    <option value="inactive" {{ ($homeWelcome->status ?? 'active') == 'inactive' ? 'selected' : '' }}>Inactive (Hide from Homepage)</option>
                                                 </select>
+                                                <small class="form-text text-muted">Choose Active to show the welcome section on homepage, Inactive to hide it</small>
                                             </div>
                                             <div class="mb-4">
                                                 <label class="form-label"></label>
@@ -188,9 +231,6 @@
     </div>
 </div>
 
-@endsection
-
-@section('scripts')
 <script>
     // Image preview functionality
     document.querySelector('input[name="photo"]').addEventListener('change', function(e) {
@@ -203,4 +243,6 @@
         }
     });
 </script>
-@endsection
+
+</body>
+</html>
