@@ -82,7 +82,7 @@
 								<div class="col-lg-3 col-sm-6 col-xs-12">
 									<div class="single-count min">
 										<h1 class="minutes">55</h1>
-										<p class="minutes_ref">minutes</p>
+										<p class="minutes_ref">minute</p>
 									</div>
 								</div>
 								<div class="col-lg-3 col-sm-6 col-xs-12">
