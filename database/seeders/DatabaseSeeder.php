@@ -16,7 +16,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             AdminSeeder::class,
             HomeBannerSeeder::class,
-            HomeWelcomeSeeder::class
+            HomeWelcomeSeeder::class,
+            HomeCounterSeeder::class
         ]);
     }
 }

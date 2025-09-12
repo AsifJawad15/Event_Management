@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\HomeBanner;
 use App\Models\HomeWelcome;
+use App\Models\HomeCounter;
 
 class FrontController extends Controller
 {
@@ -31,7 +32,10 @@ class FrontController extends Controller
         // Force fresh query without any caching
         $welcome = HomeWelcome::latest('updated_at')->first();
 
-        return view('front.home', compact('banner', 'welcome'));
+        // Get home counter data
+        $homeCounter = HomeCounter::where('status', 'show')->first();
+
+        return view('front.home', compact('banner', 'welcome', 'homeCounter'));
     }
 
     public function about()
