@@ -19,6 +19,7 @@ class HomeCounter extends Model
         'item4_icon',
         'item4_number',
         'item4_title',
-        'status'
+        'status',
+        'background'
     ];
 }

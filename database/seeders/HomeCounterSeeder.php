@@ -26,7 +26,8 @@ class HomeCounterSeeder extends Seeder
             'item4_icon' => 'fa fa-th-list',
             'item4_number' => 25,
             'item4_title' => 'Categories',
-            'status' => 'show'
+            'status' => 'show',
+            'background' => 'dist-front/images/counter-bg.jpg'
         ]);
     }
 }

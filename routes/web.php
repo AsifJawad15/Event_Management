@@ -8,12 +8,15 @@ use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\AdminHomeBannerController;
 use App\Http\Controllers\Admin\AdminHomeWelcomeController;
 use App\Http\Controllers\Admin\AdminHomeCounterController;
+use App\Http\Controllers\Admin\AdminSpeakerController;
 
 // Front
 Route::get('/', [FrontController::class, 'home'])->name('front.home');
 Route::get('/about', [FrontController::class, 'about'])->name('front.about');
 Route::get('/contact', [FrontController::class, 'contact'])->name('front.contact');
 Route::post('/contact', [FrontController::class, 'contact_submit'])->name('contact.submit');
+Route::get('/speakers', [FrontController::class, 'speakers'])->name('front.speakers');
+Route::get('/speaker/{slug}', [FrontController::class, 'speaker'])->name('front.speaker');
 
 // User
 Route::middleware('auth')->group(function () {
@@ -44,6 +47,14 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::post('/home-welcome',[AdminHomeWelcomeController::class,'update'])->name('admin_home_welcome_update');
     Route::get('/homecounter',[AdminHomeCounterController::class,'index'])->name('admin_home_counter');
     Route::put('/homecounter/{id}',[AdminHomeCounterController::class,'update'])->name('admin_home_counter_update');
+
+    // Speaker routes
+    Route::get('/speakers',[AdminSpeakerController::class,'index'])->name('admin_speaker_index');
+    Route::get('/speakers/create',[AdminSpeakerController::class,'create'])->name('admin_speaker_create');
+    Route::post('/speakers',[AdminSpeakerController::class,'store'])->name('admin_speaker_store');
+    Route::get('/speakers/{id}/edit',[AdminSpeakerController::class,'edit'])->name('admin_speaker_edit');
+    Route::put('/speakers/{id}',[AdminSpeakerController::class,'update'])->name('admin_speaker_update');
+    Route::delete('/speakers/{id}',[AdminSpeakerController::class,'destroy'])->name('admin_speaker_destroy');
 });
 Route::prefix('admin')->group(function () {
     Route::get('/', function () {return redirect('/admin/login');});

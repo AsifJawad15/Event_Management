@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\HomeBanner;
 use App\Models\HomeWelcome;
 use App\Models\HomeCounter;
+use App\Models\Speaker;
+use Illuminate\Support\Str;
 
 class FrontController extends Controller
 {
@@ -35,7 +37,10 @@ class FrontController extends Controller
         // Get home counter data
         $homeCounter = HomeCounter::where('status', 'show')->first();
 
-        return view('front.home', compact('banner', 'welcome', 'homeCounter'));
+        // Get speakers for homepage (limit to 4)
+        $speakers = Speaker::limit(4)->get();
+
+        return view('front.home', compact('banner', 'welcome', 'homeCounter', 'speakers'));
     }
 
     public function about()
@@ -61,5 +66,17 @@ class FrontController extends Controller
         // For now, we'll just redirect back with success message
 
         return redirect()->back()->with('success', 'Your message has been sent successfully!');
+    }
+
+    public function speakers()
+    {
+        $speakers = Speaker::all();
+        return view('front.speakers', compact('speakers'));
+    }
+
+    public function speaker($slug)
+    {
+        $speaker = Speaker::where('slug', $slug)->firstOrFail();
+        return view('front.speaker', compact('speaker'));
     }
 }

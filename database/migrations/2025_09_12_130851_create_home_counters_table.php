@@ -26,6 +26,7 @@ return new class extends Migration
             $table->integer('item4_number');
             $table->string('item4_title');
             $table->enum('status', ['show', 'hide'])->default('show');
+            $table->string('background')->nullable();
             $table->timestamps();
         });
     }

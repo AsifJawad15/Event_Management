@@ -17,7 +17,8 @@ class DatabaseSeeder extends Seeder
             AdminSeeder::class,
             HomeBannerSeeder::class,
             HomeWelcomeSeeder::class,
-            HomeCounterSeeder::class
+            HomeCounterSeeder::class,
+            SpeakerSeeder::class
         ]);
     }
 }

@@ -17,6 +17,8 @@
 
                     <li class="{{ Request::is('admin/homecounter' )?'active':''}}"><a class="nav-link" href="{{ route('admin_home_counter') }}"><i class="fas fa-hand-point-right"></i> <span>Home Counter</span></a></li>
 
+                    <li class="{{ Request::is('admin/speakers*' )?'active':''}}"><a class="nav-link" href="{{ route('admin_speaker_index') }}"><i class="fas fa-hand-point-right"></i> <span>Speakers</span></a></li>
+
                     <li class="{{ Request::is('admin/profile' )?'active':''}}"><a class="nav-link" href="{{ route('admin_profile') }}"><i class="fas fa-hand-point-right"></i> <span>Profile</span></a></li>
 
                 </ul>

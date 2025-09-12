@@ -119,6 +119,7 @@
                 <li><a class="nav-link" href="{{ route('admin_home_banner') }}"><i class="fas fa-hand-point-right"></i> <span>Home Banner</span></a></li>
                 <li><a class="nav-link" href="{{ route('admin_home_welcome') }}"><i class="fas fa-hand-point-right"></i> <span>Home Welcome</span></a></li>
                 <li class="active"><a class="nav-link" href="{{ route('admin_home_counter') }}"><i class="fas fa-hand-point-right"></i> <span>Home Counter</span></a></li>
+                <li><a class="nav-link" href="{{ route('admin_speaker_index') }}"><i class="fas fa-hand-point-right"></i> <span>Speakers</span></a></li>
                 <li><a class="nav-link" href="{{ route('admin_profile') }}"><i class="fas fa-hand-point-right"></i> <span>Profile</span></a></li>
             </ul>
         </aside>
@@ -135,7 +136,7 @@
                         <div class="card">
                             <div class="card-body">
                                 @if($homeCounter)
-                                <form action="{{ route('admin_home_counter_update', $homeCounter->id) }}" method="post">
+                                <form action="{{ route('admin_home_counter_update', $homeCounter->id) }}" method="post" enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
 
@@ -245,6 +246,22 @@
                                                     <h4>Settings</h4>
                                                 </div>
                                                 <div class="card-body">
+                                                    <div class="mb-4">
+                                                        <label class="form-label">Background Image</label>
+                                                        @if($homeCounter->background)
+                                                            <div class="mb-2">
+                                                                <img src="{{ asset($homeCounter->background) }}" alt="Current Background" class="img-thumbnail" style="max-width: 200px; height: auto;">
+                                                                <p class="text-muted mt-1">Current Background</p>
+                                                            </div>
+                                                        @else
+                                                            <div class="mb-2">
+                                                                <img src="{{ asset('dist-front/images/counter-bg.jpg') }}" alt="Default Background" class="img-thumbnail" style="max-width: 200px; height: auto;">
+                                                                <p class="text-muted mt-1">Default Background</p>
+                                                            </div>
+                                                        @endif
+                                                        <input type="file" class="form-control" name="background" accept="image/*">
+                                                        <small class="form-text text-muted">Upload new background image (Max: 10MB). Supported formats: jpeg, png, jpg, gif</small>
+                                                    </div>
                                                     <div class="mb-4">
                                                         <label class="form-label">Status *</label>
                                                         <select name="status" class="form-control" required>

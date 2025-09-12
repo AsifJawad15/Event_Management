@@ -94,6 +94,8 @@
 
                     <li class=""><a class="nav-link" href="{{ route('admin_home_counter') }}"><i class="fas fa-hand-point-right"></i> <span>Home Counter</span></a></li>
 
+                    <li class=""><a class="nav-link" href="{{ route('admin_speaker_index') }}"><i class="fas fa-hand-point-right"></i> <span>Speakers</span></a></li>
+
                 </ul>
             </aside>
         </div>

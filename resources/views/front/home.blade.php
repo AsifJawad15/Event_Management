@@ -16,7 +16,7 @@
 							<a class="smooth-scroll nav-link" href="{{ url('/') }}">Home</a>
 						</li>
 						<li>
-							<a class="smooth-scroll nav-link" href="{{ url('/speakers') }}">Speakers</a>
+							<a class="nav-link" href="{{ route('front.speakers') }}">Speakers</a>
 						</li>
 						<li>
 							<a class="smooth-scroll nav-link" href="{{ url('/schedule') }}">Schedule</a>
@@ -149,47 +149,64 @@
             <div class="col-sm-1 col-lg-2"></div>
         </div>
         <div class="row pt_40">
-            <div class="col-lg-3 col-sm-6 col-xs-12">
-                <div class="team-img mb_20">
-                    <a href="{{ url('/speaker') }}"><img src="{{ asset('dist-front/images/speaker-1.jpg') }}"></a>
+            @if($speakers && $speakers->count() > 0)
+                @foreach($speakers as $speaker)
+                <div class="col-lg-3 col-sm-6 col-xs-12">
+                    <div class="team-img mb_20">
+                        <a href="{{ route('front.speaker', $speaker->slug) }}">
+                            <img src="{{ asset('uploads/'.$speaker->photo) }}" alt="{{ $speaker->name }}">
+                        </a>
+                    </div>
+                    <div class="team-info text-center">
+                        <h6><a href="{{ route('front.speaker', $speaker->slug) }}">{{ $speaker->name }}</a></h6>
+                        <p>{{ $speaker->designation }}</p>
+                    </div>
                 </div>
-                <div class="team-info text-center">
-                    <h6><a href="{{ url('/speaker') }}">Danny Allen</a></h6>
-                    <p>Founder, AA Company</p>
+                @endforeach
+            @else
+                {{-- Fallback content if no speakers found --}}
+                <div class="col-lg-3 col-sm-6 col-xs-12">
+                    <div class="team-img mb_20">
+                        <a href="#"><img src="{{ asset('dist-front/images/speaker-1.jpg') }}"></a>
+                    </div>
+                    <div class="team-info text-center">
+                        <h6><a href="#">Danny Allen</a></h6>
+                        <p>Founder, AA Company</p>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-3 col-sm-6 col-xs-12">
-                <div class="team-img mb_20">
-                    <a href="{{ url('/speaker') }}"><img src="{{ asset('dist-front/images/speaker-2.jpg') }}"></a>
+                <div class="col-lg-3 col-sm-6 col-xs-12">
+                    <div class="team-img mb_20">
+                        <a href="#"><img src="{{ asset('dist-front/images/speaker-2.jpg') }}"></a>
+                    </div>
+                    <div class="team-info text-center">
+                        <h6><a href="#">John Sword</a></h6>
+                        <p>Founder, BB Company</p>
+                    </div>
                 </div>
-                <div class="team-info text-center">
-                    <h6><a href="{{ url('/speaker') }}">John Sword</a></h6>
-                    <p>Founder, BB Company</p>
+                <div class="col-lg-3 col-sm-6 col-xs-12">
+                    <div class="team-img mb_20">
+                        <a href="#"><img src="{{ asset('dist-front/images/speaker-3.jpg') }}"></a>
+                    </div>
+                    <div class="team-info text-center">
+                        <h6><a href="#">Steven Gragg</a></h6>
+                        <p>Founder, CC Company</p>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-3 col-sm-6 col-xs-12">
-                <div class="team-img mb_20">
-                    <a href="{{ url('/speaker') }}"><img src="{{ asset('dist-front/images/speaker-3.jpg') }}"></a>
+                <div class="col-lg-3 col-sm-6 col-xs-12">
+                    <div class="team-img mb_20">
+                        <a href="#"><img src="{{ asset('dist-front/images/speaker-4.jpg') }}"></a>
+                    </div>
+                    <div class="team-info text-center">
+                        <h6><a href="#">Jordan Parker</a></h6>
+                        <p>Founder, DD Company</p>
+                    </div>
                 </div>
-                <div class="team-info text-center">
-                    <h6><a href="{{ url('/speaker') }}">Steven Gragg</a></h6>
-                    <p>Founder, CC Company</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6 col-xs-12">
-                <div class="team-img mb_20">
-                    <a href="{{ url('/speaker') }}"><img src="{{ asset('dist-front/images/speaker-4.jpg') }}"></a>
-                </div>
-                <div class="team-info text-center">
-                    <h6><a href="{{ url('/speaker') }}">Jordan Parker</a></h6>
-                    <p>Founder, DD Company</p>
-                </div>
-            </div>
+            @endif
         </div>
     </div>
 </div>
 @if($homeCounter && $homeCounter->status == 'show')
-<div id="counter-section" class="pt_70 pb_70" style="background-image: url({{ asset('dist-front/images/counter-bg.jpg') }});">
+<div id="counter-section" class="pt_70 pb_70" style="background-image: url({{ asset($homeCounter->background ?: 'dist-front/images/counter-bg.jpg') }});">
     <div class="container">
         <div class="row number-counters text-center">
             <div class="col-lg-3 col-sm-6 col-xs-12">
