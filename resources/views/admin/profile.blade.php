@@ -88,21 +88,19 @@
 
                     <li class=""><a class="nav-link" href="{{ route('admin_dashboard') }}"><i class="fas fa-hand-point-right"></i> <span>Dashboard</span></a></li>
 
-                    <li class="nav-item dropdown">
-                        <a href="#" class="nav-link has-dropdown"><i class="fas fa-hand-point-right"></i><span>Dropdown Items</span></a>
-                        <ul class="dropdown-menu">
-                            <li class=""><a class="nav-link" href=""><i class="fas fa-angle-right"></i> Item 1</a></li>
-                            <li class=""><a class="nav-link" href=""><i class="fas fa-angle-right"></i> Item 2</a></li>
-                        </ul>
-                    </li>
+                    <li class=""><a class="nav-link" href="{{ route('admin_home_banner') }}"><i class="fas fa-hand-point-right"></i> <span>Home Banner</span></a></li>
 
-                    <li class=""><a class="nav-link" href="#"><i class="fas fa-hand-point-right"></i> <span>Setting</span></a></li>
+                    <li class=""><a class="nav-link" href="{{ route('admin_home_welcome') }}"><i class="fas fa-hand-point-right"></i> <span>Home Welcome</span></a></li>
 
-                    <li class=""><a class="nav-link" href="#"><i class="fas fa-hand-point-right"></i> <span>Form</span></a></li>
+                    <li class=""><a class="nav-link" href="{{ route('admin_home_counter') }}"><i class="fas fa-hand-point-right"></i> <span>Home Counter</span></a></li>
 
-                    <li class=""><a class="nav-link" href="#"><i class="fas fa-hand-point-right"></i> <span>Table</span></a></li>
+                    <li class=""><a class="nav-link" href="{{ route('admin_speaker_index') }}"><i class="fas fa-hand-point-right"></i> <span>Speakers</span></a></li>
 
-                    <li class=""><a class="nav-link" href="#"><i class="fas fa-hand-point-right"></i> <span>Invoice</span></a></li>
+                    <li class=""><a class="nav-link" href="{{ route('admin_schedule_day_index') }}"><i class="fas fa-hand-point-right"></i> <span>Schedule Days</span></a></li>
+
+                    <li class=""><a class="nav-link" href="{{ route('admin_schedule_index') }}"><i class="fas fa-hand-point-right"></i> <span>Schedules</span></a></li>
+
+                    <li class="active"><a class="nav-link" href="{{ route('admin_profile') }}"><i class="fas fa-hand-point-right"></i> <span>Profile</span></a></li>
 
                 </ul>
             </aside>

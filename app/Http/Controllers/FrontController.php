@@ -7,6 +7,7 @@ use App\Models\HomeBanner;
 use App\Models\HomeWelcome;
 use App\Models\HomeCounter;
 use App\Models\Speaker;
+use App\Models\ScheduleDay;
 use Illuminate\Support\Str;
 
 class FrontController extends Controller
@@ -78,5 +79,11 @@ class FrontController extends Controller
     {
         $speaker = Speaker::where('slug', $slug)->firstOrFail();
         return view('front.speaker', compact('speaker'));
+    }
+
+    public function schedule()
+    {
+        $schedule_days = ScheduleDay::with('schedules')->orderBy('order1', 'asc')->get();
+        return view('front.schedule', compact('schedule_days'));
     }
 }

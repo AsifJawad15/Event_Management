@@ -52,6 +52,10 @@
 
                     <li class="{{ Request::is('admin/speakers*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin_speaker_index') }}"><i class="fas fa-users"></i> <span>Speakers</span></a></li>
 
+                    <li class="{{ Request::is('admin/schedule-days*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin_schedule_day_index') }}"><i class="fas fa-calendar-day"></i> <span>Schedule Days</span></a></li>
+
+                    <li class="{{ Request::is('admin/schedules*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin_schedule_index') }}"><i class="fas fa-calendar"></i> <span>Schedules</span></a></li>
+
                     <li class="{{ Request::is('admin/profile') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin_profile') }}"><i class="fas fa-user"></i> <span>Profile</span></a></li>
 
                 </ul>
