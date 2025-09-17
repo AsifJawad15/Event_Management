@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+
+    <link rel="icon" type="image/png" href="{{ asset('uploads/favicon.png') }}">
+
+    <title>Admin Panel - Edit Schedule</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ asset('dist/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('dist/css/font_awesome_5_free.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('dist/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('dist/css/bootstrap-tagsinput.css') }}">
+    <link rel="stylesheet" href="{{ asset('dist/css/duotone-dark.css') }}">
+    <link rel="stylesheet" href="{{ asset('dist/css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('dist/css/iziToast.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('dist/css/fontawesome-iconpicker.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('dist/css/bootstrap4-toggle.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('dist/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('dist/css/components.css') }}">
+    <link rel="stylesheet" href="{{ asset('dist/css/air-datepicker.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('dist/css/spacing.css') }}">
+    <link rel="stylesheet" href="{{ asset('dist/css/custom.css') }}">
+
+    <script src="{{ asset('dist/js/jquery-3.7.0.min.js') }}"></script>
+    <script src="{{ asset('dist/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('dist/js/popper.min.js') }}"></script>
+    <script src="{{ asset('dist/js/tooltip.js') }}"></script>
+    <script src="{{ asset('dist/js/jquery.nicescroll.min.js') }}"></script>
+    <script src="{{ asset('dist/js/moment.min.js') }}"></script>
+    <script src="{{ asset('dist/js/stisla.js') }}"></script>
+    <script src="{{ asset('dist/js/jscolor.js') }}"></script>
+    <script src="{{ asset('dist/js/bootstrap-tagsinput.min.js') }}"></script>
+    <script src="{{ asset('dist/js/select2.full.min.js') }}"></script>
+    <script src="{{ asset('dist/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('dist/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('dist/js/iziToast.min.js') }}"></script>
+    <script src="{{ asset('dist/js/fontawesome-iconpicker.js') }}"></script>
+    <script src="{{ asset('dist/js/air-datepicker.min.js') }}"></script>
+    <script src="{{ asset('dist/tinymce/tinymce.min.js') }}"></script>
+    <script src="{{ asset('dist/js/bootstrap4-toggle.min.js') }}"></script>
+</head>
+
+<body>
+
+@if($errors->any())
+    @foreach($errors->all() as $error)
+        <script>
+            iziToast.error({
+                title: '',
+                position: 'topRight',
+                message: '{{ $error }}',
+            });
+        </script>
+    @endforeach
+@endif
+
+@if(session()->get('error'))
+    <script>
+        iziToast.error({
+            title: '',
+            position: 'topRight',
+            message: '{{ session()->get('error') }}',
+        });
+    </script>
+@endif
+
+@if(session()->get('success'))
+    <script>
+        iziToast.success({
+            title: '',
+            position: 'topRight',
+            message: '{{ session()->get('success') }}',
+        });
+    </script>
+@endif
+
+<div class="main-wrapper">
+
+    <div class="navbar-bg"></div>
+    <nav class="navbar navbar-expand-lg main-navbar">
+        <form class="form-inline mr-auto">
+            <ul class="navbar-nav mr-3">
+                <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
+                <li><a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i class="fas fa-search"></i></a></li>
+            </ul>
+        </form>
+        <ul class="navbar-nav navbar-right">
+            <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+                <img alt="image" src="{{ asset('uploads/'.Auth::guard('admin')->user()->photo) }}" class="rounded-circle mr-1">
+                <div class="d-sm-none d-lg-inline-block">Hi, {{ Auth::guard('admin')->user()->name }}</div></a>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <div class="dropdown-title">Logged in 5 min ago</div>
+                    <a href="{{ route('admin_profile') }}" class="dropdown-item has-icon">
+                        <i class="far fa-user"></i> Profile
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="{{ route('admin_logout') }}" class="dropdown-item has-icon text-danger">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="main-sidebar sidebar-style-2">
+        <aside id="sidebar-wrapper">
+            <div class="sidebar-brand">
+                <a href="{{ route('admin_dashboard') }}">Admin Panel</a>
+            </div>
+            <div class="sidebar-brand-sm">
+                <a href="{{ route('admin_dashboard') }}">CP</a>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a class="nav-link" href="{{ route('admin_dashboard') }}"><i class="fas fa-hand-point-right"></i> <span>Dashboard</span></a></li>
+                <li><a class="nav-link" href="{{ route('admin_home_banner') }}"><i class="fas fa-hand-point-right"></i> <span>Home Banner</span></a></li>
+                <li><a class="nav-link" href="{{ route('admin_home_welcome') }}"><i class="fas fa-hand-point-right"></i> <span>Home Welcome</span></a></li>
+                <li><a class="nav-link" href="{{ route('admin_home_counter') }}"><i class="fas fa-hand-point-right"></i> <span>Home Counter</span></a></li>
+                <li><a class="nav-link" href="{{ route('admin_speaker_index') }}"><i class="fas fa-hand-point-right"></i> <span>Speakers</span></a></li>
+                <li><a class="nav-link" href="{{ route('admin_schedule_day_index') }}"><i class="fas fa-hand-point-right"></i> <span>Schedule Days</span></a></li>
+                <li class="active"><a class="nav-link" href="{{ route('admin_schedule_index') }}"><i class="fas fa-hand-point-right"></i> <span>Schedules</span></a></li>
+                <li><a class="nav-link" href="{{ route('admin_profile') }}"><i class="fas fa-hand-point-right"></i> <span>Profile</span></a></li>
+            </ul>
+        </aside>
+    </div>
+
+    <div class="main-content">
+        <section class="section">
+            <div class="section-header">
+                <h1>Edit Schedule</h1>
+                <div class="section-header-button">
+                    <a href="{{ route('admin_schedule_index') }}" class="btn btn-primary">View All</a>
+                </div>
+            </div>
+            <div class="section-body">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <form action="{{ route('admin_schedule_update', $schedule->id) }}" method="post" enctype="multipart/form-data">
+                                    @csrf
+                                    @method('PUT')
+                                    <div class="mb-4">
+                                        <label class="form-label">Schedule Day *</label>
+                                        <select class="form-control" name="schedule_day_id" required>
+                                            <option value="">Select Schedule Day</option>
+                                            @foreach($schedule_days as $schedule_day)
+                                                <option value="{{ $schedule_day->id }}" {{ old('schedule_day_id', $schedule->schedule_day_id) == $schedule_day->id ? 'selected' : '' }}>
+                                                    {{ $schedule_day->day }} - {{ \Carbon\Carbon::parse($schedule_day->date1)->format('M d, Y') }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="form-label">Title *</label>
+                                        <input type="text" class="form-control" name="title" value="{{ old('title', $schedule->title) }}" required placeholder="e.g., Opening Ceremony">
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="form-label">Description *</label>
+                                        <textarea class="form-control" name="description" rows="4" required placeholder="Enter description">{{ old('description', $schedule->description) }}</textarea>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="form-label">Location *</label>
+                                        <input type="text" class="form-control" name="location" value="{{ old('location', $schedule->location) }}" required placeholder="e.g., Main Hall, Room A">
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="form-label">Time *</label>
+                                        <input type="text" class="form-control" name="time" value="{{ old('time', $schedule->time) }}" required placeholder="e.g., 10:00 AM - 11:00 AM">
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="form-label">Photo</label>
+                                        <input type="file" class="form-control" name="photo" accept="image/*">
+                                        @if($schedule->photo)
+                                            <div class="mt-2">
+                                                <img src="{{ asset('uploads/'.$schedule->photo) }}" alt="Current photo" class="w_200">
+                                            </div>
+                                        @endif
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="form-label">Order *</label>
+                                        <input type="number" class="form-control" name="item_order1" value="{{ old('item_order1', $schedule->item_order1) }}" required placeholder="e.g., 1, 2, 3">
+                                    </div>
+                                    <div class="mb-4">
+                                        <button type="submit" class="btn btn-primary">Update</button>
+                                        <a href="{{ route('admin_schedule_index') }}" class="btn btn-secondary">Cancel</a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="main-footer">
+        <div class="footer-left">
+            Copyright &copy; 2025 <div class="bullet"></div> All Rights Reserved
+        </div>
+        <div class="footer-right">
+            Admin Panel
+        </div>
+    </div>
+
+</div>
+
+<script src="{{ asset('dist/js/stisla.js') }}"></script>
+<script src="{{ asset('dist/js/scripts.js') }}"></script>
+
+</body>
+</html>

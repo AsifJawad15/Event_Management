@@ -9,6 +9,8 @@ use App\Http\Controllers\Admin\AdminHomeBannerController;
 use App\Http\Controllers\Admin\AdminHomeWelcomeController;
 use App\Http\Controllers\Admin\AdminHomeCounterController;
 use App\Http\Controllers\Admin\AdminSpeakerController;
+use App\Http\Controllers\Admin\AdminScheduleDayController;
+use App\Http\Controllers\Admin\AdminScheduleController;
 
 // Front
 Route::get('/', [FrontController::class, 'home'])->name('front.home');
@@ -55,6 +57,22 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::get('/speakers/{id}/edit',[AdminSpeakerController::class,'edit'])->name('admin_speaker_edit');
     Route::put('/speakers/{id}',[AdminSpeakerController::class,'update'])->name('admin_speaker_update');
     Route::delete('/speakers/{id}',[AdminSpeakerController::class,'destroy'])->name('admin_speaker_destroy');
+
+    // Schedule Day routes
+    Route::get('/schedule-days',[AdminScheduleDayController::class,'index'])->name('admin_schedule_day_index');
+    Route::get('/schedule-days/create',[AdminScheduleDayController::class,'create'])->name('admin_schedule_day_create');
+    Route::post('/schedule-days',[AdminScheduleDayController::class,'store'])->name('admin_schedule_day_store');
+    Route::get('/schedule-days/{id}/edit',[AdminScheduleDayController::class,'edit'])->name('admin_schedule_day_edit');
+    Route::put('/schedule-days/{id}',[AdminScheduleDayController::class,'update'])->name('admin_schedule_day_update');
+    Route::delete('/schedule-days/{id}',[AdminScheduleDayController::class,'destroy'])->name('admin_schedule_day_destroy');
+
+    // Schedule routes
+    Route::get('/schedules',[AdminScheduleController::class,'index'])->name('admin_schedule_index');
+    Route::get('/schedules/create',[AdminScheduleController::class,'create'])->name('admin_schedule_create');
+    Route::post('/schedules',[AdminScheduleController::class,'store'])->name('admin_schedule_store');
+    Route::get('/schedules/{id}/edit',[AdminScheduleController::class,'edit'])->name('admin_schedule_edit');
+    Route::put('/schedules/{id}',[AdminScheduleController::class,'update'])->name('admin_schedule_update');
+    Route::delete('/schedules/{id}',[AdminScheduleController::class,'destroy'])->name('admin_schedule_destroy');
 });
 Route::prefix('admin')->group(function () {
     Route::get('/', function () {return redirect('/admin/login');});
