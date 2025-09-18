@@ -141,13 +141,39 @@
                         </table>
                     </div>
 
-                    {{-- Sessions section - you can expand this later --}}
-                    <h4>My Sessions</h4>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <p class="text-muted">Session details will be available soon.</p>
+                    {{-- Sessions section --}}
+                    <h4 class="mt_30">My Sessions</h4>
+                    @if($schedules->count() > 0)
+                        @foreach($schedules as $schedule)
+                        <div class="schedule-item mb_30">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="schedule-img">
+                                        <img src="{{ asset('uploads/' . $schedule->photo) }}" alt="{{ $schedule->title }}" class="img-fluid">
+                                    </div>
+                                </div>
+                                <div class="col-lg-8 col-md-6">
+                                    <div class="schedule-content">
+                                        <h5>{{ $schedule->title }}</h5>
+                                        <p>{{ $schedule->description }}</p>
+                                        <div class="schedule-info">
+                                            <p><strong>Date:</strong> {{ \Carbon\Carbon::parse($schedule->scheduleDay->date1)->format('M d, Y') }} ({{ $schedule->scheduleDay->day }})</p>
+                                            <p><strong>Time:</strong> {{ $schedule->time }}</p>
+                                            <p><strong>Location:</strong> {{ $schedule->location }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
                         </div>
-                    </div>
+                        @endforeach
+                    @else
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p class="text-danger">No sessions found for this speaker.</p>
+                            </div>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

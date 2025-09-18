@@ -3,6 +3,24 @@
 @section('title', 'Schedule - Event & Conference Management Website')
 
 @section('content')
+<style>
+    .speakers-list {
+        margin-bottom: 15px;
+    }
+    .speaker-link {
+        color: #007bff;
+        text-decoration: none;
+        font-weight: 500;
+    }
+    .speaker-link:hover {
+        color: #0056b3;
+        text-decoration: underline;
+    }
+    .speaker-item {
+        display: inline-block;
+        margin-right: 5px;
+    }
+</style>
 <div class="container main-menu" id="navbar">
     <div class="row">
         <div class="col-lg-2 col-sm-12">
@@ -91,6 +109,22 @@
                                             <p>
                                                 {{ $schedule->description }}
                                             </p>
+                                            
+                                            <h3>Speakers:</h3>
+                                            @if($schedule->speakers->count() > 0)
+                                                <div class="speakers-list">
+                                                    @foreach($schedule->speakers as $speaker)
+                                                        <span class="speaker-item">
+                                                            <a href="{{ route('front.speaker', $speaker->slug) }}" class="speaker-link">
+                                                                {{ $speaker->name }}
+                                                            </a>@if(!$loop->last), @endif
+                                                        </span>
+                                                    @endforeach
+                                                </div>
+                                            @else
+                                                <p class="text-danger">No speakers found for this session.</p>
+                                            @endif
+                                            
                                             <h3>Location:</h3>
                                             <h4>
                                                 <span>{{ $schedule->location }}</span>

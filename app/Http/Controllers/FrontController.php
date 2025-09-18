@@ -78,12 +78,15 @@ class FrontController extends Controller
     public function speaker($slug)
     {
         $speaker = Speaker::where('slug', $slug)->firstOrFail();
-        return view('front.speaker', compact('speaker'));
+        $schedules = $speaker->schedules()->with('scheduleDay')->get();
+        return view('front.speaker', compact('speaker', 'schedules'));
     }
 
     public function schedule()
     {
-        $schedule_days = ScheduleDay::with('schedules')->orderBy('order1', 'asc')->get();
+        $schedule_days = ScheduleDay::with(['schedules' => function($query) {
+            $query->with('speakers');
+        }])->orderBy('order1', 'asc')->get();
         return view('front.schedule', compact('schedule_days'));
     }
 }

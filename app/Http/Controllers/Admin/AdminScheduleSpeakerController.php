@@ -14,7 +14,7 @@ class AdminScheduleSpeakerController extends Controller
     {
         $speakers = Speaker::orderBy('name', 'asc')->get();
         $schedules = Schedule::with('scheduleDay')->orderBy('id', 'asc')->get();
-        
+
         // Get pivot table data with joins
         $pivot_table_data = DB::table('schedule_speaker')
             ->join('speakers', 'schedule_speaker.speaker_id', '=', 'speakers.id')
