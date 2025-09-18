@@ -20,4 +20,9 @@ class Schedule extends Model
     {
         return $this->belongsTo(ScheduleDay::class);
     }
+
+    public function speakers()
+    {
+        return $this->belongsToMany(Speaker::class, 'schedule_speaker');
+    }
 }

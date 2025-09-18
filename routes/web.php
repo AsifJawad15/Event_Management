@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\AdminHomeCounterController;
 use App\Http\Controllers\Admin\AdminSpeakerController;
 use App\Http\Controllers\Admin\AdminScheduleDayController;
 use App\Http\Controllers\Admin\AdminScheduleController;
+use App\Http\Controllers\Admin\AdminScheduleSpeakerController;
 
 // Front
 Route::get('/', [FrontController::class, 'home'])->name('front.home');
@@ -74,6 +75,11 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::get('/schedules/{id}/edit',[AdminScheduleController::class,'edit'])->name('admin_schedule_edit');
     Route::put('/schedules/{id}',[AdminScheduleController::class,'update'])->name('admin_schedule_update');
     Route::delete('/schedules/{id}',[AdminScheduleController::class,'destroy'])->name('admin_schedule_destroy');
+
+    // Speaker Schedule routes
+    Route::get('/speaker_schedule_index',[AdminScheduleSpeakerController::class,'index'])->name('admin_speaker_schedule_index');
+    Route::post('/speaker_schedule_store',[AdminScheduleSpeakerController::class,'store'])->name('admin_speaker_schedule_store');
+    Route::delete('/speaker_schedule_delete/{id}',[AdminScheduleSpeakerController::class,'delete'])->name('admin_speaker_schedule_delete');
 });
 Route::prefix('admin')->group(function () {
     Route::get('/', function () {return redirect('/admin/login');});

@@ -21,4 +21,9 @@ class Speaker extends Model
         'linkedin',
         'instagram'
     ];
+
+    public function schedules()
+    {
+        return $this->belongsToMany(Schedule::class, 'schedule_speaker');
+    }
 }
