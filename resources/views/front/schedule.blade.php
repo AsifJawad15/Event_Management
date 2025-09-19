@@ -109,7 +109,7 @@
                                             <p>
                                                 {{ $schedule->description }}
                                             </p>
-                                            
+
                                             <h3>Speakers:</h3>
                                             @if($schedule->speakers->count() > 0)
                                                 <div class="speakers-list">
@@ -124,7 +124,7 @@
                                             @else
                                                 <p class="text-danger">No speakers found for this session.</p>
                                             @endif
-                                            
+
                                             <h3>Location:</h3>
                                             <h4>
                                                 <span>{{ $schedule->location }}</span>
