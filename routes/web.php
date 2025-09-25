@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\AdminSpeakerController;
 use App\Http\Controllers\Admin\AdminScheduleDayController;
 use App\Http\Controllers\Admin\AdminScheduleController;
 use App\Http\Controllers\Admin\AdminScheduleSpeakerController;
+use App\Http\Controllers\Admin\SponsorCategoryController;
 
 // Front
 Route::get('/', [FrontController::class, 'home'])->name('front.home');
@@ -80,6 +81,9 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::get('/speaker_schedule_index',[AdminScheduleSpeakerController::class,'index'])->name('admin_speaker_schedule_index');
     Route::post('/speaker_schedule_store',[AdminScheduleSpeakerController::class,'store'])->name('admin_speaker_schedule_store');
     Route::delete('/speaker_schedule_delete/{id}',[AdminScheduleSpeakerController::class,'delete'])->name('admin_speaker_schedule_delete');
+
+    // Sponsor Category routes
+    Route::resource('sponsor-categories', SponsorCategoryController::class, ['as' => 'admin']);
 });
 Route::prefix('admin')->group(function () {
     Route::get('/', function () {return redirect('/admin/login');});
