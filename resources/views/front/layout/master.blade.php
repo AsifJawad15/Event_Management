@@ -33,7 +33,7 @@
 										<div class="widget-content">
 											<ul class="list">
 												<li><a href="{{ url('/') }}">Home</a></li>
-												<li><a href="{{ url('/sponsors') }}">Sponsors</a></li>
+												<li><a href="{{ route('front.sponsors') }}">Sponsors</a></li>
 												<li><a href="{{ url('/speakers') }}">Speakers</a></li>
 												<li><a href="{{ url('/organizers') }}">Organizers</a></li>
 											</ul>

@@ -8,6 +8,8 @@ use App\Models\HomeWelcome;
 use App\Models\HomeCounter;
 use App\Models\Speaker;
 use App\Models\ScheduleDay;
+use App\Models\SponsorCategory;
+use App\Models\Sponsor;
 use Illuminate\Support\Str;
 
 class FrontController extends Controller
@@ -88,5 +90,17 @@ class FrontController extends Controller
             $query->with('speakers');
         }])->orderBy('order1', 'asc')->get();
         return view('front.schedule', compact('schedule_days'));
+    }
+
+    public function sponsors()
+    {
+        $sponsor_categories = SponsorCategory::with('sponsors')->get();
+        return view('front.sponsors', compact('sponsor_categories'));
+    }
+
+    public function sponsor($slug)
+    {
+        $sponsor = Sponsor::where('slug', $slug)->with('sponsorCategory')->firstOrFail();
+        return view('front.sponsor', compact('sponsor'));
     }
 }

@@ -30,7 +30,7 @@
                         </li>
                         <li class="nav-item dropdown"> <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Pages </a>
                             <div class="dropdown-menu" id="dropmenu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ url('/sponsors') }}">Sponsors</a>
+                                								<a class="dropdown-item" href="{{ route('front.sponsors') }}">Sponsors</a>
                                 <a class="dropdown-item" href="{{ url('/organizers') }}">Organizers</a>
                                 <a class="dropdown-item" href="{{ url('/accommodations') }}">Accommodations</a>
                                 <a class="dropdown-item" href="{{ url('/photo-gallery') }}">Photo Gallery</a>

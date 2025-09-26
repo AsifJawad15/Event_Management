@@ -23,6 +23,8 @@ Route::post('/contact', [FrontController::class, 'contact_submit'])->name('conta
 Route::get('/speakers', [FrontController::class, 'speakers'])->name('front.speakers');
 Route::get('/speaker/{slug}', [FrontController::class, 'speaker'])->name('front.speaker');
 Route::get('/schedule', [FrontController::class, 'schedule'])->name('front.schedule');
+Route::get('/sponsors', [FrontController::class, 'sponsors'])->name('front.sponsors');
+Route::get('/sponsor/{slug}', [FrontController::class, 'sponsor'])->name('front.sponsor.detail');
 
 // User
 Route::middleware('auth')->group(function () {
