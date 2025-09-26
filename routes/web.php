@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\AdminScheduleController;
 use App\Http\Controllers\Admin\AdminScheduleSpeakerController;
 use App\Http\Controllers\Admin\SponsorCategoryController;
 use App\Http\Controllers\Admin\AdminSponsorController;
+use App\Http\Controllers\Admin\AdminOrganiserController;
 
 // Front
 Route::get('/', [FrontController::class, 'home'])->name('front.home');
@@ -25,6 +26,8 @@ Route::get('/speaker/{slug}', [FrontController::class, 'speaker'])->name('front.
 Route::get('/schedule', [FrontController::class, 'schedule'])->name('front.schedule');
 Route::get('/sponsors', [FrontController::class, 'sponsors'])->name('front.sponsors');
 Route::get('/sponsor/{slug}', [FrontController::class, 'sponsor'])->name('front.sponsor.detail');
+Route::get('/organisers', [FrontController::class, 'organisers'])->name('front.organisers');
+Route::get('/organiser/{slug}', [FrontController::class, 'organiser'])->name('front.organiser.detail');
 
 // User
 Route::middleware('auth')->group(function () {
@@ -92,6 +95,14 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::get('/sponsors/{id}/edit',[AdminSponsorController::class,'edit'])->name('admin_sponsor_edit');
     Route::put('/sponsors/{id}',[AdminSponsorController::class,'update'])->name('admin_sponsor_update');
     Route::delete('/sponsors/{id}',[AdminSponsorController::class,'destroy'])->name('admin_sponsor_destroy');
+
+    // Organiser routes
+    Route::get('/organisers',[AdminOrganiserController::class,'index'])->name('admin_organiser_index');
+    Route::get('/organisers/create',[AdminOrganiserController::class,'create'])->name('admin_organiser_create');
+    Route::post('/organisers',[AdminOrganiserController::class,'store'])->name('admin_organiser_store');
+    Route::get('/organisers/{id}/edit',[AdminOrganiserController::class,'edit'])->name('admin_organiser_edit');
+    Route::put('/organisers/{id}',[AdminOrganiserController::class,'update'])->name('admin_organiser_update');
+    Route::delete('/organisers/{id}',[AdminOrganiserController::class,'destroy'])->name('admin_organiser_destroy');
 
     // Sponsor Category routes
     Route::get('/sponsor-categories',[SponsorCategoryController::class,'index'])->name('admin_sponsor_categories_index');

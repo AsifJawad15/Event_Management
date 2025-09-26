@@ -29,6 +29,8 @@
 
                     <li class="{{ Request::is('admin/sponsor-categories*' )?'active':''}}"><a class="nav-link" href="{{ route('admin_sponsor_categories_index') }}"><i class="fas fa-hand-point-right"></i> <span>Sponsor Categories</span></a></li>
 
+                    <li class="{{ Request::is('admin/organisers*' )?'active':''}}"><a class="nav-link" href="{{ route('admin_organiser_index') }}"><i class="fas fa-hand-point-right"></i> <span>Organisers</span></a></li>
+
                     <li class="{{ Request::is('admin/profile' )?'active':''}}"><a class="nav-link" href="{{ route('admin_profile') }}"><i class="fas fa-hand-point-right"></i> <span>Profile</span></a></li>
 
                 </ul>

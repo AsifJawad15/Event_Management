@@ -10,6 +10,7 @@ use App\Models\Speaker;
 use App\Models\ScheduleDay;
 use App\Models\SponsorCategory;
 use App\Models\Sponsor;
+use App\Models\Organiser;
 use Illuminate\Support\Str;
 
 class FrontController extends Controller
@@ -102,5 +103,17 @@ class FrontController extends Controller
     {
         $sponsor = Sponsor::where('slug', $slug)->with('sponsorCategory')->firstOrFail();
         return view('front.sponsor', compact('sponsor'));
+    }
+
+    public function organisers()
+    {
+        $organisers = Organiser::all();
+        return view('front.organisers', compact('organisers'));
+    }
+
+    public function organiser($slug)
+    {
+        $organiser = Organiser::where('slug', $slug)->firstOrFail();
+        return view('front.organiser', compact('organiser'));
     }
 }
