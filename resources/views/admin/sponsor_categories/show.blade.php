@@ -101,7 +101,8 @@
                 <li><a class="nav-link" href="{{ route('admin_schedule_day_index') }}"><i class="fas fa-hand-point-right"></i> <span>Schedule Days</span></a></li>
                 <li><a class="nav-link" href="{{ route('admin_schedule_index') }}"><i class="fas fa-hand-point-right"></i> <span>Schedules</span></a></li>
                 <li><a class="nav-link" href="{{ route('admin_speaker_schedule_index') }}"><i class="fas fa-hand-point-right"></i> <span>Speaker Schedule</span></a></li>
-                <li class="active"><a class="nav-link" href="{{ route('admin.sponsor-categories.index') }}"><i class="fas fa-hand-point-right"></i> <span>Sponsor Categories</span></a></li>
+                <li><a class="nav-link" href="{{ route('admin_sponsor_index') }}"><i class="fas fa-hand-point-right"></i> <span>Sponsors</span></a></li>
+                <li class="active"><a class="nav-link" href="{{ route('admin_sponsor_categories_index') }}"><i class="fas fa-hand-point-right"></i> <span>Sponsor Categories</span></a></li>
                 <li><a class="nav-link" href="{{ route('admin_profile') }}"><i class="fas fa-hand-point-right"></i> <span>Profile</span></a></li>
             </ul>
         </aside>
@@ -112,8 +113,8 @@
             <div class="section-header">
                 <h1>View Sponsor Category</h1>
                 <div class="section-header-button">
-                    <a href="{{ route('admin.sponsor-categories.index') }}" class="btn btn-primary">View All</a>
-                    <a href="{{ route('admin.sponsor-categories.edit', $sponsorCategory) }}" class="btn btn-warning">Edit</a>
+                    <a href="{{ route('admin_sponsor_categories_index') }}" class="btn btn-primary">View All</a>
+                    <a href="{{ route('admin_sponsor_categories_edit', $sponsorCategory) }}" class="btn btn-warning">Edit</a>
                 </div>
             </div>
             <div class="section-body">
@@ -152,9 +153,9 @@
                                     </div>
                                 </div>
                                 <div class="mb-4">
-                                    <a href="{{ route('admin.sponsor-categories.edit', $sponsorCategory) }}" class="btn btn-primary">Edit Category</a>
-                                    <a href="{{ route('admin.sponsor-categories.index') }}" class="btn btn-secondary">Back to List</a>
-                                    <form action="{{ route('admin.sponsor-categories.destroy', $sponsorCategory) }}" method="POST" style="display: inline;">
+                                    <a href="{{ route('admin_sponsor_categories_edit', $sponsorCategory) }}" class="btn btn-primary">Edit Category</a>
+                                    <a href="{{ route('admin_sponsor_categories_index') }}" class="btn btn-secondary">Back to List</a>
+                                    <form action="{{ route('admin_sponsor_categories_destroy', $sponsorCategory) }}" method="POST" style="display: inline;">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger" onClick="return confirm('Are you sure you want to delete this category?');">Delete Category</button>

@@ -2,7 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit                                                <td class="pt_10 pb_10">
+                                                    <a href="{{ route('admin_sponsor_categories_edit', $category) }}" class="btn btn-primary btn-sm">Edit</a>
+                                                    <form action="{{ route('admin_sponsor_categories_destroy', $category) }}" method="POST" style="display: inline;">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
+                                                    </form>
+                                                </td>="viewport">
 
     <link rel="icon" type="image/png" href="{{ asset('uploads/favicon.png') }}">
 
@@ -113,7 +120,8 @@
                 <li><a class="nav-link" href="{{ route('admin_schedule_day_index') }}"><i class="fas fa-hand-point-right"></i> <span>Schedule Days</span></a></li>
                 <li><a class="nav-link" href="{{ route('admin_schedule_index') }}"><i class="fas fa-hand-point-right"></i> <span>Schedules</span></a></li>
                 <li><a class="nav-link" href="{{ route('admin_speaker_schedule_index') }}"><i class="fas fa-hand-point-right"></i> <span>Speaker Schedule</span></a></li>
-                <li class="active"><a class="nav-link" href="{{ route('admin.sponsor-categories.index') }}"><i class="fas fa-hand-point-right"></i> <span>Sponsor Categories</span></a></li>
+                <li><a class="nav-link" href="{{ route('admin_sponsor_index') }}"><i class="fas fa-hand-point-right"></i> <span>Sponsors</span></a></li>
+                <li class="active"><a class="nav-link" href="{{ route('admin_sponsor_categories_index') }}"><i class="fas fa-hand-point-right"></i> <span>Sponsor Categories</span></a></li>
                 <li><a class="nav-link" href="{{ route('admin_profile') }}"><i class="fas fa-hand-point-right"></i> <span>Profile</span></a></li>
             </ul>
         </aside>
@@ -124,7 +132,7 @@
             <div class="section-header">
                 <h1>Sponsor Categories</h1>
                 <div class="section-header-button">
-                    <a href="{{ route('admin.sponsor-categories.create') }}" class="btn btn-primary">Add New Category</a>
+                    <a href="{{ route('admin_sponsor_categories_create') }}" class="btn btn-primary">Add New Category</a>
                 </div>
             </div>
             <div class="section-body">

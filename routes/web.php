@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\AdminScheduleDayController;
 use App\Http\Controllers\Admin\AdminScheduleController;
 use App\Http\Controllers\Admin\AdminScheduleSpeakerController;
 use App\Http\Controllers\Admin\SponsorCategoryController;
+use App\Http\Controllers\Admin\AdminSponsorController;
 
 // Front
 Route::get('/', [FrontController::class, 'home'])->name('front.home');
@@ -82,8 +83,21 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::post('/speaker_schedule_store',[AdminScheduleSpeakerController::class,'store'])->name('admin_speaker_schedule_store');
     Route::delete('/speaker_schedule_delete/{id}',[AdminScheduleSpeakerController::class,'delete'])->name('admin_speaker_schedule_delete');
 
+    // Sponsor routes
+    Route::get('/sponsors',[AdminSponsorController::class,'index'])->name('admin_sponsor_index');
+    Route::get('/sponsors/create',[AdminSponsorController::class,'create'])->name('admin_sponsor_create');
+    Route::post('/sponsors',[AdminSponsorController::class,'store'])->name('admin_sponsor_store');
+    Route::get('/sponsors/{id}/edit',[AdminSponsorController::class,'edit'])->name('admin_sponsor_edit');
+    Route::put('/sponsors/{id}',[AdminSponsorController::class,'update'])->name('admin_sponsor_update');
+    Route::delete('/sponsors/{id}',[AdminSponsorController::class,'destroy'])->name('admin_sponsor_destroy');
+
     // Sponsor Category routes
-    Route::resource('sponsor-categories', SponsorCategoryController::class, ['as' => 'admin']);
+    Route::get('/sponsor-categories',[SponsorCategoryController::class,'index'])->name('admin_sponsor_categories_index');
+    Route::get('/sponsor-categories/create',[SponsorCategoryController::class,'create'])->name('admin_sponsor_categories_create');
+    Route::post('/sponsor-categories',[SponsorCategoryController::class,'store'])->name('admin_sponsor_categories_store');
+    Route::get('/sponsor-categories/{sponsorCategory}/edit',[SponsorCategoryController::class,'edit'])->name('admin_sponsor_categories_edit');
+    Route::put('/sponsor-categories/{sponsorCategory}',[SponsorCategoryController::class,'update'])->name('admin_sponsor_categories_update');
+    Route::delete('/sponsor-categories/{sponsorCategory}',[SponsorCategoryController::class,'destroy'])->name('admin_sponsor_categories_destroy');
 });
 Route::prefix('admin')->group(function () {
     Route::get('/', function () {return redirect('/admin/login');});

@@ -123,7 +123,8 @@
                 <li><a class="nav-link" href="{{ route('admin_schedule_day_index') }}"><i class="fas fa-hand-point-right"></i> <span>Schedule Days</span></a></li>
                 <li><a class="nav-link" href="{{ route('admin_schedule_index') }}"><i class="fas fa-hand-point-right"></i> <span>Schedules</span></a></li>
                 <li><a class="nav-link" href="{{ route('admin_speaker_schedule_index') }}"><i class="fas fa-hand-point-right"></i> <span>Speaker Schedule</span></a></li>
-                <li class="active"><a class="nav-link" href="{{ route('admin.sponsor-categories.index') }}"><i class="fas fa-hand-point-right"></i> <span>Sponsor Categories</span></a></li>
+                <li><a class="nav-link" href="{{ route('admin_sponsor_index') }}"><i class="fas fa-hand-point-right"></i> <span>Sponsors</span></a></li>
+                <li class="active"><a class="nav-link" href="{{ route('admin_sponsor_categories_index') }}"><i class="fas fa-hand-point-right"></i> <span>Sponsor Categories</span></a></li>
                 <li><a class="nav-link" href="{{ route('admin_profile') }}"><i class="fas fa-hand-point-right"></i> <span>Profile</span></a></li>
             </ul>
         </aside>
@@ -134,7 +135,7 @@
             <div class="section-header">
                 <h1>Edit Sponsor Category</h1>
                 <div class="section-header-button">
-                    <a href="{{ route('admin.sponsor-categories.index') }}" class="btn btn-primary">View All</a>
+                    <a href="{{ route('admin_sponsor_categories_index') }}" class="btn btn-primary">View All</a>
                 </div>
             </div>
             <div class="section-body">
@@ -142,7 +143,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <form action="{{ route('admin.sponsor-categories.update', $sponsorCategory) }}" method="post">
+                                <form action="{{ route('admin_sponsor_categories_update', $sponsorCategory) }}" method="post">
                                     @csrf
                                     @method('PUT')
                                     <div class="row">
@@ -164,7 +165,7 @@
                                     <div class="mb-4">
                                         <label class="form-label"></label>
                                         <button type="submit" class="btn btn-primary">Update</button>
-                                        <a href="{{ route('admin.sponsor-categories.index') }}" class="btn btn-secondary">Cancel</a>
+                                        <a href="{{ route('admin_sponsor_categories_index') }}" class="btn btn-secondary">Cancel</a>
                                     </div>
                                 </form>
                             </div>

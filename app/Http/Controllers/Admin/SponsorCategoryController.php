@@ -40,7 +40,7 @@ class SponsorCategoryController extends Controller
             'description' => $request->description
         ]);
 
-        return redirect()->route('admin.sponsor_categories.index')
+        return redirect()->route('admin_sponsor_categories_index')
             ->with('success', 'Sponsor category created successfully!');
     }
 
@@ -75,7 +75,7 @@ class SponsorCategoryController extends Controller
             'description' => $request->description
         ]);
 
-        return redirect()->route('admin.sponsor_categories.index')
+        return redirect()->route('admin_sponsor_categories_index')
             ->with('success', 'Sponsor category updated successfully!');
     }
 
@@ -84,9 +84,15 @@ class SponsorCategoryController extends Controller
      */
     public function destroy(SponsorCategory $sponsorCategory)
     {
+        // Check if there are sponsors under this category
+        if ($sponsorCategory->sponsors()->count() > 0) {
+            return redirect()->route('admin_sponsor_categories_index')
+                ->with('error', 'Cannot delete sponsor category. There are sponsors under this category.');
+        }
+
         $sponsorCategory->delete();
 
-        return redirect()->route('admin.sponsor_categories.index')
+        return redirect()->route('admin_sponsor_categories_index')
             ->with('success', 'Sponsor category deleted successfully!');
     }
 }

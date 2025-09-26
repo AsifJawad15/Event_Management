@@ -6,7 +6,7 @@
 
     <link rel="icon" type="image/png" href="{{ asset('uploads/favicon.png') }}">
 
-    <title>Admin Panel - Create Sponsor Category</title>
+    <title>Admin Panel - Sponsors</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
@@ -123,8 +123,8 @@
                 <li><a class="nav-link" href="{{ route('admin_schedule_day_index') }}"><i class="fas fa-hand-point-right"></i> <span>Schedule Days</span></a></li>
                 <li><a class="nav-link" href="{{ route('admin_schedule_index') }}"><i class="fas fa-hand-point-right"></i> <span>Schedules</span></a></li>
                 <li><a class="nav-link" href="{{ route('admin_speaker_schedule_index') }}"><i class="fas fa-hand-point-right"></i> <span>Speaker Schedule</span></a></li>
-                <li><a class="nav-link" href="{{ route('admin_sponsor_index') }}"><i class="fas fa-hand-point-right"></i> <span>Sponsors</span></a></li>
-                <li class="active"><a class="nav-link" href="{{ route('admin_sponsor_categories_index') }}"><i class="fas fa-hand-point-right"></i> <span>Sponsor Categories</span></a></li>
+                <li class="active"><a class="nav-link" href="{{ route('admin_sponsor_index') }}"><i class="fas fa-hand-point-right"></i> <span>Sponsors</span></a></li>
+                <li><a class="nav-link" href="{{ route('admin_sponsor_categories_index') }}"><i class="fas fa-hand-point-right"></i> <span>Sponsor Categories</span></a></li>
                 <li><a class="nav-link" href="{{ route('admin_profile') }}"><i class="fas fa-hand-point-right"></i> <span>Profile</span></a></li>
             </ul>
         </aside>
@@ -133,9 +133,9 @@
     <div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1>Create Sponsor Category</h1>
+                <h1>Sponsors</h1>
                 <div class="section-header-button">
-                    <a href="{{ route('admin_sponsor_categories_index') }}" class="btn btn-primary">View All</a>
+                    <a href="{{ route('admin_sponsor_create') }}" class="btn btn-primary">Add Sponsor</a>
                 </div>
             </div>
             <div class="section-body">
@@ -143,30 +143,61 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <form action="{{ route('admin_sponsor_categories_store') }}" method="post">
-                                    @csrf
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="mb-4">
-                                                <label class="form-label">Category Name *</label>
-                                                <input type="text" class="form-control" name="name" value="{{ old('name') }}" required placeholder="e.g., Gold Sponsor, Platinum Sponsor, Silver Sponsor">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="mb-4">
-                                                <label class="form-label">Description</label>
-                                                <textarea class="form-control" name="description" rows="4" placeholder="Optional description for this sponsor category">{{ old('description') }}</textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="mb-4">
-                                        <label class="form-label"></label>
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                        <a href="{{ route('admin_sponsor_categories_index') }}" class="btn btn-secondary">Cancel</a>
-                                    </div>
-                                </form>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="example1">
+                                        <thead>
+                                            <tr>
+                                                <th>SL</th>
+                                                <th>Logo</th>
+                                                <th>Featured Photo</th>
+                                                <th>Name</th>
+                                                <th>Category</th>
+                                                <th>Email</th>
+                                                <th>Phone</th>
+                                                <th>Website</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($sponsors as $sponsor)
+                                            <tr>
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td>
+                                                    @if($sponsor->logo && file_exists(public_path('uploads/'.$sponsor->logo)))
+                                                        <img src="{{ asset('uploads/'.$sponsor->logo) }}" alt="{{ $sponsor->name }}" class="rounded" style="width: 50px; height: 50px; object-fit: cover;">
+                                                    @else
+                                                        <img src="{{ asset('uploads/default.png') }}" alt="Default Logo" class="rounded" style="width: 50px; height: 50px; object-fit: cover;">
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    @if($sponsor->featured_photo && file_exists(public_path('uploads/'.$sponsor->featured_photo)))
+                                                        <img src="{{ asset('uploads/'.$sponsor->featured_photo) }}" alt="{{ $sponsor->name }}" class="rounded" style="width: 50px; height: 50px; object-fit: cover;">
+                                                    @else
+                                                        <img src="{{ asset('uploads/default.png') }}" alt="Default Photo" class="rounded" style="width: 50px; height: 50px; object-fit: cover;">
+                                                    @endif
+                                                </td>
+                                                <td>{{ $sponsor->name }}</td>
+                                                <td>
+                                                    <span class="badge badge-primary">{{ $sponsor->sponsorCategory->name }}</span>
+                                                </td>
+                                                <td>{{ $sponsor->email ?? 'N/A' }}</td>
+                                                <td>{{ $sponsor->phone ?? 'N/A' }}</td>
+                                                <td>
+                                                    @if($sponsor->website)
+                                                        <a href="{{ $sponsor->website }}" target="_blank" class="btn btn-sm btn-info">Visit</a>
+                                                    @else
+                                                        N/A
+                                                    @endif
+                                                </td>
+                                                <td class="pt_10 pb_10">
+                                                    <a href="{{ route('admin_sponsor_edit', $sponsor->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                                                    <a href="{{ route('admin_sponsor_destroy', $sponsor->id) }}" class="btn btn-danger btn-sm" onClick="return confirm('Are you sure?');">Delete</a>
+                                                </td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -177,8 +208,11 @@
 
 </div>
 
-<script src="{{ asset('dist/js/scripts.js') }}"></script>
-<script src="{{ asset('dist/js/custom.js') }}"></script>
+<script>
+    $(document).ready(function () {
+        $('#example1').DataTable();
+    });
+</script>
 
 </body>
 </html>
