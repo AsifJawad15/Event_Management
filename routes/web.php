@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\SponsorCategoryController;
 use App\Http\Controllers\Admin\AdminSponsorController;
 use App\Http\Controllers\Admin\AdminOrganiserController;
 use App\Http\Controllers\Admin\AdminAccommodationController;
+use App\Http\Controllers\Admin\AdminPhotoController;
 
 // Front
 Route::get('/', [FrontController::class, 'home'])->name('front.home');
@@ -30,6 +31,7 @@ Route::get('/sponsor/{slug}', [FrontController::class, 'sponsor'])->name('front.
 Route::get('/organisers', [FrontController::class, 'organisers'])->name('front.organisers');
 Route::get('/organiser/{slug}', [FrontController::class, 'organiser'])->name('front.organiser.detail');
 Route::get('/accommodations', [FrontController::class, 'accommodations'])->name('front.accommodations');
+Route::get('/photo-gallery', [FrontController::class, 'photo_gallery'])->name('front.photo_gallery');
 
 // User
 Route::middleware('auth')->group(function () {
@@ -113,6 +115,14 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::get('/accommodations/{id}/edit',[AdminAccommodationController::class,'edit'])->name('admin_accommodation_edit');
     Route::put('/accommodations/{id}',[AdminAccommodationController::class,'update'])->name('admin_accommodation_update');
     Route::delete('/accommodations/{id}',[AdminAccommodationController::class,'destroy'])->name('admin_accommodation_destroy');
+
+    // Photo Gallery routes
+    Route::get('/photo-gallery',[AdminPhotoController::class,'index'])->name('admin_photo_index');
+    Route::get('/photo-gallery/create',[AdminPhotoController::class,'create'])->name('admin_photo_create');
+    Route::post('/photo-gallery',[AdminPhotoController::class,'store'])->name('admin_photo_store');
+    Route::get('/photo-gallery/{id}/edit',[AdminPhotoController::class,'edit'])->name('admin_photo_edit');
+    Route::put('/photo-gallery/{id}',[AdminPhotoController::class,'update'])->name('admin_photo_update');
+    Route::delete('/photo-gallery/{id}',[AdminPhotoController::class,'destroy'])->name('admin_photo_delete');
 
     // Sponsor Category routes
     Route::get('/sponsor-categories',[SponsorCategoryController::class,'index'])->name('admin_sponsor_categories_index');

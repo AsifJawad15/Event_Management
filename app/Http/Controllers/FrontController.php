@@ -12,6 +12,7 @@ use App\Models\SponsorCategory;
 use App\Models\Sponsor;
 use App\Models\Organiser;
 use App\Models\Accommodation;
+use App\Models\Photo;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
 
@@ -123,5 +124,11 @@ class FrontController extends Controller
     {
         $accommodations = Accommodation::all();
         return view('front.accommodations', compact('accommodations'));
+    }
+
+    public function photo_gallery()
+    {
+        $photos = Photo::latest()->paginate(6); // 6 photos per page
+        return view('front.photo_gallery', compact('photos'));
     }
 }

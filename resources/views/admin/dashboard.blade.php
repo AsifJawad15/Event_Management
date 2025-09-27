@@ -31,45 +31,7 @@
 
 
 
-        <div class="main-sidebar">
-            <aside id="sidebar-wrapper">
-                <div class="sidebar-brand">
-                    <a href="{{ route('admin_dashboard') }}">Admin Panel</a>
-                </div>
-                <div class="sidebar-brand sidebar-brand-sm">
-                    <a href="{{ route('admin_dashboard') }}"></a>
-                </div>
-
-                <ul class="sidebar-menu">
-
-                    <li class="{{ Request::is('admin/dashboard') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin_dashboard') }}"><i class="fas fa-hand-point-right"></i> <span>Dashboard</span></a></li>
-
-                    <li class="{{ Request::is('admin/home-banner') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin_home_banner') }}"><i class="fas fa-image"></i> <span>Home Banner</span></a></li>
-
-                    <li class="{{ Request::is('admin/home-welcome') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin_home_welcome') }}"><i class="fas fa-home"></i> <span>Home Welcome</span></a></li>
-
-                    <li class="{{ Request::is('admin/homecounter') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin_home_counter') }}"><i class="fas fa-calculator"></i> <span>Home Counter</span></a></li>
-
-                    <li class="{{ Request::is('admin/speakers*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin_speaker_index') }}"><i class="fas fa-users"></i> <span>Speakers</span></a></li>
-
-                    <li class="{{ Request::is('admin/schedule-days*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin_schedule_day_index') }}"><i class="fas fa-calendar-day"></i> <span>Schedule Days</span></a></li>
-
-                    <li class="{{ Request::is('admin/schedules*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin_schedule_index') }}"><i class="fas fa-calendar"></i> <span>Schedules</span></a></li>
-
-                    <li class="{{ Request::is('admin/speaker_schedule_index*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin_speaker_schedule_index') }}"><i class="fas fa-user-clock"></i> <span>Speaker Schedule</span></a></li>
-
-                    <li class="{{ Request::is('admin/sponsors*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin_sponsor_index') }}"><i class="fas fa-handshake"></i> <span>Sponsors</span></a></li>
-
-                    <li class="{{ Request::is('admin/sponsor-categories*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin_sponsor_categories_index') }}"><i class="fas fa-award"></i> <span>Sponsor Categories</span></a></li>
-
-                    <li class="{{ Request::is('admin/organisers*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin_organiser_index') }}"><i class="fas fa-user-tie"></i> <span>Organisers</span></a></li>
-
-                    <li class="{{ Request::is('admin/accommodations*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin_accommodation_index') }}"><i class="fas fa-hotel"></i> <span>Accommodations</span></a></li>
-
-                    <li class="{{ Request::is('admin/profile') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin_profile') }}"><i class="fas fa-user"></i> <span>Profile</span></a></li>
-
-                </ul>
-            </aside>
+        <div class="main-sidebar">        @include('admin.layout.sidebar')
         </div>
 
         <div class="main-content">
