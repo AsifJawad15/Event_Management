@@ -35,6 +35,8 @@
 
                     <li class="{{ Request::is('admin/photo-gallery*' )?'active':''}}"><a class="nav-link" href="{{ route('admin_photo_index') }}"><i class="fas fa-hand-point-right"></i> <span>Photo Gallery</span></a></li>
 
+                    <li class="{{ Request::is('admin/video-gallery*' )?'active':''}}"><a class="nav-link" href="{{ route('admin_video_index') }}"><i class="fas fa-hand-point-right"></i> <span>Video Gallery</span></a></li>
+
                     <li class="{{ Request::is('admin/profile' )?'active':''}}"><a class="nav-link" href="{{ route('admin_profile') }}"><i class="fas fa-hand-point-right"></i> <span>Profile</span></a></li>
 
                 </ul>

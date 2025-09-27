@@ -13,6 +13,7 @@ use App\Models\Sponsor;
 use App\Models\Organiser;
 use App\Models\Accommodation;
 use App\Models\Photo;
+use App\Models\Video;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
 
@@ -130,5 +131,11 @@ class FrontController extends Controller
     {
         $photos = Photo::latest()->paginate(6); // 6 photos per page
         return view('front.photo_gallery', compact('photos'));
+    }
+
+    public function video_gallery()
+    {
+        $videos = Video::latest()->paginate(6); // 6 videos per page
+        return view('front.video_gallery', compact('videos'));
     }
 }
