@@ -11,7 +11,9 @@ use App\Models\ScheduleDay;
 use App\Models\SponsorCategory;
 use App\Models\Sponsor;
 use App\Models\Organiser;
+use App\Models\Accommodation;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
 
 class FrontController extends Controller
 {
@@ -115,5 +117,11 @@ class FrontController extends Controller
     {
         $organiser = Organiser::where('slug', $slug)->firstOrFail();
         return view('front.organiser', compact('organiser'));
+    }
+
+    public function accommodations()
+    {
+        $accommodations = Accommodation::all();
+        return view('front.accommodations', compact('accommodations'));
     }
 }

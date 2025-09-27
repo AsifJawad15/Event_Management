@@ -62,6 +62,10 @@
 
                     <li class="{{ Request::is('admin/sponsor-categories*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin_sponsor_categories_index') }}"><i class="fas fa-award"></i> <span>Sponsor Categories</span></a></li>
 
+                    <li class="{{ Request::is('admin/organisers*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin_organiser_index') }}"><i class="fas fa-user-tie"></i> <span>Organisers</span></a></li>
+
+                    <li class="{{ Request::is('admin/accommodations*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin_accommodation_index') }}"><i class="fas fa-hotel"></i> <span>Accommodations</span></a></li>
+
                     <li class="{{ Request::is('admin/profile') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin_profile') }}"><i class="fas fa-user"></i> <span>Profile</span></a></li>
 
                 </ul>

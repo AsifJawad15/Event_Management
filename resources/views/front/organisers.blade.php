@@ -31,7 +31,7 @@
                             <div class="dropdown-menu" id="dropmenu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ route('front.sponsors') }}">Sponsors</a>
                                 <a class="dropdown-item" href="{{ route('front.organisers') }}">Organisers</a>
-                                <a class="dropdown-item" href="{{ url('/accommodations') }}">Accommodations</a>
+                                <a class="dropdown-item" href="{{ route('front.accommodations') }}">Accommodations</a>
                                 <a class="dropdown-item" href="{{ url('/photo-gallery') }}">Photo Gallery</a>
                                 <a class="dropdown-item" href="{{ url('/video-gallery') }}">Video Gallery</a>
                                 <a class="dropdown-item" href="{{ url('/faq') }}">FAQ</a>

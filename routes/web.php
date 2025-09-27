@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\AdminScheduleSpeakerController;
 use App\Http\Controllers\Admin\SponsorCategoryController;
 use App\Http\Controllers\Admin\AdminSponsorController;
 use App\Http\Controllers\Admin\AdminOrganiserController;
+use App\Http\Controllers\Admin\AdminAccommodationController;
 
 // Front
 Route::get('/', [FrontController::class, 'home'])->name('front.home');
@@ -28,6 +29,7 @@ Route::get('/sponsors', [FrontController::class, 'sponsors'])->name('front.spons
 Route::get('/sponsor/{slug}', [FrontController::class, 'sponsor'])->name('front.sponsor.detail');
 Route::get('/organisers', [FrontController::class, 'organisers'])->name('front.organisers');
 Route::get('/organiser/{slug}', [FrontController::class, 'organiser'])->name('front.organiser.detail');
+Route::get('/accommodations', [FrontController::class, 'accommodations'])->name('front.accommodations');
 
 // User
 Route::middleware('auth')->group(function () {
@@ -103,6 +105,14 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::get('/organisers/{id}/edit',[AdminOrganiserController::class,'edit'])->name('admin_organiser_edit');
     Route::put('/organisers/{id}',[AdminOrganiserController::class,'update'])->name('admin_organiser_update');
     Route::delete('/organisers/{id}',[AdminOrganiserController::class,'destroy'])->name('admin_organiser_destroy');
+
+    // Accommodation routes
+    Route::get('/accommodations',[AdminAccommodationController::class,'index'])->name('admin_accommodation_index');
+    Route::get('/accommodations/create',[AdminAccommodationController::class,'create'])->name('admin_accommodation_create');
+    Route::post('/accommodations',[AdminAccommodationController::class,'store'])->name('admin_accommodation_store');
+    Route::get('/accommodations/{id}/edit',[AdminAccommodationController::class,'edit'])->name('admin_accommodation_edit');
+    Route::put('/accommodations/{id}',[AdminAccommodationController::class,'update'])->name('admin_accommodation_update');
+    Route::delete('/accommodations/{id}',[AdminAccommodationController::class,'destroy'])->name('admin_accommodation_destroy');
 
     // Sponsor Category routes
     Route::get('/sponsor-categories',[SponsorCategoryController::class,'index'])->name('admin_sponsor_categories_index');
