@@ -25,7 +25,7 @@
 							<a class="nav-link" href="{{ url('/pricing') }}">Pricing</a>
 						</li>
 						<li>
-							<a class="nav-link" href="{{ url('/blog') }}">Blog</a>
+							<a class="nav-link" href="{{ route('front.blog') }}">Blog</a>
 						</li>
 						<li class="nav-item dropdown"> <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Pages </a>
 							<div class="dropdown-menu" id="dropmenu" aria-labelledby="navbarDropdown">

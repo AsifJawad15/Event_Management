@@ -16,6 +16,7 @@ use App\Models\Photo;
 use App\Models\Video;
 use App\Models\Faq;
 use App\Models\Testimonial;
+use App\Models\Post;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
 
@@ -151,5 +152,17 @@ class FrontController extends Controller
     {
         $testimonials = Testimonial::latest()->get(); // Get all testimonials for carousel
         return view('front.testimonials', compact('testimonials'));
+    }
+
+    public function blog()
+    {
+        $posts = Post::latest()->paginate(6); // 6 posts per page, matching the grid layout
+        return view('front.blog', compact('posts'));
+    }
+
+    public function post($slug)
+    {
+        $post = Post::where('slug', $slug)->firstOrFail();
+        return view('front.post', compact('post'));
     }
 }
