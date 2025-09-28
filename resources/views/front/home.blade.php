@@ -35,7 +35,7 @@
 								<a class="dropdown-item" href="{{ url('/photo-gallery') }}">Photo Gallery</a>
 								<a class="dropdown-item" href="{{ url('/video-gallery') }}">Video Gallery</a>
 								<a class="dropdown-item" href="{{ url('/faq') }}">FAQ</a>
-								<a class="dropdown-item" href="{{ url('/testimonials') }}">Testimonials</a>
+								<a class="dropdown-item" href="{{ route('front.testimonials') }}">Testimonials</a>
 							</div>
 						</li>
 						<li>

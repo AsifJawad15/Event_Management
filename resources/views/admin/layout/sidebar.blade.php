@@ -1,5 +1,9 @@
 <div class="main-sidebar">
-            <aside id="sidebar-wrapper">
+                                <li class="{{ Request::is('admin/faq*' )?'active':''}}"><a class="nav-link" href="{{ route('admin_faq_index') }}"><i class="fas fa-hand-point-right"></i> <span>FAQ Management</span></a></li>
+
+                    <li class="{{ Request::is('admin/testimonials*' )?'active':''}}"><a class="nav-link" href="{{ route('admin_testimonial_index') }}"><i class="fas fa-hand-point-right"></i> <span>Testimonials</span></a></li>
+
+                    <li class="{{ Request::is('admin/profile' )?'active':''}}"><a class="nav-link" href="{{ route('admin_profile') }}"><i class="fas fa-hand-point-right"></i> <span>Profile</span></a></li>ide id="sidebar-wrapper">
                 <div class="sidebar-brand">
                     <a href="{{ route('admin_dashboard') }}">Admin Panel</a>
                 </div>
@@ -38,6 +42,8 @@
                     <li class="{{ Request::is('admin/video-gallery*' )?'active':''}}"><a class="nav-link" href="{{ route('admin_video_index') }}"><i class="fas fa-hand-point-right"></i> <span>Video Gallery</span></a></li>
 
                     <li class="{{ Request::is('admin/faq*' )?'active':''}}"><a class="nav-link" href="{{ route('admin_faq_index') }}"><i class="fas fa-hand-point-right"></i> <span>FAQ Management</span></a></li>
+
+                    <li class="{{ Request::is('admin/testimonials*' )?'active':''}}"><a class="nav-link" href="{{ route('admin_testimonial_index') }}"><i class="fas fa-hand-point-right"></i> <span>Testimonials</span></a></li>
 
                     <li class="{{ Request::is('admin/profile' )?'active':''}}"><a class="nav-link" href="{{ route('admin_profile') }}"><i class="fas fa-hand-point-right"></i> <span>Profile</span></a></li>
 

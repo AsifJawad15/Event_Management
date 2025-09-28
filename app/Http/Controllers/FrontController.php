@@ -15,6 +15,7 @@ use App\Models\Accommodation;
 use App\Models\Photo;
 use App\Models\Video;
 use App\Models\Faq;
+use App\Models\Testimonial;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
 
@@ -144,5 +145,11 @@ class FrontController extends Controller
     {
         $faqs = Faq::latest()->get(); // Get all FAQs for accordion display
         return view('front.faq', compact('faqs'));
+    }
+
+    public function testimonials()
+    {
+        $testimonials = Testimonial::latest()->get(); // Get all testimonials for carousel
+        return view('front.testimonials', compact('testimonials'));
     }
 }
