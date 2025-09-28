@@ -14,6 +14,7 @@ use App\Models\Organiser;
 use App\Models\Accommodation;
 use App\Models\Photo;
 use App\Models\Video;
+use App\Models\Faq;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
 
@@ -137,5 +138,11 @@ class FrontController extends Controller
     {
         $videos = Video::latest()->paginate(6); // 6 videos per page
         return view('front.video_gallery', compact('videos'));
+    }
+
+    public function faq()
+    {
+        $faqs = Faq::latest()->get(); // Get all FAQs for accordion display
+        return view('front.faq', compact('faqs'));
     }
 }

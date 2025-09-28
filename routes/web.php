@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\AdminOrganiserController;
 use App\Http\Controllers\Admin\AdminAccommodationController;
 use App\Http\Controllers\Admin\AdminPhotoController;
 use App\Http\Controllers\Admin\AdminVideoController;
+use App\Http\Controllers\Admin\AdminFaqController;
 
 // Front
 Route::get('/', [FrontController::class, 'home'])->name('front.home');
@@ -34,6 +35,7 @@ Route::get('/organiser/{slug}', [FrontController::class, 'organiser'])->name('fr
 Route::get('/accommodations', [FrontController::class, 'accommodations'])->name('front.accommodations');
 Route::get('/photo-gallery', [FrontController::class, 'photo_gallery'])->name('front.photo_gallery');
 Route::get('/video-gallery', [FrontController::class, 'video_gallery'])->name('front.video_gallery');
+Route::get('/faq', [FrontController::class, 'faq'])->name('front.faq');
 
 // User
 Route::middleware('auth')->group(function () {
@@ -133,6 +135,15 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::get('/video-gallery/{video}/edit',[AdminVideoController::class,'edit'])->name('admin_video_edit');
     Route::put('/video-gallery/{video}',[AdminVideoController::class,'update'])->name('admin_video_update');
     Route::delete('/video-gallery/{video}',[AdminVideoController::class,'destroy'])->name('admin_video_destroy');
+
+    // FAQ routes
+    Route::get('/faq',[AdminFaqController::class,'index'])->name('admin_faq_index');
+    Route::get('/faq/create',[AdminFaqController::class,'create'])->name('admin_faq_create');
+    Route::post('/faq',[AdminFaqController::class,'store'])->name('admin_faq_store');
+    Route::get('/faq/{faq}',[AdminFaqController::class,'show'])->name('admin_faq_show');
+    Route::get('/faq/{faq}/edit',[AdminFaqController::class,'edit'])->name('admin_faq_edit');
+    Route::put('/faq/{faq}',[AdminFaqController::class,'update'])->name('admin_faq_update');
+    Route::delete('/faq/{faq}',[AdminFaqController::class,'destroy'])->name('admin_faq_destroy');
 
     // Sponsor Category routes
     Route::get('/sponsor-categories',[SponsorCategoryController::class,'index'])->name('admin_sponsor_categories_index');
