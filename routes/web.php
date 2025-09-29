@@ -44,6 +44,11 @@ Route::get('/blog', [FrontController::class, 'blog'])->name('front.blog');
 Route::get('/post/{slug}', [FrontController::class, 'post'])->name('front.post');
 Route::get('/pricing', [FrontController::class, 'pricing'])->name('front.pricing');
 
+// Buy Ticket - requires authentication
+Route::middleware('auth')->group(function () {
+    Route::get('/buy-ticket/{id}', [FrontController::class, 'buy_ticket'])->name('front.buy_ticket');
+});
+
 // User
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard',[UserController::class,'dashboard'])->name('user.dashboard');

@@ -53,7 +53,10 @@ class FrontController extends Controller
         // Get speakers for homepage (limit to 4)
         $speakers = Speaker::limit(4)->get();
 
-        return view('front.home', compact('banner', 'welcome', 'homeCounter', 'speakers'));
+        // Get packages for pricing section (limit to 3 for home page)
+        $packages = Package::with('facilities')->orderByItemOrder()->limit(3)->get();
+
+        return view('front.home', compact('banner', 'welcome', 'homeCounter', 'speakers', 'packages'));
     }
 
     public function about()
@@ -171,6 +174,60 @@ class FrontController extends Controller
     public function pricing()
     {
         $packages = Package::with('facilities')->orderByItemOrder()->get();
-        return view('front.pricing', compact('packages'));
+
+        // Get home banner for background
+        $banner = HomeBanner::active()->ordered()->first();
+
+        // If no banner exists, create a default one
+        if (!$banner) {
+            $banner = new HomeBanner([
+                'heading' => 'Event and Conference Website',
+                'subheading' => 'September 7, 2025, California',
+                'text' => 'Join us at our next networking event and conference!',
+                'background' => 'dist-front/images/banner-home.jpg',
+                'event_date' => '2025-09-07',
+                'event_time' => '13:00:00',
+                'button_text' => 'BUY TICKETS',
+                'button_url' => '/buy',
+                'status' => 1
+            ]);
+        }
+
+        return view('front.pricing', compact('packages', 'banner'));
+    }
+
+    public function buy_ticket($id)
+    {
+        // Check if ticket purchase is still available (static date for now)
+        $expireDate = '2025-12-31'; // You can change this date as needed
+        if ($expireDate < date('Y-m-d')) {
+            return redirect()->route('front.home')->with('error', 'Ticket purchase date is expired!');
+        }
+
+        // Get the package
+        $package = Package::where('id', $id)->first();
+        if (!$package) {
+            return redirect()->route('front.pricing')->with('error', 'Package not found!');
+        }
+
+        // Get home banner for background
+        $banner = HomeBanner::active()->ordered()->first();
+
+        // If no banner exists, create a default one
+        if (!$banner) {
+            $banner = new HomeBanner([
+                'heading' => 'Event and Conference Website',
+                'subheading' => 'September 7, 2025, California',
+                'text' => 'Join us at our next networking event and conference!',
+                'background' => 'dist-front/images/banner-home.jpg',
+                'event_date' => '2025-09-07',
+                'event_time' => '13:00:00',
+                'button_text' => 'BUY TICKETS',
+                'button_url' => '/buy',
+                'status' => 1
+            ]);
+        }
+
+        return view('front.buy_ticket', compact('package', 'banner'));
     }
 }

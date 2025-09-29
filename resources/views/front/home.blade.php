@@ -2,58 +2,7 @@
 
 @section('title', 'Home | SingleEvent')
 @section('content')
-<div class="container main-menu" id="navbar">
-	<div class="row">
-		<div class="col-lg-2 col-sm-12">
-			<a href="{{ url('/') }}" id="logo" class="grid_2"> <img src="{{ asset('dist-front/images/logo.png') }}"> </a>
-		</div>
-		<div class="col-lg-10 col-sm-12">
-			<nav class="navbar navbar-expand-lg navbar-light">
-				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
-				<div class="collapse navbar-collapse" id="navbarSupportedContent">
-					<ul id="navContent" class="navbar-nav mr-auto navigation">
-						<li>
-							<a class="smooth-scroll nav-link" href="{{ url('/') }}">Home</a>
-						</li>
-						<li>
-							<a class="nav-link" href="{{ route('front.speakers') }}">Speakers</a>
-						</li>
-						<li>
-							<a class="smooth-scroll nav-link" href="{{ url('/schedule') }}">Schedule</a>
-						</li>
-						<li>
-							<a class="smooth-scroll nav-link" href="{{ url('/pricing') }}">Pricing</a>
-						</li>
-						<li>
-							<a class="smooth-scroll nav-link" href="{{ route('front.blog') }}">Blog</a>
-						</li>
-						<li class="nav-item dropdown"> <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Pages </a>
-							<div class="dropdown-menu" id="dropmenu" aria-labelledby="navbarDropdown">
-								<a class="dropdown-item" href="{{ route('front.sponsors') }}">Sponsors</a>
-								<a class="dropdown-item" href="{{ route('front.organisers') }}">Organisers</a>
-								<a class="dropdown-item" href="{{ route('front.accommodations') }}">Accommodations</a>
-								<a class="dropdown-item" href="{{ url('/photo-gallery') }}">Photo Gallery</a>
-								<a class="dropdown-item" href="{{ url('/video-gallery') }}">Video Gallery</a>
-								<a class="dropdown-item" href="{{ url('/faq') }}">FAQ</a>
-								<a class="dropdown-item" href="{{ route('front.testimonials') }}">Testimonials</a>
-							</div>
-						</li>
-						<li>
-							<a class="smooth-scroll nav-link" href="{{ url('/contact') }}">Contact</a>
-						</li>
-						<li class="member-login-button">
-							<div class="inner">
-								<a class="smooth-scroll nav-link" href="{{ url('/login') }}">
-									<i class="fa fa-sign-in"></i> Login
-								</a>
-							</div>
-						</li>
-					</ul>
-				</div>
-			</nav>
-		</div>
-	</div>
-</div>
+@include('front.layout.navigation')
 <div class="container-fluid home-banner" style="background-image: url('{{ asset($banner->background) }}'); min-height: 500px; background-size: cover; background-position: center; background-repeat: no-repeat;">
 	<div class="container">
 		<div class="row">
@@ -254,51 +203,87 @@
             <div class="col-sm-1 col-lg-2"></div>
         </div>
         <div class="row pt_40">
-            <div class="col-md-4 col-sm-12">
-                <div class="info">
-                    <h5 class="event-ti-style">Standard</h5>
-                    <h3 class="event-ti-style">$49</h3>
-                    <ul>
-                        <li><i class="fa fa-check"></i> Access to all sessions</li>
-                        <li><i class="fa fa-check"></i> Unlimited Drinkgs & Coffee</li>
-                        <li><i class="fa fa-times"></i> Lunch Facility</li>
-                        <li><i class="fa fa-times"></i> Meet with Speakers</li>
-                    </ul>
-                    <div class="global_btn mt_20">
-                        <a class="btn_two" href="{{ url('/buy') }}">Buy Ticket</a>
+            @if($packages && $packages->count() > 0)
+                @php
+                    // Get all available active facilities for comparison
+                    $allFacilities = \App\Models\PackageFacility::active()->orderByItemOrder()->get();
+                @endphp
+
+                @foreach($packages as $package)
+                <div class="col-md-4 col-sm-12">
+                    <div class="info">
+                        <h5 class="event-ti-style">{{ $package->name }}</h5>
+                        <h3 class="event-ti-style">${{ number_format($package->price, 0) }}</h3>
+                        <ul>
+                            @foreach($allFacilities->take(4) as $facility)
+                                <li>
+                                    @if($package->facilities->contains($facility->id))
+                                        <i class="fa fa-check" style="color: #4CAF50;"></i>
+                                    @else
+                                        <i class="fa fa-times" style="color: #f44336;"></i>
+                                    @endif
+                                    {{ $facility->name }}
+                                </li>
+                            @endforeach
+                        </ul>
+                        <div class="global_btn mt_20">
+                            @auth
+                                <a class="btn_two" href="{{ route('front.buy_ticket', $package->id) }}">Buy Ticket</a>
+                            @else
+                                <a class="btn_two" href="{{ route('login') }}">Login to Buy</a>
+                            @endauth
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4 col-sm-12">
-                <div class="info">
-                    <h5 class="event-ti-style">Business</h5>
-                    <h3 class="event-ti-style">$99</h3>
-                    <ul>
-                        <li><i class="fa fa-check"></i> Access to all sessions</li>
-                        <li><i class="fa fa-check"></i> Unlimited Drinkgs & Coffee</li>
-                        <li><i class="fa fa-check"></i> Lunch Facility</li>
-                        <li><i class="fa fa-times"></i> Meet with Speakers</li>
-                    </ul>
-                    <div class="global_btn mt_20">
-                        <a class="btn_two" href="{{ url('/buy') }}">Buy Ticket</a>
+                @endforeach
+            @else
+                <!-- Fallback content if no packages -->
+                <div class="col-md-4 col-sm-12">
+                    <div class="info">
+                        <h5 class="event-ti-style">Standard</h5>
+                        <h3 class="event-ti-style">$49</h3>
+                        <ul>
+                            <li><i class="fa fa-check" style="color: #4CAF50;"></i> Access to all sessions</li>
+                            <li><i class="fa fa-check" style="color: #4CAF50;"></i> Unlimited Drinks & Coffee</li>
+                            <li><i class="fa fa-times" style="color: #f44336;"></i> Lunch Facility</li>
+                            <li><i class="fa fa-times" style="color: #f44336;"></i> Meet with Speakers</li>
+                        </ul>
+                        <div class="global_btn mt_20">
+                            <a class="btn_two" href="{{ route('login') }}">Login to Buy</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4 col-sm-12">
-                <div class="info">
-                    <h5 class="event-ti-style">Premium</h5>
-                    <h3 class="event-ti-style">$139</h3>
-                    <ul>
-                        <li><i class="fa fa-check"></i> Access to all sessions</li>
-                        <li><i class="fa fa-check"></i> Unlimited Drinkgs & Coffee</li>
-                        <li><i class="fa fa-check"></i> Lunch Facility</li>
-                        <li><i class="fa fa-check"></i> Meet with Speakers</li>
-                    </ul>
-                    <div class="global_btn mt_20">
-                        <a class="btn_two" href="{{ url('/buy') }}">Buy Ticket</a>
+                <div class="col-md-4 col-sm-12">
+                    <div class="info">
+                        <h5 class="event-ti-style">Business</h5>
+                        <h3 class="event-ti-style">$99</h3>
+                        <ul>
+                            <li><i class="fa fa-check" style="color: #4CAF50;"></i> Access to all sessions</li>
+                            <li><i class="fa fa-check" style="color: #4CAF50;"></i> Unlimited Drinks & Coffee</li>
+                            <li><i class="fa fa-check" style="color: #4CAF50;"></i> Lunch Facility</li>
+                            <li><i class="fa fa-times" style="color: #f44336;"></i> Meet with Speakers</li>
+                        </ul>
+                        <div class="global_btn mt_20">
+                            <a class="btn_two" href="{{ route('login') }}">Login to Buy</a>
+                        </div>
                     </div>
                 </div>
-            </div>
+                <div class="col-md-4 col-sm-12">
+                    <div class="info">
+                        <h5 class="event-ti-style">Premium</h5>
+                        <h3 class="event-ti-style">$139</h3>
+                        <ul>
+                            <li><i class="fa fa-check" style="color: #4CAF50;"></i> Access to all sessions</li>
+                            <li><i class="fa fa-check" style="color: #4CAF50;"></i> Unlimited Drinks & Coffee</li>
+                            <li><i class="fa fa-check" style="color: #4CAF50;"></i> Lunch Facility</li>
+                            <li><i class="fa fa-check" style="color: #4CAF50;"></i> Meet with Speakers</li>
+                        </ul>
+                        <div class="global_btn mt_20">
+                            <a class="btn_two" href="{{ route('login') }}">Login to Buy</a>
+                        </div>
+                    </div>
+                </div>
+            @endif
         </div>
     </div>
 </div>

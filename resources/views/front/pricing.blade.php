@@ -43,9 +43,15 @@
 						</li>
 						<li class="member-login-button">
 							<div class="inner">
+								@if(Auth::guard('web')->check())
+								<a class="smooth-scroll nav-link" href="{{ route('user.dashboard') }}">
+									<i class="fa fa-user"></i> Dashboard
+								</a>
+								@else
 								<a class="nav-link" href="{{ url('/login') }}">
 									<i class="fa fa-sign-in"></i> Login
 								</a>
+								@endif
 							</div>
 						</li>
 					</ul>
@@ -55,7 +61,7 @@
 	</div>
 </div>
 
-<section class="page-header">
+<section class="page-header" style="background-image: url('{{ asset($banner->background) }}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
@@ -124,7 +130,11 @@
                             </ul>
                         </div>
                         <div class="pricing-footer">
-                            <a href="#" class="btn-buy">Buy Ticket</a>
+                            @auth
+                                <a href="{{ route('front.buy_ticket', $package->id) }}" class="btn-buy">Buy Ticket</a>
+                            @else
+                                <a href="{{ route('login') }}" class="btn-buy">Login to Buy</a>
+                            @endauth
                         </div>
                     </div>
                 </div>
@@ -144,7 +154,6 @@
 <style>
 .page-header {
     padding: 100px 0 50px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     position: relative;
     overflow: hidden;
 }
@@ -368,11 +377,11 @@
     .header-content h2 {
         font-size: 36px;
     }
-    
+
     .section-title {
         font-size: 32px;
     }
-    
+
     .section-description {
         font-size: 16px;
         padding: 0 20px;
@@ -397,7 +406,7 @@
     .pricing-header, .pricing-body, .pricing-footer {
         padding: 25px 20px;
     }
-    
+
     .pricing-card.popular {
         transform: none;
         margin-top: 20px;
@@ -408,15 +417,15 @@
     .pricing-section {
         padding: 60px 0;
     }
-    
+
     .page-header {
         padding: 80px 0 40px;
     }
-    
+
     .header-content h2 {
         font-size: 28px;
     }
-    
+
     .section-title {
         font-size: 28px;
     }
@@ -428,7 +437,7 @@
     .col-md-6 {
         margin-bottom: 30px;
     }
-    
+
     .popular-badge {
         font-size: 10px;
         padding: 3px 25px;
