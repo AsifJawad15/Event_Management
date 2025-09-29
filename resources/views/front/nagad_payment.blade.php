@@ -23,43 +23,68 @@
     </div>
 </div>
 
-<div class="pt_50 pb_70">
+<div class="pt_50 pb_70" style="background-color: #f8f9fa;">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header text-center" style="background-color: #ec1f26; color: white;">
-                        <h3><i class="fas fa-mobile-alt"></i> Nagad Payment</h3>
+            <div class="col-md-4">
+                <!-- Nagad Authentic Payment Interface -->
+                <div class="nagad-payment-container">
+                    <!-- Header -->
+                    <div class="nagad-header">
+                        <div class="nagad-logo-section">
+                            <span class="nagad-logo-text">নগদ</span>
+                            <span class="sandbox-text">Sandbox Merchant</span>
+                        </div>
                     </div>
-                    <div class="card-body text-center">
-                        <div class="mb-4">
-                            <img src="data:image/png;base64,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" alt="Nagad" style="height: 60px;">
-                        </div>
-                        <h4>Payment Amount: ৳{{ number_format($price * 85, 2) }}</h4>
-                        <p class="text-muted">This is a demo payment gateway for testing purposes</p>
 
-                        <form class="mt-4">
-                            <div class="form-group">
-                                <label>Enter your Nagad Mobile Number</label>
-                                <input type="text" class="form-control" placeholder="01XXXXXXXXX" required>
-                            </div>
-                            <div class="form-group mt-3">
-                                <label>Enter PIN</label>
-                                <input type="password" class="form-control" placeholder="****" required>
-                            </div>
-                        </form>
-
-                        <div class="mt-4">
-                            <a href="{{ route('nagad_success') }}" class="btn btn-success btn-lg mr-3">
-                                <i class="fas fa-check"></i> Pay Now
-                            </a>
-                            <a href="{{ route('nagad_cancel') }}" class="btn btn-danger btn-lg">
-                                <i class="fas fa-times"></i> Cancel
-                            </a>
+                    <!-- Payment Details -->
+                    <div class="nagad-body">
+                        <div class="payment-info">
+                            <p class="invoice-label">Invoice No: <strong>{{ 'INV-' . time() }}</strong></p>
+                            <p class="amount-label">Total Amount: <strong>BDT {{ number_format($price * 85, 2) }}</strong></p>
+                            <p class="charge-label">Charge: <strong>BDT 0</strong></p>
                         </div>
 
-                        <div class="mt-3">
-                            <small class="text-muted">This is a sandbox environment. No actual money will be charged.</small>
+                        <div class="account-input-section">
+                            <label class="account-label">Your Nagad Account Number</label>
+                            <div class="mobile-input-container">
+                                <div class="mobile-number-display">
+                                    <span class="number-boxes">
+                                        <span class="box">0</span>
+                                        <span class="box">1</span>
+                                        <span class="box"></span>
+                                        <span class="box"></span>
+                                        <span class="box"></span>
+                                        <span class="box"></span>
+                                        <span class="box"></span>
+                                        <span class="box"></span>
+                                        <span class="box"></span>
+                                        <span class="box"></span>
+                                        <span class="box"></span>
+                                    </span>
+                                </div>
+                                <input type="text" class="nagad-input" placeholder="Enter mobile number" maxlength="11">
+                            </div>
+
+                            <div class="terms-section">
+                                <p class="terms-text">
+                                    By clicking "Proceed" you are agreeing to the
+                                    <a href="#" class="terms-link">Nagad Terms and Conditions</a>
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="action-buttons">
+                            <a href="{{ route('nagad_success') }}" class="btn-proceed">Proceed</a>
+                            <a href="{{ route('nagad_cancel') }}" class="btn-close">Close</a>
+                        </div>
+
+                        <!-- Footer -->
+                        <div class="nagad-footer">
+                            <div class="nagad-logo-footer">
+                                <span class="footer-logo">নগদ</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -67,4 +92,219 @@
         </div>
     </div>
 </div>
+
+<style>
+.nagad-payment-container {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.nagad-header {
+    background: linear-gradient(135deg, #ed1c24 0%, #b71c1c 100%);
+    padding: 15px 20px;
+    text-align: center;
+}
+
+.nagad-logo-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.nagad-logo-text {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    font-family: 'SolaimanLipi', Arial, sans-serif;
+}
+
+.sandbox-text {
+    color: rgba(255,255,255,0.9);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.nagad-body {
+    padding: 25px 20px;
+    background: #ed1c24;
+    color: white;
+}
+
+.payment-info {
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+.payment-info p {
+    margin: 8px 0;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.invoice-label, .amount-label, .charge-label {
+    color: rgba(255,255,255,0.9);
+}
+
+.account-input-section {
+    margin-bottom: 25px;
+}
+
+.account-label {
+    display: block;
+    margin-bottom: 15px;
+    font-size: 14px;
+    color: rgba(255,255,255,0.9);
+    text-align: center;
+}
+
+.mobile-input-container {
+    margin-bottom: 20px;
+}
+
+.mobile-number-display {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.number-boxes {
+    display: flex;
+    gap: 3px;
+}
+
+.box {
+    width: 25px;
+    height: 30px;
+    border: 1px solid rgba(255,255,255,0.4);
+    background: rgba(255,255,255,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 3px;
+}
+
+.nagad-input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 4px;
+    background: rgba(255,255,255,0.1);
+    color: white;
+    font-size: 16px;
+    text-align: center;
+}
+
+.nagad-input::placeholder {
+    color: rgba(255,255,255,0.6);
+}
+
+.nagad-input:focus {
+    outline: none;
+    border-color: rgba(255,255,255,0.6);
+    background: rgba(255,255,255,0.15);
+}
+
+.terms-section {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.terms-text {
+    font-size: 12px;
+    line-height: 1.4;
+    color: rgba(255,255,255,0.8);
+    margin: 0;
+}
+
+.terms-link {
+    color: rgba(255,255,255,0.9);
+    text-decoration: underline;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.btn-proceed, .btn-close {
+    flex: 1;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-proceed {
+    background: rgba(255,255,255,0.2);
+    color: white;
+    border: 1px solid rgba(255,255,255,0.4);
+}
+
+.btn-proceed:hover {
+    background: rgba(255,255,255,0.3);
+    color: white;
+    text-decoration: none;
+}
+
+.btn-close {
+    background: rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.8);
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+.btn-close:hover {
+    background: rgba(255,255,255,0.2);
+    color: white;
+    text-decoration: none;
+}
+
+.nagad-footer {
+    text-align: center;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255,255,255,0.2);
+}
+
+.footer-logo {
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: 'SolaimanLipi', Arial, sans-serif;
+    opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+    .col-md-4 {
+        padding: 0 15px;
+    }
+
+    .nagad-payment-container {
+        margin: 0 10px;
+    }
+
+    .number-boxes {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .box {
+        width: 22px;
+        height: 28px;
+        font-size: 12px;
+    }
+}
+</style>
 @endsection

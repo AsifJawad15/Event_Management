@@ -87,7 +87,7 @@
 <div id="price-section" class="pt_50 pb_70 gray prices">
     <div class="container">
         <div class="row">
-            <form class="form" method="post" action="#">
+            <form class="form" method="post" action="{{ route('payment') }}">
                 @csrf
                 <input type="hidden" name="package_id" value="{{ $package->id }}">
                 <input type="hidden" name="package_name" value="{{ $package->name }}">
@@ -162,8 +162,8 @@
 
                 <h3 class="mt_25 mb_15 fw600">Payment Method</h3>
                 <select name="payment_method" class="form-control">
-                    <option value="PayPal">PayPal</option>
-                    <option value="Stripe">Stripe</option>
+                    <option value="bKash">bKash</option>
+                    <option value="Nagad">Nagad</option>
                     <option value="Bank">Bank Transfer</option>
                 </select>
                 <div class="mt_20">
