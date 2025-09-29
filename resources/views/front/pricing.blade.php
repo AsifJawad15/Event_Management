@@ -75,16 +75,27 @@
 
 <section class="pricing-section">
     <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-header text-center mb-5">
+                    <h2 class="section-title">Pricing</h2>
+                    <p class="section-description">You will find below the different pricing options for our event. Choose the one that suits you best and register now! You will have access to all sessions, unlimited coffee and food, and the opportunity to meet with your favorite speakers.</p>
+                </div>
+            </div>
+        </div>
         <div class="row justify-content-center">
             @if($packages->count() > 0)
                 @php
-                    // Get all available facilities for comparison
+                    // Get all available active facilities for comparison
                     $allFacilities = \App\Models\PackageFacility::active()->orderByItemOrder()->get();
                 @endphp
 
                 @foreach($packages as $package)
-                <div class="col-lg-4 col-md-6 mb-5">
-                    <div class="pricing-card">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="pricing-card {{ $loop->iteration == 2 ? 'popular' : '' }}">
+                        @if($loop->iteration == 2)
+                            <div class="popular-badge">POPULAR</div>
+                        @endif
                         <div class="pricing-header">
                             <h3 class="package-name">{{ $package->name }}</h3>
                             <div class="package-price">
@@ -182,21 +193,62 @@
     background: #f8f9fa;
 }
 
+.section-header {
+    margin-bottom: 60px;
+}
+
+.section-title {
+    font-size: 42px;
+    font-weight: 700;
+    color: #4CAF50;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.section-description {
+    font-size: 18px;
+    color: #6c757d;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+    text-align: center;
+}
+
 .pricing-card {
     background: #ffffff;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
     overflow: hidden;
     height: 100%;
     display: flex;
     flex-direction: column;
     position: relative;
+    border: 2px solid transparent;
 }
 
 .pricing-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.pricing-card.popular {
+    border: 2px solid #4CAF50;
+    transform: scale(1.05);
+}
+
+.popular-badge {
+    position: absolute;
+    top: 20px;
+    right: -30px;
+    background: #4CAF50;
+    color: white;
+    padding: 5px 35px;
+    font-size: 12px;
+    font-weight: 600;
+    transform: rotate(45deg);
+    letter-spacing: 1px;
+    z-index: 10;
 }
 
 .pricing-header {
@@ -207,17 +259,16 @@
 }
 
 .package-name {
-    font-size: 28px;
+    font-size: 32px;
     font-weight: 700;
-    color: #2c3e50;
+    color: #333;
     margin-bottom: 20px;
-    text-transform: capitalize;
 }
 
 .package-price {
-    font-size: 48px;
+    font-size: 56px;
     font-weight: 700;
-    color: #27ae60;
+    color: #4CAF50;
     line-height: 1;
 }
 
@@ -233,6 +284,7 @@
 .pricing-body {
     flex: 1;
     padding: 30px;
+    background: #ffffff;
 }
 
 .features-list {
@@ -244,10 +296,10 @@
 .feature-item {
     display: flex;
     align-items: center;
-    padding: 12px 0;
+    padding: 15px 0;
     border-bottom: 1px solid #f1f1f1;
     font-size: 16px;
-    color: #6c757d;
+    color: #555;
 }
 
 .feature-item:last-child {
@@ -259,22 +311,24 @@
     text-align: center;
     margin-right: 15px;
     font-size: 16px;
+    font-weight: bold;
 }
 
 .feature-check {
-    color: #27ae60;
+    color: #4CAF50;
 }
 
 .feature-cross {
-    color: #e74c3c;
+    color: #f44336;
 }
 
 .feature-info {
-    color: #3498db;
+    color: #2196F3;
 }
 
 .feature-item span {
     flex: 1;
+    font-weight: 500;
 }
 
 .pricing-footer {
@@ -285,48 +339,28 @@
 
 .btn-buy {
     display: inline-block;
-    background: #27ae60;
-    color: white;
+    background: #4CAF50;
+    color: white !important;
     padding: 15px 40px;
     font-size: 16px;
     font-weight: 600;
     text-decoration: none;
-    border-radius: 50px;
+    border-radius: 25px;
     transition: all 0.3s ease;
     text-transform: uppercase;
     letter-spacing: 1px;
     border: none;
-    box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3);
+    box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+    width: 100%;
+    max-width: 200px;
 }
 
 .btn-buy:hover {
-    background: #229954;
+    background: #45a049;
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(39, 174, 96, 0.4);
+    box-shadow: 0 8px 25px rgba(76, 175, 80, 0.4);
     text-decoration: none;
-    color: white;
-}
-
-/* Premium package highlight */
-.pricing-card:nth-child(2) {
-    position: relative;
-    border: 2px solid #27ae60;
-    transform: scale(1.05);
-}
-
-.pricing-card:nth-child(2):after {
-    content: 'POPULAR';
-    position: absolute;
-    top: 20px;
-    right: -30px;
-    background: #27ae60;
-    color: white;
-    padding: 5px 35px;
-    font-size: 12px;
-    font-weight: 600;
-    transform: rotate(45deg);
-    letter-spacing: 1px;
-    z-index: 10;
+    color: white !important;
 }
 
 /* Mobile responsive */
@@ -334,28 +368,37 @@
     .header-content h2 {
         font-size: 36px;
     }
-
-    .package-price {
-        font-size: 36px;
+    
+    .section-title {
+        font-size: 32px;
+    }
+    
+    .section-description {
+        font-size: 16px;
+        padding: 0 20px;
     }
 
-    .amount {
+    .package-price {
         font-size: 42px;
     }
 
+    .amount {
+        font-size: 48px;
+    }
+
     .currency {
-        font-size: 24px;
+        font-size: 28px;
     }
 
     .package-name {
-        font-size: 24px;
+        font-size: 28px;
     }
 
     .pricing-header, .pricing-body, .pricing-footer {
-        padding: 20px;
+        padding: 25px 20px;
     }
-
-    .pricing-card:nth-child(2) {
+    
+    .pricing-card.popular {
         transform: none;
         margin-top: 20px;
     }
@@ -363,14 +406,18 @@
 
 @media (max-width: 576px) {
     .pricing-section {
-        padding: 40px 0;
+        padding: 60px 0;
     }
-
+    
     .page-header {
-        padding: 60px 0 30px;
+        padding: 80px 0 40px;
     }
-
+    
     .header-content h2 {
+        font-size: 28px;
+    }
+    
+    .section-title {
         font-size: 28px;
     }
 
@@ -380,6 +427,11 @@
 
     .col-md-6 {
         margin-bottom: 30px;
+    }
+    
+    .popular-badge {
+        font-size: 10px;
+        padding: 3px 25px;
     }
 }
 </style>
