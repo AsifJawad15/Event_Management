@@ -47,6 +47,20 @@ Route::get('/pricing', [FrontController::class, 'pricing'])->name('front.pricing
 // Buy Ticket - requires authentication
 Route::middleware('auth')->group(function () {
     Route::get('/buy-ticket/{id}', [FrontController::class, 'buy_ticket'])->name('front.buy_ticket');
+
+    // Payment Routes
+    Route::post('/payment', [FrontController::class, 'payment'])->name('payment');
+
+    // bKash Routes
+    Route::get('/bkash-success', [FrontController::class, 'bkash_success'])->name('bkash_success');
+    Route::get('/bkash-cancel', [FrontController::class, 'bkash_cancel'])->name('bkash_cancel');
+
+    // Nagad Routes
+    Route::get('/nagad-success', [FrontController::class, 'nagad_success'])->name('nagad_success');
+    Route::get('/nagad-cancel', [FrontController::class, 'nagad_cancel'])->name('nagad_cancel');
+
+    // Bank Routes
+    Route::post('/bank-success', [FrontController::class, 'bank_success'])->name('bank_success');
 });
 
 // User

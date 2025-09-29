@@ -3,8 +3,12 @@
 @section('title', 'Buy Ticket | SingleEvent')
 @section('content')
 <div class="container main-menu" id="navbar">
-	<div class="row">
-		<div class="col-lg-2 col-sm-12">
+	<div class="                <h3 class="mt_25 mb_15 fw600">Payment</h3>
+                <select name="payment_method" class="form-control">
+                    <option value="bKash">bKash</option>
+                    <option value="Nagad">Nagad</option>
+                    <option value="Bank">Bank</option>
+                </select>		<div class="col-lg-2 col-sm-12">
 			<a href="{{ url('/') }}" id="logo" class="grid_2"> <img src="{{ asset('dist-front/images/logo.png') }}"> </a>
 		</div>
 		<div class="col-lg-10 col-sm-12">

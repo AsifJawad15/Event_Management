@@ -19,8 +19,14 @@ use App\Models\Testimonial;
 use App\Models\Post;
 use App\Models\Package;
 use App\Models\PackageFacility;
+use App\Models\Ticket;
+use App\Models\Admin;
+use App\Mail\Websitemail;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
+use Xenon\NagadApi\Helper;
+use Xenon\NagadApi\Base;
 
 class FrontController extends Controller
 {
@@ -229,5 +235,207 @@ class FrontController extends Controller
         }
 
         return view('front.buy_ticket', compact('package', 'banner'));
+    }
+
+    public function payment(Request $request)
+    {
+        $package_id = $request->package_id;
+        $unit_price = $request->unit_price;
+        $quantity = $request->quantity;
+        $price = $unit_price * $quantity;
+
+        if($request->payment_method == "bKash")
+        {
+            // bKash Start - Dummy Implementation
+            session()->put('package_id', $request->package_id);
+            session()->put('package_name', $request->package_name);
+            session()->put('quantity', $request->quantity);
+            session()->put('unit_price', $request->unit_price);
+            session()->put('price', $price);
+
+            session()->put('billing_name', $request->billing_name);
+            session()->put('billing_email', $request->billing_email);
+            session()->put('billing_phone', $request->billing_phone);
+            session()->put('billing_address', $request->billing_address);
+            session()->put('billing_country', $request->billing_country);
+            session()->put('billing_state', $request->billing_state);
+            session()->put('billing_city', $request->billing_city);
+            session()->put('billing_zip', $request->billing_zip);
+            session()->put('billing_note', $request->billing_note);
+
+            // For demo purposes, redirect to a dummy bKash page
+            return view('front.bkash_payment', compact('price'));
+            // bKash End
+        }
+        elseif($request->payment_method == "Nagad")
+        {
+            // Nagad Start - Dummy Implementation
+            session()->put('package_id', $request->package_id);
+            session()->put('package_name', $request->package_name);
+            session()->put('quantity', $request->quantity);
+            session()->put('unit_price', $request->unit_price);
+            session()->put('price', $price);
+
+            session()->put('billing_name', $request->billing_name);
+            session()->put('billing_email', $request->billing_email);
+            session()->put('billing_phone', $request->billing_phone);
+            session()->put('billing_address', $request->billing_address);
+            session()->put('billing_country', $request->billing_country);
+            session()->put('billing_state', $request->billing_state);
+            session()->put('billing_city', $request->billing_city);
+            session()->put('billing_zip', $request->billing_zip);
+            session()->put('billing_note', $request->billing_note);
+
+            // For demo purposes, redirect to a dummy Nagad page
+            return view('front.nagad_payment', compact('price'));
+            // Nagad End
+        }
+        else
+        {
+            // Bank Start
+            session()->put('package_id', $request->package_id);
+            session()->put('package_name', $request->package_name);
+            session()->put('quantity', $request->quantity);
+            session()->put('unit_price', $request->unit_price);
+            session()->put('price', $price);
+
+            session()->put('billing_name', $request->billing_name);
+            session()->put('billing_email', $request->billing_email);
+            session()->put('billing_phone', $request->billing_phone);
+            session()->put('billing_address', $request->billing_address);
+            session()->put('billing_country', $request->billing_country);
+            session()->put('billing_state', $request->billing_state);
+            session()->put('billing_city', $request->billing_city);
+            session()->put('billing_zip', $request->billing_zip);
+            session()->put('billing_note', $request->billing_note);
+
+            return view('front.bank');
+            // Bank End
+        }
+    }
+
+    public function bkash_success(Request $request)
+    {
+        // Generate unique number
+        $unique_number = time().rand(1000,9999);
+
+        // Insert data into database
+        $ticket = new Ticket;
+        $ticket->user_id = Auth::guard('web')->user()->id;
+        $ticket->package_id = session()->get('package_id');
+        $ticket->payment_id = $unique_number;
+        $ticket->package_name = session()->get('package_name');
+        $ticket->billing_name = session()->get('billing_name');
+        $ticket->billing_email = session()->get('billing_email');
+        $ticket->billing_phone = session()->get('billing_phone');
+        $ticket->billing_address = session()->get('billing_address');
+        $ticket->billing_country = session()->get('billing_country');
+        $ticket->billing_state = session()->get('billing_state');
+        $ticket->billing_city = session()->get('billing_city');
+        $ticket->billing_zip = session()->get('billing_zip');
+        $ticket->billing_note = session()->get('billing_note');
+        $ticket->payment_method = "bKash";
+        $ticket->payment_currency = "BDT";
+        $ticket->payment_status = 'Completed';
+        $ticket->transaction_id = 'BKS'.time().rand(1000,9999);
+        $ticket->bank_transaction_info = '';
+        $ticket->per_ticket_price = session()->get('unit_price');
+        $ticket->total_tickets = session()->get('quantity');
+        $ticket->total_price = session()->get('price');
+        $ticket->save();
+
+        // Clear session
+        session()->forget(['package_id', 'package_name', 'quantity', 'unit_price', 'price',
+                          'billing_name', 'billing_email', 'billing_phone', 'billing_address',
+                          'billing_country', 'billing_state', 'billing_city', 'billing_zip', 'billing_note']);
+
+        return redirect()->route('user.dashboard')->with('success','Payment is successful!');
+    }
+
+    public function bkash_cancel()
+    {
+        return redirect()->route('user.dashboard')->with('error','Payment is cancelled!');
+    }
+
+    public function nagad_success(Request $request)
+    {
+        // Generate unique number
+        $unique_number = time().rand(1000,9999);
+
+        $ticket = new Ticket;
+        $ticket->user_id = Auth::guard('web')->user()->id;
+        $ticket->package_id = session()->get('package_id');
+        $ticket->payment_id = $unique_number;
+        $ticket->package_name = session()->get('package_name');
+        $ticket->billing_name = session()->get('billing_name');
+        $ticket->billing_email = session()->get('billing_email');
+        $ticket->billing_phone = session()->get('billing_phone');
+        $ticket->billing_address = session()->get('billing_address');
+        $ticket->billing_country = session()->get('billing_country');
+        $ticket->billing_state = session()->get('billing_state');
+        $ticket->billing_city = session()->get('billing_city');
+        $ticket->billing_zip = session()->get('billing_zip');
+        $ticket->billing_note = session()->get('billing_note');
+        $ticket->payment_method = "Nagad";
+        $ticket->payment_currency = "BDT";
+        $ticket->payment_status = 'Completed';
+        $ticket->transaction_id = 'NGD'.time().rand(1000,9999);
+        $ticket->bank_transaction_info = '';
+        $ticket->per_ticket_price = session()->get('unit_price');
+        $ticket->total_tickets = session()->get('quantity');
+        $ticket->total_price = session()->get('price');
+        $ticket->save();
+
+        // Clear session
+        session()->forget(['package_id', 'package_name', 'quantity', 'unit_price', 'price',
+                          'billing_name', 'billing_email', 'billing_phone', 'billing_address',
+                          'billing_country', 'billing_state', 'billing_city', 'billing_zip', 'billing_note']);
+
+        return redirect()->route('user.dashboard')->with('success','Payment is successful!');
+    }
+
+    public function nagad_cancel()
+    {
+        return redirect()->route('user.dashboard')->with('error','Payment is cancelled!');
+    }
+
+    public function bank_success(Request $request)
+    {
+        if($request->bank_transaction_info == '') {
+            return redirect()->route('front.buy_ticket',session()->get('package_id'))->with('error','Please enter the bank transaction information!');
+        }
+
+        $unique_number = time().rand(1000,9999);
+
+        $ticket = new Ticket;
+        $ticket->user_id = Auth::guard('web')->user()->id;
+        $ticket->package_id = session()->get('package_id');
+        $ticket->payment_id = $unique_number;
+        $ticket->package_name = session()->get('package_name');
+        $ticket->billing_name = session()->get('billing_name');
+        $ticket->billing_email = session()->get('billing_email');
+        $ticket->billing_phone = session()->get('billing_phone');
+        $ticket->billing_address = session()->get('billing_address');
+        $ticket->billing_country = session()->get('billing_country');
+        $ticket->billing_state = session()->get('billing_state');
+        $ticket->billing_city = session()->get('billing_city');
+        $ticket->billing_zip = session()->get('billing_zip');
+        $ticket->billing_note = session()->get('billing_note');
+        $ticket->payment_method = "Bank";
+        $ticket->payment_currency = "BDT";
+        $ticket->payment_status = 'Pending';
+        $ticket->transaction_id = "";
+        $ticket->bank_transaction_info = $request->bank_transaction_info;
+        $ticket->per_ticket_price = session()->get('unit_price');
+        $ticket->total_tickets = session()->get('quantity');
+        $ticket->total_price = session()->get('price');
+        $ticket->save();
+
+        // Clear session
+        session()->forget(['package_id', 'package_name', 'quantity', 'unit_price', 'price',
+                          'billing_name', 'billing_email', 'billing_phone', 'billing_address',
+                          'billing_country', 'billing_state', 'billing_city', 'billing_zip', 'billing_note']);
+
+        return redirect()->route('user.dashboard')->with('success','Payment Information that you provided will be verified by admin and then it will be successful!');
     }
 }
