@@ -170,15 +170,18 @@ Route::middleware('admin')->prefix('admin')->group(function () {
 
     // Package routes
     Route::get('/packages',[AdminPackageController::class,'index'])->name('admin_package_index');
+    Route::get('/packages/create',[AdminPackageController::class,'create'])->name('admin_package_create');
     Route::post('/packages',[AdminPackageController::class,'store'])->name('admin_package_store');
-    Route::put('/packages/{package}',[AdminPackageController::class,'update'])->name('admin_package_update');
-    Route::delete('/packages/{package}',[AdminPackageController::class,'destroy'])->name('admin_package_destroy');
+    Route::get('/packages/{id}/edit',[AdminPackageController::class,'edit'])->name('admin_package_edit');
+    Route::put('/packages/{id}',[AdminPackageController::class,'update'])->name('admin_package_update');
+    Route::delete('/packages/{id}',[AdminPackageController::class,'destroy'])->name('admin_package_delete');
 
     // Package Facility routes
     Route::get('/package-facilities',[AdminPackageController::class,'facilityIndex'])->name('admin_package_facility_index');
+    Route::get('/package-facilities/{id}/edit',[AdminPackageController::class,'facilityEdit'])->name('admin_package_facility_edit');
     Route::post('/package-facilities',[AdminPackageController::class,'facilityStore'])->name('admin_package_facility_store');
-    Route::put('/package-facilities/{facility}',[AdminPackageController::class,'facilityUpdate'])->name('admin_package_facility_update');
-    Route::delete('/package-facilities/{facility}',[AdminPackageController::class,'facilityDestroy'])->name('admin_package_facility_destroy');
+    Route::put('/package-facilities/{id}',[AdminPackageController::class,'facilityUpdate'])->name('admin_package_facility_update');
+    Route::delete('/package-facilities/{id}',[AdminPackageController::class,'facilityDestroy'])->name('admin_package_facility_delete');
 
     // Sponsor Category routes
     Route::get('/sponsor-categories',[SponsorCategoryController::class,'index'])->name('admin_sponsor_categories_index');

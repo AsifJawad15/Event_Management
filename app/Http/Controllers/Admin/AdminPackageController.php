@@ -29,14 +29,26 @@ class AdminPackageController extends Controller
             'price' => 'required|numeric|min:0',
             'maximum_tickets' => 'nullable|integer|min:1',
             'item_order' => 'required|integer|min:0',
-            'facilities' => 'nullable|array',
-            'facilities.*' => 'exists:package_facilities,id'
+            'facility' => 'nullable|array',
+            'facility.*' => 'nullable|string|max:255',
+            'status' => 'nullable|array',
+            'order' => 'nullable|array',
         ]);
 
         $package = Package::create($request->only(['name', 'price', 'maximum_tickets', 'item_order']));
 
-        if ($request->has('facilities')) {
-            $package->facilities()->sync($request->facilities);
+        // Handle dynamic facilities
+        if ($request->has('facility')) {
+            foreach ($request->facility as $index => $facilityName) {
+                if (!empty($facilityName)) {
+                    $facility = PackageFacility::create([
+                        'name' => $facilityName,
+                        'status' => isset($request->status[$index]) && $request->status[$index] == 'Yes' ? 1 : 0,
+                        'item_order' => $request->order[$index] ?? 0,
+                    ]);
+                    $package->facilities()->attach($facility->id);
+                }
+            }
         }
 
         return redirect()->route('admin_package_index')->with('success', 'Package created successfully.');
@@ -45,8 +57,8 @@ class AdminPackageController extends Controller
     public function edit($id)
     {
         $package = Package::with('facilities')->findOrFail($id);
-        $facilities = PackageFacility::active()->orderByItemOrder()->get();
-        return view('admin.package.edit', compact('package', 'facilities'));
+        $package_facilities = PackageFacility::orderByItemOrder()->get();
+        return view('admin.package.edit', compact('package', 'package_facilities'));
     }
 
     public function update(Request $request, $id)
@@ -56,17 +68,27 @@ class AdminPackageController extends Controller
             'price' => 'required|numeric|min:0',
             'maximum_tickets' => 'nullable|integer|min:1',
             'item_order' => 'required|integer|min:0',
-            'facilities' => 'nullable|array',
-            'facilities.*' => 'exists:package_facilities,id'
+            'facility' => 'nullable|array',
+            'facility.*' => 'nullable|string|max:255',
+            'status' => 'nullable|array',
+            'order' => 'nullable|array',
         ]);
 
         $package = Package::findOrFail($id);
         $package->update($request->only(['name', 'price', 'maximum_tickets', 'item_order']));
 
-        if ($request->has('facilities')) {
-            $package->facilities()->sync($request->facilities);
-        } else {
-            $package->facilities()->detach();
+        // Handle new facilities
+        if ($request->has('facility')) {
+            foreach ($request->facility as $index => $facilityName) {
+                if (!empty($facilityName)) {
+                    $facility = PackageFacility::create([
+                        'name' => $facilityName,
+                        'status' => isset($request->status[$index]) && $request->status[$index] == 'Yes' ? 1 : 0,
+                        'item_order' => $request->order[$index] ?? 0,
+                    ]);
+                    $package->facilities()->attach($facility->id);
+                }
+            }
         }
 
         return redirect()->route('admin_package_index')->with('success', 'Package updated successfully.');
@@ -108,21 +130,25 @@ class AdminPackageController extends Controller
 
     public function facilityEdit($id)
     {
-        $facility = PackageFacility::findOrFail($id);
-        return view('admin.package.facility_edit', compact('facility'));
+        $package_facility = PackageFacility::findOrFail($id);
+        return view('admin.package.edit_facility', compact('package_facility'));
     }
 
     public function facilityUpdate(Request $request, $id)
     {
         $facility = PackageFacility::findOrFail($id);
-        
+
         $request->validate([
             'name' => 'required|string|max:255|unique:package_facilities,name,' . $facility->id,
-            'status' => 'required|boolean',
+            'status' => 'required|string|in:Yes,No',
             'item_order' => 'required|integer|min:0'
         ]);
 
-        $facility->update($request->all());
+        $facility->update([
+            'name' => $request->name,
+            'status' => $request->status == 'Yes' ? 1 : 0,
+            'item_order' => $request->item_order
+        ]);
 
         return redirect()->route('admin_package_facility_index')->with('success', 'Facility updated successfully.');
     }
