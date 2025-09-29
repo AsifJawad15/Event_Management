@@ -21,6 +21,7 @@ use App\Http\Controllers\Admin\AdminVideoController;
 use App\Http\Controllers\Admin\AdminFaqController;
 use App\Http\Controllers\Admin\AdminTestimonialController;
 use App\Http\Controllers\Admin\AdminPostController;
+use App\Http\Controllers\Admin\AdminPackageController;
 
 // Front
 Route::get('/', [FrontController::class, 'home'])->name('front.home');
@@ -41,6 +42,7 @@ Route::get('/faq', [FrontController::class, 'faq'])->name('front.faq');
 Route::get('/testimonials', [FrontController::class, 'testimonials'])->name('front.testimonials');
 Route::get('/blog', [FrontController::class, 'blog'])->name('front.blog');
 Route::get('/post/{slug}', [FrontController::class, 'post'])->name('front.post');
+Route::get('/pricing', [FrontController::class, 'pricing'])->name('front.pricing');
 
 // User
 Route::middleware('auth')->group(function () {
@@ -165,6 +167,18 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::get('/posts/{post}/edit',[AdminPostController::class,'edit'])->name('admin_post_edit');
     Route::put('/posts/{post}',[AdminPostController::class,'update'])->name('admin_post_update');
     Route::delete('/posts/{post}',[AdminPostController::class,'destroy'])->name('admin_post_destroy');
+
+    // Package routes
+    Route::get('/packages',[AdminPackageController::class,'index'])->name('admin_package_index');
+    Route::post('/packages',[AdminPackageController::class,'store'])->name('admin_package_store');
+    Route::put('/packages/{package}',[AdminPackageController::class,'update'])->name('admin_package_update');
+    Route::delete('/packages/{package}',[AdminPackageController::class,'destroy'])->name('admin_package_destroy');
+
+    // Package Facility routes
+    Route::get('/package-facilities',[AdminPackageController::class,'facilityIndex'])->name('admin_package_facility_index');
+    Route::post('/package-facilities',[AdminPackageController::class,'facilityStore'])->name('admin_package_facility_store');
+    Route::put('/package-facilities/{facility}',[AdminPackageController::class,'facilityUpdate'])->name('admin_package_facility_update');
+    Route::delete('/package-facilities/{facility}',[AdminPackageController::class,'facilityDestroy'])->name('admin_package_facility_destroy');
 
     // Sponsor Category routes
     Route::get('/sponsor-categories',[SponsorCategoryController::class,'index'])->name('admin_sponsor_categories_index');

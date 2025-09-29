@@ -17,6 +17,8 @@ use App\Models\Video;
 use App\Models\Faq;
 use App\Models\Testimonial;
 use App\Models\Post;
+use App\Models\Package;
+use App\Models\PackageFacility;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
 
@@ -164,5 +166,11 @@ class FrontController extends Controller
     {
         $post = Post::where('slug', $slug)->firstOrFail();
         return view('front.post', compact('post'));
+    }
+
+    public function pricing()
+    {
+        $packages = Package::with('facilities')->orderByItemOrder()->get();
+        return view('front.pricing', compact('packages'));
     }
 }
