@@ -49,6 +49,8 @@
 
                     <li class="{{ Request::is('admin/packages*' )?'active':''}}"><a class="nav-link" href="{{ route('admin_package_index') }}"><i class="fas fa-hand-point-right"></i> <span>Packages</span></a></li>
 
+                    <li class="{{ Request::is('admin/tickets*' )?'active':''}}"><a class="nav-link" href="{{ route('admin_ticket_index') }}"><i class="fas fa-ticket-alt"></i> <span>Ticket Management</span></a></li>
+
                     <li class="{{ Request::is('admin/profile' )?'active':''}}"><a class="nav-link" href="{{ route('admin_profile') }}"><i class="fas fa-hand-point-right"></i> <span>Profile</span></a></li>
 
                 </ul>

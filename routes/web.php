@@ -22,6 +22,7 @@ use App\Http\Controllers\Admin\AdminFaqController;
 use App\Http\Controllers\Admin\AdminTestimonialController;
 use App\Http\Controllers\Admin\AdminPostController;
 use App\Http\Controllers\Admin\AdminPackageController;
+use App\Http\Controllers\Admin\AdminTicketController;
 
 // Front
 Route::get('/', [FrontController::class, 'home'])->name('front.home');
@@ -209,6 +210,12 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::get('/sponsor-categories/{sponsorCategory}/edit',[SponsorCategoryController::class,'edit'])->name('admin_sponsor_categories_edit');
     Route::put('/sponsor-categories/{sponsorCategory}',[SponsorCategoryController::class,'update'])->name('admin_sponsor_categories_update');
     Route::delete('/sponsor-categories/{sponsorCategory}',[SponsorCategoryController::class,'destroy'])->name('admin_sponsor_categories_destroy');
+
+    // Ticket routes
+    Route::get('/tickets',[AdminTicketController::class,'index'])->name('admin_ticket_index');
+    Route::get('/tickets/change-status/{id}/{status}',[AdminTicketController::class,'change_status'])->name('admin_ticket_change_status');
+    Route::delete('/tickets/{id}',[AdminTicketController::class,'delete'])->name('admin_ticket_delete');
+    Route::get('/tickets/invoice/{id}',[AdminTicketController::class,'invoice'])->name('admin_ticket_invoice');
 });
 Route::prefix('admin')->group(function () {
     Route::get('/', function () {return redirect('/admin/login');});

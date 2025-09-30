@@ -21,6 +21,11 @@ class Package extends Model
         return $this->belongsToMany(PackageFacility::class)->orderBy('item_order');
     }
 
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class);
+    }
+
     public function scopeOrderByItemOrder($query)
     {
         return $query->orderBy('item_order');
