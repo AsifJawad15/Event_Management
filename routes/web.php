@@ -70,6 +70,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard',[UserController::class,'dashboard'])->name('user.dashboard');
     Route::get('/profile',[UserController::class,'profile'])->name('user.profile');
     Route::post('/profile',[UserController::class,'profile_update'])->name('user.profile.update');
+
+    // Attendee Ticket Routes
+    Route::get('/my-tickets',[FrontController::class,'attendee_tickets'])->name('attendee.tickets');
+    Route::get('/ticket-invoice/{id}',[FrontController::class,'attendee_invoice'])->name('attendee.invoice');
 });
 Route::get('/register',[UserController::class,'register'])->name('register');
 Route::post('/register_submit',[UserController::class,'register_submit'])->name('register_submit');

@@ -438,4 +438,43 @@ class FrontController extends Controller
 
         return redirect()->route('user.dashboard')->with('success','Payment Information that you provided will be verified by admin and then it will be successful!');
     }
+
+    public function attendee_tickets()
+    {
+        // Check if user is authenticated
+        if (!Auth::guard('web')->check()) {
+            return redirect()->route('login')->with('error', 'Please login to view your tickets.');
+        }
+
+        $user = Auth::guard('web')->user();
+
+        $tickets = Ticket::with(['package', 'user'])
+                         ->where('user_id', $user->id)
+                         ->orderBy('created_at', 'desc')
+                         ->get();
+
+        return view('user.ticket', compact('tickets'));
+    }
+
+    public function attendee_invoice($id)
+    {
+        $ticket = Ticket::with(['package', 'user'])
+                        ->where('id', $id)
+                        ->where('user_id', Auth::guard('web')->user()->id)
+                        ->first();
+
+        if (!$ticket) {
+            return redirect()->route('attendee.tickets')->with('error', 'Ticket not found!');
+        }
+
+        $admin = Admin::first();
+        $setting = Admin::first(); // Assuming setting data is in admin table
+
+        // Create setting_data object for banner
+        $setting_data = (object) [
+            'banner' => 'dist-front/images/banner.jpg'
+        ];
+
+        return view('user.invoice', compact('ticket', 'admin', 'setting', 'setting_data'));
+    }
 }
