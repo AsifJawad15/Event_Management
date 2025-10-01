@@ -8,6 +8,7 @@ use App\Models\HomeWelcome;
 use App\Models\HomeCounter;
 use App\Models\Speaker;
 use App\Models\ScheduleDay;
+use App\Models\Message;
 use App\Models\SponsorCategory;
 use App\Models\Sponsor;
 use App\Models\Organiser;
@@ -476,5 +477,36 @@ class FrontController extends Controller
         ];
 
         return view('user.invoice', compact('ticket', 'admin', 'setting', 'setting_data'));
+    }
+
+    public function message()
+    {
+        $messages = Message::orderBy('id','asc')->where('user_id',Auth::guard('web')->user()->id)->get();
+        $admin = Admin::where('id',1)->first();
+        return view('user.message', compact('messages', 'admin'));
+    }
+
+    public function message_submit(Request $request)
+    {
+        $request->validate([
+            'message' => ['required'],
+        ]);
+
+        $message = new Message();
+        $message->user_id = Auth::guard('web')->user()->id;
+        $message->admin_id = 0;
+        $message->message = $request->message;
+        $message->save();
+
+        $admin = Admin::where('id',1)->first();
+
+        $link = url('admin/message/detail/'.Auth::guard('web')->user()->id);
+        $subject = "Message from Attendee";
+        $message_text = 'Please click on the following link to view the message from attendee:<br>';
+        $message_text .= '<a href="'.$link.'">'.$link.'</a>';
+
+        \Mail::to($admin->email)->send(new Websitemail($subject,$message_text));
+
+        return redirect()->back()->with('success','Message is sent successfully!');
     }
 }

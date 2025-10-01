@@ -53,6 +53,8 @@
 
                     <li class="{{ Request::is('admin/attendees*' )?'active':''}}"><a class="nav-link" href="{{ route('admin_attendee_index') }}"><i class="fas fa-users"></i> <span>Attendee Management</span></a></li>
 
+                    <li class="{{ Request::is('admin/message*' )?'active':''}}"><a class="nav-link" href="{{ route('admin_message_index') }}"><i class="fas fa-envelope"></i> <span>Messages</span></a></li>
+
                     <li class="{{ Request::is('admin/profile' )?'active':''}}"><a class="nav-link" href="{{ route('admin_profile') }}"><i class="fas fa-hand-point-right"></i> <span>Profile</span></a></li>
 
                 </ul>

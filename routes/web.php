@@ -24,6 +24,7 @@ use App\Http\Controllers\Admin\AdminPostController;
 use App\Http\Controllers\Admin\AdminPackageController;
 use App\Http\Controllers\Admin\AdminTicketController;
 use App\Http\Controllers\Admin\AdminAttendeeController;
+use App\Http\Controllers\Admin\AdminMessageController;
 
 // Front
 Route::get('/', [FrontController::class, 'home'])->name('front.home');
@@ -74,6 +75,10 @@ Route::middleware('auth')->group(function () {
     // Attendee Ticket Routes
     Route::get('/my-tickets',[FrontController::class,'attendee_tickets'])->name('attendee.tickets');
     Route::get('/ticket-invoice/{id}',[FrontController::class,'attendee_invoice'])->name('attendee.invoice');
+
+    // Attendee Message Routes
+    Route::get('/my-messages',[FrontController::class,'message'])->name('user.message');
+    Route::post('/my-messages',[FrontController::class,'message_submit'])->name('user.message.submit');
 });
 Route::get('/register',[UserController::class,'register'])->name('register');
 Route::post('/register_submit',[UserController::class,'register_submit'])->name('register_submit');
@@ -229,6 +234,11 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::get('/attendees/{id}/edit',[AdminAttendeeController::class,'edit'])->name('admin_attendee_edit');
     Route::put('/attendees/{id}',[AdminAttendeeController::class,'update'])->name('admin_attendee_update');
     Route::get('/attendees/{id}/delete',[AdminAttendeeController::class,'delete'])->name('admin_attendee_delete');
+
+    // Message Routes
+    Route::get('/message',[AdminMessageController::class,'index'])->name('admin_message_index');
+    Route::get('/message/detail/{id}',[AdminMessageController::class,'detail'])->name('admin_message_detail');
+    Route::post('/message/detail/{id}',[AdminMessageController::class,'detail_submit'])->name('admin_message_detail_submit');
 });
 Route::prefix('admin')->group(function () {
     Route::get('/', function () {return redirect('/admin/login');});

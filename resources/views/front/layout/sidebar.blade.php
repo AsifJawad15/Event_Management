@@ -19,6 +19,11 @@
                 <i class="fas fa-ticket-alt"></i> My Tickets
             </a>
         </li>
+        <li class="{{ Request::is('my-messages') ? 'active' : '' }}">
+            <a href="{{ route('user.message') }}">
+                <i class="fas fa-envelope"></i> Messages
+            </a>
+        </li>
         <li>
             <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                 <i class="fas fa-sign-out-alt"></i> Logout
