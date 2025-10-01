@@ -36,7 +36,9 @@
                                             <td>
                                                 {{ $ticket->user->name }}<br>
                                                 {{ $ticket->user->email }}<br>
-                                                <small class="text-muted">{{ $ticket->user->phone ?? 'N/A' }}</small>
+                                                <a href="{{ route('admin_attendee_edit', $ticket->user->id) }}" class="btn btn-sm btn-outline-info mt-1">
+                                                    <i class="fas fa-eye"></i> See Details
+                                                </a>
                                             </td>
                                             <td>
                                                 <a href="{{ route('admin_package_index') }}" class="text-primary">
@@ -108,6 +110,13 @@
                                                                             </div>
                                                                             <div class="col-md-7">
                                                                                 {{ $ticket->user->email }}
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row pt_10 mb_0">
+                                                                            <div class="col-md-12">
+                                                                                <a href="{{ route('admin_attendee_edit', $ticket->user->id) }}" class="btn btn-sm btn-primary" target="_blank">
+                                                                                    <i class="fas fa-user-edit"></i> View Full User Details
+                                                                                </a>
                                                                             </div>
                                                                         </div>
 
