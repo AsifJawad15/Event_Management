@@ -1,24 +1,21 @@
 @extends('front.layout.master')
 
-@section('main_content')
-<div class="common-banner" style="background-image:url({{ asset('uploads/'.$setting_data->banner ?? 'dist-front/images/banner.jpg') }})">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="item">
-                    <h2>Invoice: {{ $ticket->payment_id }}</h2>
-                    <div class="breadcrumb-container">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('front.home') }}">Home</a></li>
-                            <li class="breadcrumb-item"><a href="{{ route('attendee.tickets') }}">My Tickets</a></li>
-                            <li class="breadcrumb-item active">Invoice: {{ $ticket->payment_id }}</li>
-                        </ol>
-                    </div>
-                </div>
-            </div>
-        </div>
+@section('content')
+@include('front.layout.navigation')
+
+<!-- Banner Section -->
+<section class="page-title" style="background-image: url({{ asset('dist-front/images/banner.jpg') }}); background-size: cover; background-position: center; position: relative; padding: 150px 0; text-align: center;">
+    <div class="auto-container">
+        <h2 style="color: white; font-size: 48px; font-weight: bold; margin-bottom: 20px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">Invoice</h2>
+        <ul class="page-breadcrumb" style="list-style: none; padding: 0; margin: 0; color: white; font-size: 16px;">
+            <li style="display: inline; color: #6bc24a;"><a href="{{ route('front.home') }}" style="color: #6bc24a; text-decoration: none; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);">Home</a></li>
+            <li style="display: inline; margin: 0 10px; color: white; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);"> / </li>
+            <li style="display: inline;"><a href="{{ route('attendee.tickets') }}" style="color: #6bc24a; text-decoration: none; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);">My Tickets</a></li>
+            <li style="display: inline; margin: 0 10px; color: white; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);"> / </li>
+            <li style="display: inline; color: white; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);">Invoice</li>
+        </ul>
     </div>
-</div>
+</section>
 <div class="user-section pt_70 pb_70">
     <div class="container-fluid">
         <div class="row">
@@ -30,8 +27,16 @@
                 </div>
             </div>
             <div class="col-lg-9">
-                <div class="invoice-container" id="print_invoice">
-                    <div class="invoice-top">
+                <div class="card">
+                    <div class="card-header bg-white border-0 d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Invoice - Order #{{ $ticket->payment_id }}</h5>
+                        <button onclick="window.print()" class="btn btn-success no-print">
+                            <i class="fa fa-print"></i> Print Invoice
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div class="invoice-container" id="print_invoice">
+                            <div class="invoice-top">
                         <div class="row">
                             <div class="col-12">
                                 <div class="table-responsive">
@@ -54,7 +59,7 @@
                                                 </td>
                                             </tr>
                                         </tbody>
-                                    </table>    
+                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -176,7 +181,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="invoice-footer mt-4">
                         <div class="row">
                             <div class="col-md-8">
@@ -195,7 +200,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="print-button mt_25">
                     <a href="{{ route('attendee.tickets') }}" class="btn btn-secondary mr-2">
                         <i class="fa fa-arrow-left"></i> Back to Tickets
@@ -204,7 +209,7 @@
                         <i class="fa fa-print"></i> Print Invoice
                     </a>
                 </div>
-                
+
                 <script>
                     function printInvoice() {
                         let body = document.body.innerHTML;
@@ -227,16 +232,16 @@
     .breadcrumb-container {
         display: none !important;
     }
-    
+
     .user-section {
         padding: 0 !important;
     }
-    
+
     .invoice-container {
         margin: 0 !important;
         padding: 20px !important;
     }
-    
+
     body {
         background: white !important;
     }
@@ -257,13 +262,13 @@
 .invoice-middle-left h4,
 .invoice-middle-right h4 {
     color: #333;
-    border-bottom: 2px solid #007bff;
+    border-bottom: 2px solid #6bc24a;
     padding-bottom: 5px;
     margin-bottom: 15px;
 }
 
 .invoice-item-table th {
-    background-color: #007bff;
+    background-color: #6bc24a;
     color: white;
     border: none;
 }
@@ -275,7 +280,7 @@
 }
 
 .invoice-note h5 {
-    color: #007bff;
+    color: #6bc24a;
 }
 
 .badge {
@@ -292,5 +297,48 @@
     background-color: #ffc107;
     color: #212529;
 }
+
+/* Print Styles */
+@media print {
+    .no-print,
+    .user-sidebar,
+    .page-title,
+    nav,
+    footer,
+    .breadcrumb-container,
+    .btn {
+        display: none !important;
+    }
+
+    body {
+        padding: 0;
+        margin: 0;
+    }
+
+    .invoice-container {
+        border: none;
+        box-shadow: none;
+        margin: 0;
+        padding: 20px;
+    }
+
+    .col-lg-9 {
+        width: 100%;
+        max-width: 100%;
+        flex: 0 0 100%;
+    }
+
+    .card {
+        border: none;
+        box-shadow: none;
+    }
+}
 </style>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
