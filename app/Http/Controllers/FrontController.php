@@ -27,6 +27,7 @@ use App\Models\PackageFacility;
 use App\Models\Ticket;
 use App\Models\Admin;
 use App\Models\ContactPageItem;
+use App\Models\TermPageItem;
 use App\Mail\Websitemail;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
@@ -88,6 +89,12 @@ class FrontController extends Controller
         }
 
         return redirect()->back()->with('success','Message is sent successfully!');
+    }
+
+    public function term()
+    {
+        $term_page_data = TermPageItem::where('id',1)->first();
+        return view('front.term', compact('term_page_data'));
     }
 
     public function speakers()
