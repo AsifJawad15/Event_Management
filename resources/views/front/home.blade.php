@@ -3,11 +3,6 @@
 @section('title', 'Home | SingleEvent')
 @section('content')
 @include('front.layout.navigation')
-@extends('front.layout.master')
-
-@section('title', 'Home | SingleEvent')
-@section('content')
-@include('front.layout.navigation')
 <div class="container-fluid home-banner" style="background-image: url('{{ asset($home_banner->background) }}'); min-height: 500px; background-size: cover; background-position: center; background-repeat: no-repeat;">
 	<div class="container">
 		<div class="row">
