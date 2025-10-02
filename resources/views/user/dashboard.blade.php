@@ -29,7 +29,7 @@
                             <ul class="user-links">
                                 <li class="current"><a href="{{ route('user.dashboard') }}">Dashboard</a></li>
                                 <li><a href="{{ route('attendee.tickets') }}">My Tickets</a></li>
-                                <li><a href="#">Messages</a></li>
+                                <li><a href="{{ route('user.message') }}">Messages</a></li>
                                 <li><a href="{{ route('user.profile') }}">Profile</a></li>
                                 <li><a href="{{ route('logout') }}">Logout</a></li>
                             </ul>

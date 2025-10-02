@@ -482,7 +482,16 @@ class FrontController extends Controller
     public function message()
     {
         $messages = Message::orderBy('id','asc')->where('user_id',Auth::guard('web')->user()->id)->get();
-        $admin = Admin::where('id',1)->first();
+        $admin = Admin::first(); // Get the first admin instead of specifically id=1
+
+        // If no admin exists, create a default admin object to prevent errors
+        if (!$admin) {
+            $admin = new Admin();
+            $admin->name = 'Admin';
+            $admin->email = 'admin@example.com';
+            $admin->photo = 'default.png';
+        }
+
         return view('user.message', compact('messages', 'admin'));
     }
 
@@ -498,14 +507,17 @@ class FrontController extends Controller
         $message->message = $request->message;
         $message->save();
 
-        $admin = Admin::where('id',1)->first();
+        $admin = Admin::first(); // Get the first admin
 
-        $link = url('admin/message/detail/'.Auth::guard('web')->user()->id);
-        $subject = "Message from Attendee";
-        $message_text = 'Please click on the following link to view the message from attendee:<br>';
-        $message_text .= '<a href="'.$link.'">'.$link.'</a>';
+        // Only send email if admin exists
+        if ($admin) {
+            $link = url('admin/message/detail/'.Auth::guard('web')->user()->id);
+            $subject = "Message from Attendee";
+            $message_text = 'Please click on the following link to view the message from attendee:<br>';
+            $message_text .= '<a href="'.$link.'">'.$link.'</a>';
 
-        \Mail::to($admin->email)->send(new Websitemail($subject,$message_text));
+            \Mail::to($admin->email)->send(new Websitemail($subject,$message_text));
+        }
 
         return redirect()->back()->with('success','Message is sent successfully!');
     }
