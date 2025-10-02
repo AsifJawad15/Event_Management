@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\ContactPageItem;
 use App\Models\TermPageItem;
+use App\Models\PrivacyPageItem;
 
 class AdminOtherPageController extends Controller
 {
@@ -36,6 +37,21 @@ class AdminOtherPageController extends Controller
     public function term_page_update(Request $request)
     {
         $obj = TermPageItem::where('id',1)->first();
+        $obj->content = $request->content;
+        $obj->save();
+
+        return redirect()->back()->with('success','Data is updated!');
+    }
+
+    public function privacy_page()
+    {
+        $page_data = PrivacyPageItem::where('id',1)->first();
+        return view('admin.other_pages.privacy', compact('page_data'));
+    }
+
+    public function privacy_page_update(Request $request)
+    {
+        $obj = PrivacyPageItem::where('id',1)->first();
         $obj->content = $request->content;
         $obj->save();
 

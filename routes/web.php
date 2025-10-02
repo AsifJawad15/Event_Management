@@ -37,6 +37,7 @@ Route::get('/about', [FrontController::class, 'about'])->name('front.about');
 Route::get('/contact', [FrontController::class, 'contact'])->name('front.contact');
 Route::post('/contact', [FrontController::class, 'contact_submit'])->name('contact.submit');
 Route::get('/term', [FrontController::class, 'term'])->name('front.term');
+Route::get('/privacy', [FrontController::class, 'privacy'])->name('front.privacy');
 Route::get('/speakers', [FrontController::class, 'speakers'])->name('front.speakers');
 Route::get('/speaker/{slug}', [FrontController::class, 'speaker'])->name('front.speaker');
 Route::get('/schedule', [FrontController::class, 'schedule'])->name('front.schedule');
@@ -259,6 +260,8 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::post('/contact-page',[AdminOtherPageController::class,'contact_page_update'])->name('admin_contact_page_update');
     Route::get('/term-page',[AdminOtherPageController::class,'term_page'])->name('admin_term_page');
     Route::post('/term-page',[AdminOtherPageController::class,'term_page_update'])->name('admin_term_page_update');
+    Route::get('/privacy-page',[AdminOtherPageController::class,'privacy_page'])->name('admin_privacy_page');
+    Route::post('/privacy-page',[AdminOtherPageController::class,'privacy_page_update'])->name('admin_privacy_page_update');
 });
 Route::prefix('admin')->group(function () {
     Route::get('/', function () {return redirect('/admin/login');});
