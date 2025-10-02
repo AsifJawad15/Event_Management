@@ -8,6 +8,10 @@ use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\AdminHomeBannerController;
 use App\Http\Controllers\Admin\AdminHomeWelcomeController;
 use App\Http\Controllers\Admin\AdminHomeCounterController;
+use App\Http\Controllers\Admin\AdminHomeSpeakerController;
+use App\Http\Controllers\Admin\AdminHomePricingController;
+use App\Http\Controllers\Admin\AdminHomeBlogController;
+use App\Http\Controllers\Admin\AdminHomeSponsorController;
 use App\Http\Controllers\Admin\AdminSpeakerController;
 use App\Http\Controllers\Admin\AdminScheduleDayController;
 use App\Http\Controllers\Admin\AdminScheduleController;
@@ -103,6 +107,14 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::post('/home-welcome',[AdminHomeWelcomeController::class,'update'])->name('admin_home_welcome_update');
     Route::get('/homecounter',[AdminHomeCounterController::class,'index'])->name('admin_home_counter');
     Route::put('/homecounter/{id}',[AdminHomeCounterController::class,'update'])->name('admin_home_counter_update');
+    Route::get('/home-speaker',[AdminHomeSpeakerController::class,'index'])->name('admin_home_speaker');
+    Route::post('/home-speaker',[AdminHomeSpeakerController::class,'update'])->name('admin_home_speaker_update');
+    Route::get('/home-pricing',[AdminHomePricingController::class,'index'])->name('admin_home_pricing');
+    Route::post('/home-pricing',[AdminHomePricingController::class,'update'])->name('admin_home_pricing_update');
+    Route::get('/home-blog',[AdminHomeBlogController::class,'index'])->name('admin_home_blog');
+    Route::post('/home-blog',[AdminHomeBlogController::class,'update'])->name('admin_home_blog_update');
+    Route::get('/home-sponsor',[AdminHomeSponsorController::class,'index'])->name('admin_home_sponsor');
+    Route::post('/home-sponsor',[AdminHomeSponsorController::class,'update'])->name('admin_home_sponsor_update');
 
     // Speaker routes
     Route::get('/speakers',[AdminSpeakerController::class,'index'])->name('admin_speaker_index');

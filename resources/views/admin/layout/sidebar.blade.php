@@ -15,12 +15,16 @@
 
                     <li class="{{ Request::is('admin/dashboard' )?'active':''}}"><a class="nav-link" href="{{ route('admin_dashboard') }}"><i class="fas fa-hand-point-right"></i> <span>Dashboard</span></a></li>
 
-                    <li class="nav-item dropdown {{ Request::is('admin/home-banner') || Request::is('admin/home-welcome') || Request::is('admin/homecounter') ? 'active' : '' }}">
+                    <li class="nav-item dropdown {{ Request::is('admin/home-banner') || Request::is('admin/home-welcome') || Request::is('admin/homecounter') || Request::is('admin/home-speaker') || Request::is('admin/home-pricing') || Request::is('admin/home-blog') || Request::is('admin/home-sponsor') ? 'active' : '' }}">
                         <a href="#" class="nav-link has-dropdown"><i class="fas fa-home"></i><span>Home Section</span></a>
                         <ul class="dropdown-menu">
                             <li class="{{ Request::is('admin/home-banner' )?'active':''}}"><a class="nav-link" href="{{ route('admin_home_banner') }}"><i class="fas fa-image"></i> <span>Home Banner</span></a></li>
                             <li class="{{ Request::is('admin/home-welcome' )?'active':''}}"><a class="nav-link" href="{{ route('admin_home_welcome') }}"><i class="fas fa-handshake"></i> <span>Home Welcome</span></a></li>
                             <li class="{{ Request::is('admin/homecounter' )?'active':''}}"><a class="nav-link" href="{{ route('admin_home_counter') }}"><i class="fas fa-chart-bar"></i> <span>Home Counter</span></a></li>
+                            <li class="{{ Request::is('admin/home-speaker' )?'active':''}}"><a class="nav-link" href="{{ route('admin_home_speaker') }}"><i class="fas fa-users"></i> <span>Home Speaker</span></a></li>
+                            <li class="{{ Request::is('admin/home-pricing' )?'active':''}}"><a class="nav-link" href="{{ route('admin_home_pricing') }}"><i class="fas fa-dollar-sign"></i> <span>Home Pricing</span></a></li>
+                            <li class="{{ Request::is('admin/home-blog' )?'active':''}}"><a class="nav-link" href="{{ route('admin_home_blog') }}"><i class="fas fa-blog"></i> <span>Home Blog</span></a></li>
+                            <li class="{{ Request::is('admin/home-sponsor' )?'active':''}}"><a class="nav-link" href="{{ route('admin_home_sponsor') }}"><i class="fas fa-handshake"></i> <span>Home Sponsor</span></a></li>
                         </ul>
                     </li>
 

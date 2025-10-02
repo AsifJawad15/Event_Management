@@ -3,15 +3,20 @@
 @section('title', 'Home | SingleEvent')
 @section('content')
 @include('front.layout.navigation')
-<div class="container-fluid home-banner" style="background-image: url('{{ asset($banner->background) }}'); min-height: 500px; background-size: cover; background-position: center; background-repeat: no-repeat;">
+@extends('front.layout.master')
+
+@section('title', 'Home | SingleEvent')
+@section('content')
+@include('front.layout.navigation')
+<div class="container-fluid home-banner" style="background-image: url('{{ asset($home_banner->background) }}'); min-height: 500px; background-size: cover; background-position: center; background-repeat: no-repeat;">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="static-banner-detail">
-					<h4>{{ $banner->subheading }}</h4>
-					<h2>{{ $banner->heading }}</h2>
+					<h4>{{ $home_banner->subheading }}</h4>
+					<h2>{{ $home_banner->heading }}</h2>
 					<p>
-						{{ $banner->text }}
+						{{ $home_banner->text }}
 					</p>
 					<div class="counter-area">
 						<div class="countDown clearfix">
@@ -43,37 +48,37 @@
 							</div>
 						</div>
 					</div>
-					@if($banner->button_text && $banner->button_url)
-					<a href="{{ url($banner->button_url) }}" class="banner_btn video_btn">{{ $banner->button_text }}</a>
+					@if($home_banner->button_text && $home_banner->button_url)
+					<a href="{{ url($home_banner->button_url) }}" class="banner_btn video_btn">{{ $home_banner->button_text }}</a>
 					@endif
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
-@if($welcome && $welcome->status == 'active')
+@if($home_welcome && $home_welcome->status == 'Show')
 <section id="about-section" class="pt_70 pb_70 white">
     <div class="container">
         <div class="row">
             <div class="col-lg-7 col-sm-12 col-xs-12">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h2><span class="color_green">{{ $welcome->heading }}</span></h2>
+                        <h2><span class="color_green">{{ $home_welcome->heading }}</span></h2>
                     </div>
                 </div>
                 <div class="about-details">
-                    <p>{{ $welcome->description }}</p>
-                    @if(!empty($welcome->button_text) && !empty($welcome->button_link))
+                    <p>{{ $home_welcome->description }}</p>
+                    @if(!empty($home_welcome->button_text) && !empty($home_welcome->button_link))
                     <div class="global_btn mt_20">
-                        <a class="btn_one" href="{{ $welcome->button_link }}">{{ $welcome->button_text }}</a>
+                        <a class="btn_one" href="{{ $home_welcome->button_link }}">{{ $home_welcome->button_text }}</a>
                     </div>
                     @endif
                 </div>
             </div>
             <div class="col-lg-5 col-sm-12 col-xs-12">
                 <div class="about-details-img">
-                    @if($welcome->photo)
-                        <img src="{{ asset($welcome->photo) }}" alt="{{ $welcome->heading }}">
+                    @if($home_welcome->photo)
+                        <img src="{{ asset($home_welcome->photo) }}" alt="{{ $home_welcome->heading }}">
                     @else
                         <img src="{{ asset('dist-front/images/about.jpg') }}" alt="Welcome">
                     @endif
@@ -83,17 +88,20 @@
     </div>
 </section>
 @endif
+@if($home_speaker && $home_speaker->status == 'Show')
 <div id="speakers" class="pt_70 pb_70 gray team">
     <div class="container">
         <div class="row">
             <div class="col-sm-1 col-lg-2"></div>
             <div class="col-xs-12 col-sm-10 col-lg-8 text-center">
                 <h2 class="title-1 mb_10">
-                    <span class="color_green">Speakers</span>
+                    <span class="color_green">{{ $home_speaker->heading }}</span>
                 </h2>
+                @if($home_speaker->description)
                 <p class="heading-space">
-                    You will find below the list of our valuable speakers. They are all experts in their field and will share their knowledge with you.
+                    {{ $home_speaker->description }}
                 </p>
+                @endif
             </div>
             <div class="col-sm-1 col-lg-2"></div>
         </div>
@@ -154,51 +162,55 @@
         </div>
     </div>
 </div>
-@if($homeCounter && $homeCounter->status == 'show')
-<div id="counter-section" class="pt_70 pb_70" style="background-image: url({{ asset($homeCounter->background ?: 'dist-front/images/counter-bg.jpg') }});">
+@endif
+@if($home_counter && $home_counter->status == 'show')
+<div id="counter-section" class="pt_70 pb_70" style="background-image: url({{ asset($home_counter->background ?: 'dist-front/images/counter-bg.jpg') }});">
     <div class="container">
         <div class="row number-counters text-center">
             <div class="col-lg-3 col-sm-6 col-xs-12">
                 <div class="counters-item">
-                    <i class="{{ $homeCounter->item1_icon }}"></i>
-                    <strong data-to="{{ $homeCounter->item1_number }}">0</strong>
-                    <p>{{ $homeCounter->item1_title }}</p>
+                    <i class="{{ $home_counter->item1_icon }}"></i>
+                    <strong data-to="{{ $home_counter->item1_number }}">0</strong>
+                    <p>{{ $home_counter->item1_title }}</p>
                 </div>
             </div>
             <div class="col-lg-3 col-sm-6 col-xs-12">
                 <div class="counters-item">
-                    <i class="{{ $homeCounter->item2_icon }}"></i>
-                    <strong data-to="{{ $homeCounter->item2_number }}">0</strong>
-                    <p>{{ $homeCounter->item2_title }}</p>
+                    <i class="{{ $home_counter->item2_icon }}"></i>
+                    <strong data-to="{{ $home_counter->item2_number }}">0</strong>
+                    <p>{{ $home_counter->item2_title }}</p>
                 </div>
             </div>
             <div class="col-lg-3 col-sm-6 col-xs-12">
                 <div class="counters-item">
-                    <i class="{{ $homeCounter->item3_icon }}"></i>
-                    <strong data-to="{{ $homeCounter->item3_number }}">0</strong>
-                    <p>{{ $homeCounter->item3_title }}</p>
+                    <i class="{{ $home_counter->item3_icon }}"></i>
+                    <strong data-to="{{ $home_counter->item3_number }}">0</strong>
+                    <p>{{ $home_counter->item3_title }}</p>
                 </div>
             </div>
             <div class="col-lg-3 col-sm-6 col-xs-12">
                 <div class="counters-item">
-                    <i class="{{ $homeCounter->item4_icon }}"></i>
-                    <strong data-to="{{ $homeCounter->item4_number }}">0</strong>
-                    <p>{{ $homeCounter->item4_title }}</p>
+                    <i class="{{ $home_counter->item4_icon }}"></i>
+                    <strong data-to="{{ $home_counter->item4_number }}">0</strong>
+                    <p>{{ $home_counter->item4_title }}</p>
                 </div>
             </div>
         </div>
     </div>
 </div>
 @endif
+@if($home_pricing && $home_pricing->status == 'Show')
 <div id="price-section" class="pt_70 pb_70 gray prices">
     <div class="container">
         <div class="row">
             <div class="col-sm-1 col-lg-2"></div>
             <div class="col-xs-12 col-sm-10 col-lg-8 text-center">
-                <h2 class="title-1 mb_10"><span class="color_green">Pricing</span></h2>
+                <h2 class="title-1 mb_10"><span class="color_green">{{ $home_pricing->heading }}</span></h2>
+                @if($home_pricing->description)
                 <p class="heading-space">
-                    You will find below the different pricing options for our event. Choose the one that suits you best and register now! You will have access to all sessions, unlimited coffee and food, and the opportunity to meet with your favorite speakers.
+                    {{ $home_pricing->description }}
                 </p>
+                @endif
             </div>
             <div class="col-sm-1 col-lg-2"></div>
         </div>
@@ -287,115 +299,85 @@
         </div>
     </div>
 </div>
+@endif
+@if($home_blog && $home_blog->status == 'Show')
 <div id="blog-section" class="pt_70 pb_70 white blog-section">
     <div class="container">
         <div class="row">
             <div class="col-sm-1 col-lg-2"></div>
             <div class="col-xs-12 col-sm-10 col-lg-8 text-center">
                 <h2 class="title-1 mb_15">
-                    <span class="color_green">Latest News</span>
+                    <span class="color_green">{{ $home_blog->heading }}</span>
                 </h2>
+                @if($home_blog->description)
                 <p class="heading-space">
-                    All the latest news and updates about our event and conference are available here. Stay informed and don't miss any important information!
+                    {{ $home_blog->description }}
                 </p>
+                @endif
             </div>
             <div class="col-sm-1 col-lg-2"></div>
         </div>
         <div class="row pt_40">
-            <div class="col-lg-4 col-sm-6 col-xs-12">
-                <div class="blog-box text-center">
-                    <div class="blog-post-images">
-                        <a href="{{ url('/post') }}">
-                            <img src="{{ asset('dist-front/images/post-1.jpg') }}" alt="image">
-                        </a>
-                    </div>
-                    <div class="blogs-post">
-                        <h4><a href="{{ url('/post') }}">Essential Tips for a Successful Virtual Conference</a></h4>
-                        <p>
-                            Organizing a virtual conference can be challenging. Focus on engaging content, interactive sessions, & reliable technology to ensure a successful event.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6 col-xs-12">
-                <div class="blog-box text-center">
-                    <div class="blog-post-images">
-                        <a href="{{ url('/post') }}"><img src="{{ asset('dist-front/images/post-2.jpg') }}" alt="image"></a>
-                    </div>
-                    <div class="blogs-post">
-                        <h4><a href="{{ url('/post') }}">Maximizing Your Networking Opportunities at Events</a></h4>
-                        <p>
-                            Networking at events requires strategic planning. Attend relevant sessions, participate in discussions, and utilize apps to connect with professionals.
-                        </p>
+            @if($posts && $posts->count() > 0)
+                @foreach($posts as $post)
+                <div class="col-lg-4 col-sm-6 col-xs-12">
+                    <div class="blog-box text-center">
+                        <div class="blog-post-images">
+                            <a href="{{ route('front.post', $post->slug) }}">
+                                <img src="{{ asset('uploads/'.$post->photo) }}" alt="{{ $post->title }}">
+                            </a>
+                        </div>
+                        <div class="blogs-post">
+                            <h4><a href="{{ route('front.post', $post->slug) }}">{{ $post->title }}</a></h4>
+                            <p>
+                                {{ Str::limit($post->short_description, 120) }}
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-4 col-sm-6 col-xs-12">
-                <div class="blog-box text-center">
-                    <div class="blog-post-images">
-                        <a href="{{ url('/post') }}"><img src="{{ asset('dist-front/images/post-3.jpg') }}" alt="image"></a>
-                    </div>
-                    <div class="blogs-post">
-                        <h4><a href="{{ url('/post') }}">How to Choose the Perfect Venue for Your Conference</a></h4>
-                        <p>
-                            Selecting the ideal venue involves considering location, capacity, and amenities. Ensure it aligns with your goals, and fits within your budget.
-                        </p>
-                    </div>
-                </div>
-            </div>
+                @endforeach
+            @endif
         </div>
     </div>
 </div>
+@endif
+@if($home_sponsor && $home_sponsor->status == 'Show')
 <div id="sponsor-section" class="pt_70 pb_70 gray">
     <div class="container">
         <div class="row">
             <div class="col-sm-1 col-lg-2"></div>
             <div class="col-xs-12 col-sm-10 col-lg-8 text-center">
                 <h2 class="title-1 mb_15">
-                    <span class="color_green">Our Sponsers</span>
+                    <span class="color_green">{{ $home_sponsor->heading }}</span>
                 </h2>
+                @if($home_sponsor->description)
                 <p class="heading-space">
-                    If you want to become a sponsor, please contact us. We offer different sponsorship packages that will help you promote your brand and reach a wider audience.
+                    {{ $home_sponsor->description }}
                 </p>
+                @endif
             </div>
             <div class="col-sm-1 col-lg-2"></div>
         </div>
         <div class="row pt_40">
             <div class="col-md-12">
                 <div class="owl-carousel">
-                    <div class="sponsors-logo">
-                        <img src="{{ asset('dist-front/images/partner-1.png') }}" class="img-responsive" alt="sponsor logo">
-                    </div>
-                    <div class="sponsors-logo">
-                        <img src="{{ asset('dist-front/images/partner-2.png') }}" class="img-responsive" alt="sponsor logo">
-                    </div>
-                    <div class="sponsors-logo">
-                        <img src="{{ asset('dist-front/images/partner-3.png') }}" class="img-responsive" alt="sponsor logo">
-                    </div>
-                    <div class="sponsors-logo">
-                        <img src="{{ asset('dist-front/images/partner-4.png') }}" class="img-responsive" alt="sponsor logo">
-                    </div>
-                    <div class="sponsors-logo">
-                        <img src="{{ asset('dist-front/images/partner-5.png') }}" class="img-responsive" alt="sponsor logo">
-                    </div>
-                    <div class="sponsors-logo">
-                        <img src="{{ asset('dist-front/images/partner-6.png') }}" class="img-responsive" alt="sponsor logo">
-                    </div>
-                    <div class="sponsors-logo">
-                        <img src="{{ asset('dist-front/images/partner-7.png') }}" class="img-responsive" alt="sponsor logo">
-                    </div>
-                    <div class="sponsors-logo">
-                        <img src="{{ asset('dist-front/images/partner-8.png') }}" class="img-responsive" alt="sponsor logo">
-                    </div>
+                    @if($sponsors && $sponsors->count() > 0)
+                        @foreach($sponsors as $sponsor)
+                        <div class="sponsors-logo">
+                            <img src="{{ asset('uploads/'.$sponsor->logo) }}" class="img-responsive" alt="{{ $sponsor->name }}">
+                        </div>
+                        @endforeach
+                    @endif
                 </div>
             </div>
         </div>
     </div>
 </div>
+@endif
 @section('scripts')
 <script>
     $(".countDown").downCount({
-        date: '{{ $banner->countdown_date }}', //month/date/year   HH:MM:SS
+        date: '{{ $home_banner->countdown_date }}', //month/date/year   HH:MM:SS
         offset: +6 //+GMT+6 (Bangladesh Standard Time)
     });
 </script>

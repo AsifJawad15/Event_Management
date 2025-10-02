@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\HomeBanner;
 use App\Models\HomeWelcome;
 use App\Models\HomeCounter;
+use App\Models\HomeSpeaker;
+use App\Models\HomePricing;
+use App\Models\HomeBlog;
+use App\Models\HomeSponsor;
 use App\Models\Speaker;
 use App\Models\ScheduleDay;
 use App\Models\Message;
@@ -33,37 +37,20 @@ class FrontController extends Controller
 {
     public function home()
     {
-        $banner = HomeBanner::active()->ordered()->first();
-
-        // If no banner exists, create a default one
-        if (!$banner) {
-            $banner = new HomeBanner([
-                'heading' => 'Event and Conference Website',
-                'subheading' => 'September 7, 2025, California',
-                'text' => 'Join us at our next networking event and conference! Connect with industry professionals, engage in insightful discussions, and attend hands-on workshops. Learn from experts, collaborate on innovative ideas, and build lasting relationships.',
-                'background' => 'dist-front/images/banner-home.jpg',
-                'event_date' => '2025-09-07',
-                'event_time' => '13:00:00',
-                'button_text' => 'BUY TICKETS',
-                'button_url' => '/buy',
-                'status' => 1
-            ]);
-        }
-
-        // Get home welcome data - get first record regardless of status
-        // Force fresh query without any caching
-        $welcome = HomeWelcome::latest('updated_at')->first();
-
-        // Get home counter data
-        $homeCounter = HomeCounter::where('status', 'show')->first();
-
-        // Get speakers for homepage (limit to 4)
-        $speakers = Speaker::limit(4)->get();
-
-        // Get packages for pricing section (limit to 3 for home page)
-        $packages = Package::with('facilities')->orderByItemOrder()->limit(3)->get();
-
-        return view('front.home', compact('banner', 'welcome', 'homeCounter', 'speakers', 'packages'));
+        $home_banner = HomeBanner::where('id',1)->first();
+        $home_welcome = HomeWelcome::where('id',1)->first();
+        $home_counter = HomeCounter::where('id',1)->first();
+        $home_speaker = HomeSpeaker::where('id',1)->first();
+        $home_pricing = HomePricing::where('id',1)->first();
+        $home_blog = HomeBlog::where('id',1)->first();
+        $home_sponsor = HomeSponsor::where('id',1)->first();
+        
+        $speakers = Speaker::get()->take($home_speaker->how_many ?? 4);
+        $packages = Package::with('facilities')->orderByItemOrder()->get()->take($home_pricing->how_many ?? 3);
+        $posts = Post::orderBy('id','desc')->get()->take($home_blog->how_many ?? 3);
+        $sponsors = Sponsor::get()->take($home_sponsor->how_many ?? 8);
+        
+        return view('front.home', compact('home_banner','home_welcome','home_counter', 'home_speaker','home_pricing','home_blog','home_sponsor','speakers', 'packages', 'posts', 'sponsors'));
     }
 
     public function about()
