@@ -26,6 +26,7 @@ use App\Models\Package;
 use App\Models\PackageFacility;
 use App\Models\Ticket;
 use App\Models\Admin;
+use App\Models\ContactPageItem;
 use App\Mail\Websitemail;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
@@ -44,12 +45,12 @@ class FrontController extends Controller
         $home_pricing = HomePricing::where('id',1)->first();
         $home_blog = HomeBlog::where('id',1)->first();
         $home_sponsor = HomeSponsor::where('id',1)->first();
-        
+
         $speakers = Speaker::get()->take($home_speaker->how_many ?? 4);
         $packages = Package::with('facilities')->orderByItemOrder()->get()->take($home_pricing->how_many ?? 3);
         $posts = Post::orderBy('id','desc')->get()->take($home_blog->how_many ?? 3);
         $sponsors = Sponsor::get()->take($home_sponsor->how_many ?? 8);
-        
+
         return view('front.home', compact('home_banner','home_welcome','home_counter', 'home_speaker','home_pricing','home_blog','home_sponsor','speakers', 'packages', 'posts', 'sponsors'));
     }
 
@@ -60,22 +61,33 @@ class FrontController extends Controller
 
     public function contact()
     {
-        return view('front.contact');
+        $contact_page_data = ContactPageItem::where('id',1)->first();
+        return view('front.contact', compact('contact_page_data'));
     }
 
     public function contact_submit(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'subject' => 'required|string|max:255',
-            'message' => 'required|string|max:1000'
+            'name' => ['required'],
+            'email' => ['required', 'email'],
+            'subject' => ['required'],
+            'message' => ['required'],
         ]);
 
-        // Here you can add logic to send email or save to database
-        // For now, we'll just redirect back with success message
+        $admin = Admin::first();
+       
+        $subject = "Contact Message";
+        $message = "Visitor Information:<br><br>";
+        $message .= "<b>Name:</b><br>".$request->name."<br><br>";
+        $message .= "<b>Email:</b><br>".$request->email."<br><br>";
+        $message .= "<b>Subject:</b><br>".$request->subject."<br><br>";
+        $message .= "<b>Message:</b><br>".$request->message."<br><br>";
 
-        return redirect()->back()->with('success', 'Your message has been sent successfully!');
+        if($admin) {
+            \Mail::to($admin->email)->send(new Websitemail($subject,$message));
+        }
+
+        return redirect()->back()->with('success','Message is sent successfully!');
     }
 
     public function speakers()

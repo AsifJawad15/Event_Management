@@ -29,6 +29,7 @@ use App\Http\Controllers\Admin\AdminPackageController;
 use App\Http\Controllers\Admin\AdminTicketController;
 use App\Http\Controllers\Admin\AdminAttendeeController;
 use App\Http\Controllers\Admin\AdminMessageController;
+use App\Http\Controllers\Admin\AdminOtherPageController;
 
 // Front
 Route::get('/', [FrontController::class, 'home'])->name('front.home');
@@ -251,6 +252,10 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::get('/message',[AdminMessageController::class,'index'])->name('admin_message_index');
     Route::get('/message/detail/{id}',[AdminMessageController::class,'detail'])->name('admin_message_detail');
     Route::post('/message/detail/{id}',[AdminMessageController::class,'detail_submit'])->name('admin_message_detail_submit');
+
+    // Other Pages Routes
+    Route::get('/contact-page',[AdminOtherPageController::class,'contact_page'])->name('admin_contact_page');
+    Route::post('/contact-page',[AdminOtherPageController::class,'contact_page_update'])->name('admin_contact_page_update');
 });
 Route::prefix('admin')->group(function () {
     Route::get('/', function () {return redirect('/admin/login');});

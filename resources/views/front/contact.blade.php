@@ -3,58 +3,7 @@
 @section('title', 'Contact | SingleEvent')
 
 @section('content')
-<div class="container main-menu" id="navbar">
-    <div class="row">
-        <div class="col-lg-2 col-sm-12">
-            <a href="{{ url('/') }}" id="logo" class="grid_2"> <img src="{{ asset('dist-front/images/logo.png') }}"> </a>
-        </div>
-        <div class="col-lg-10 col-sm-12">
-            <nav class="navbar navbar-expand-lg navbar-light">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul id="navContent" class="navbar-nav mr-auto navigation">
-                        <li>
-                            <a class="smooth-scroll nav-link" href="{{ url('/') }}">Home</a>
-                        </li>
-                        <li>
-                            <a class="smooth-scroll nav-link" href="{{ url('/speakers') }}">Speakers</a>
-                        </li>
-                        <li>
-                            <a class="smooth-scroll nav-link" href="{{ url('/schedule') }}">Schedule</a>
-                        </li>
-                        <li>
-                            <a class="smooth-scroll nav-link" href="{{ url('/pricing') }}">Pricing</a>
-                        </li>
-                        <li>
-                            <a class="smooth-scroll nav-link" href="{{ url('/blog') }}">Blog</a>
-                        </li>
-                        <li class="nav-item dropdown"> <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Pages </a>
-                            <div class="dropdown-menu" id="dropmenu" aria-labelledby="navbarDropdown">
-                                								<a class="dropdown-item" href="{{ route('front.sponsors') }}">Sponsors</a>
-                                								<a class="dropdown-item" href="{{ route('front.organisers') }}">Organisers</a>
-                                <a class="dropdown-item" href="{{ url('/accommodations') }}">Accommodations</a>
-                                <a class="dropdown-item" href="{{ url('/photo-gallery') }}">Photo Gallery</a>
-                                <a class="dropdown-item" href="{{ url('/video-gallery') }}">Video Gallery</a>
-                                <a class="dropdown-item" href="{{ url('/faq') }}">FAQ</a>
-                                <a class="dropdown-item" href="{{ url('/testimonials') }}">Testimonials</a>
-                            </div>
-                        </li>
-                        <li>
-                            <a class="smooth-scroll nav-link" href="{{ url('/contact') }}">Contact</a>
-                        </li>
-                        <li class="member-login-button">
-                            <div class="inner">
-                                <a class="smooth-scroll nav-link" href="{{ url('/login') }}">
-                                    <i class="fa fa-sign-in"></i> Login
-                                </a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
-    </div>
-</div>
+@include('front.layout.navigation')
 
 <div class="common-banner" style="background-image: url('{{ asset('dist-front/images/banner.jpg') }}');">
     <div class="container">
@@ -130,7 +79,7 @@
                         </div>
                         <div class="text">
                             <div class="contact-inner-text">
-                                Address: <br><span>43, Park Street, NYC, USA</span>
+                                Address: <br><span>{{ $contact_page_data->address }}</span>
                             </div>
                         </div>
                     </div>
@@ -142,7 +91,7 @@
                         </div>
                         <div class="text">
                             <div class="contact-inner-text">
-                                Email: <br><span>contact@example.com</span>
+                                Email: <br><span>{{ $contact_page_data->email }}</span>
                             </div>
                         </div>
                     </div>
@@ -154,7 +103,7 @@
                         </div>
                         <div class="text">
                             <div class="contact-inner-text">
-                                Phone: <br><span>234-423-1266</span>
+                                Phone: <br><span>{{ $contact_page_data->phone }}</span>
                             </div>
                         </div>
                     </div>
@@ -163,4 +112,16 @@
         </div>
     </div>
 </div>
+
+@if($contact_page_data->map != '')
+<div class="map pb_70">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                {!! $contact_page_data->map !!}
+            </div>
+        </div>
+    </div>
+</div>
+@endif
 @endsection

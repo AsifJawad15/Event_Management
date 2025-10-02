@@ -62,6 +62,15 @@
 
                     <li class="{{ Request::is('admin/message*' )?'active':''}}"><a class="nav-link" href="{{ route('admin_message_index') }}"><i class="fas fa-envelope"></i> <span>Messages</span></a></li>
 
+                    <li class="nav-item dropdown {{ Request::is('admin/contact-page') || Request::is('admin/term-page') || Request::is('admin/privacy-page') ? 'active' : '' }}">
+                        <a href="#" class="nav-link has-dropdown"><i class="fas fa-file-alt"></i><span>Other Pages</span></a>
+                        <ul class="dropdown-menu">
+                            <li class="{{ Request::is('admin/contact-page' )?'active':''}}"><a class="nav-link" href="{{ route('admin_contact_page') }}"><i class="fas fa-address-book"></i> <span>Contact Page</span></a></li>
+                            <li class="{{ Request::is('admin/term-page' )?'active':''}}"><a class="nav-link" href="#"><i class="fas fa-file-contract"></i> <span>Terms Page</span></a></li>
+                            <li class="{{ Request::is('admin/privacy-page' )?'active':''}}"><a class="nav-link" href="#"><i class="fas fa-user-shield"></i> <span>Privacy Page</span></a></li>
+                        </ul>
+                    </li>
+
                     <li class="{{ Request::is('admin/profile' )?'active':''}}"><a class="nav-link" href="{{ route('admin_profile') }}"><i class="fas fa-hand-point-right"></i> <span>Profile</span></a></li>
 
                 </ul>
