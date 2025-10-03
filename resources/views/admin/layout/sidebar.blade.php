@@ -62,6 +62,8 @@
 
                     <li class="{{ Request::is('admin/message*' )?'active':''}}"><a class="nav-link" href="{{ route('admin_message_index') }}"><i class="fas fa-envelope"></i> <span>Messages</span></a></li>
 
+                    <li class="{{ Request::is('admin/subscribers*' )?'active':''}}"><a class="nav-link" href="{{ route('admin_subscriber_index') }}"><i class="fas fa-users"></i> <span>Subscribers</span></a></li>
+
                     <li class="nav-item dropdown {{ Request::is('admin/contact-page') || Request::is('admin/term-page') || Request::is('admin/privacy-page') ? 'active' : '' }}">
                         <a href="#" class="nav-link has-dropdown"><i class="fas fa-file-alt"></i><span>Other Pages</span></a>
                         <ul class="dropdown-menu">

@@ -30,6 +30,7 @@ use App\Http\Controllers\Admin\AdminTicketController;
 use App\Http\Controllers\Admin\AdminAttendeeController;
 use App\Http\Controllers\Admin\AdminMessageController;
 use App\Http\Controllers\Admin\AdminOtherPageController;
+use App\Http\Controllers\Admin\AdminSubscriberController;
 
 // Front
 Route::get('/', [FrontController::class, 'home'])->name('front.home');
@@ -264,6 +265,12 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::post('/term-page',[AdminOtherPageController::class,'term_page_update'])->name('admin_term_page_update');
     Route::get('/privacy-page',[AdminOtherPageController::class,'privacy_page'])->name('admin_privacy_page');
     Route::post('/privacy-page',[AdminOtherPageController::class,'privacy_page_update'])->name('admin_privacy_page_update');
+
+    // Subscriber Routes
+    Route::get('/subscribers',[AdminSubscriberController::class,'index'])->name('admin_subscriber_index');
+    Route::get('/subscribers/delete/{id}',[AdminSubscriberController::class,'delete'])->name('admin_subscriber_delete');
+    Route::get('/subscribers/message-all',[AdminSubscriberController::class,'message_all'])->name('admin_subscriber_message_all');
+    Route::post('/subscribers/message-all',[AdminSubscriberController::class,'message_all_submit'])->name('admin_subscriber_message_all_submit');
 });
 Route::prefix('admin')->group(function () {
     Route::get('/', function () {return redirect('/admin/login');});
