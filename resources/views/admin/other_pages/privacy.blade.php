@@ -2,7 +2,9 @@
 
 @section('title', 'Privacy Page')
 
-@section('content')
+@section('main_content')
+@include('admin.layout.nav')
+@include('admin.layout.sidebar')
 <div class="main-content">
     <section class="section">
         <div class="section-header d-flex justify-content-between">
@@ -22,7 +24,7 @@
                                 @csrf
                                 <div class="form-group mb-3">
                                     <label>Content *</label>
-                                    <textarea name="content" class="form-control editor" cols="30" rows="10">{{ $page_data->content }}</textarea>
+                                    <textarea name="content" class="form-control editor" cols="30" rows="10">{{ $page_data->content ?? '' }}</textarea>
                                 </div>
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary">Update</button>

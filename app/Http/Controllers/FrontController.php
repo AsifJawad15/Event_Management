@@ -29,6 +29,7 @@ use App\Models\Admin;
 use App\Models\ContactPageItem;
 use App\Models\TermPageItem;
 use App\Models\PrivacyPageItem;
+use App\Models\Subscriber;
 use App\Mail\Websitemail;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
@@ -77,7 +78,7 @@ class FrontController extends Controller
         ]);
 
         $admin = Admin::first();
-       
+
         $subject = "Contact Message";
         $message = "Visitor Information:<br><br>";
         $message .= "<b>Name:</b><br>".$request->name."<br><br>";
@@ -533,5 +534,41 @@ class FrontController extends Controller
         }
 
         return redirect()->back()->with('success','Message is sent successfully!');
+    }
+
+    public function subscribe_submit(Request $request)
+    {
+        $request->validate([
+            'email' => ['required', 'email', 'unique:subscribers'],
+        ]);
+
+        // Save data into database
+        $subscriber = new Subscriber;
+        $subscriber->email = $request->email;
+        $subscriber->token = hash('sha256',time());
+        $subscriber->save();
+
+        // Create link and Send email
+        $verification_link = url('subscriber-verify/'.$subscriber->token.'/'.$request->email);
+        $subject = "Subscription Verification";
+        $message = "To complete the subscription, please click on the link below:<br>";
+        $message .= "<a href='".$verification_link."'>Click Here</a>";
+
+        \Mail::to($request->email)->send(new Websitemail($subject,$message));
+
+        return redirect()->back()->with('success','An email is sent to your email. Please check your email. If you do not find the email in your inbox, please check your spam folder.');
+    }
+
+    public function subscriber_verify($token,$email)
+    {
+        $subscriber = Subscriber::where('token',$token)->where('email',$email)->first();
+        if(!$subscriber) {
+            return redirect()->route('front.home');
+        }
+        $subscriber->token = '';
+        $subscriber->status = 'active';
+        $subscriber->update();
+
+        return redirect()->route('front.home')->with('success', 'Your email is verified. You will receive the latest news and updates.');
     }
 }

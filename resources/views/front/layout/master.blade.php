@@ -75,13 +75,26 @@
 									<div class="footer-widget subscribe-widget">
 										<h2>Newsletter</h2>
 										<div class="widget-content">
+											@if(session('success'))
+												<div class="alert alert-success mb-3">
+													{{ session('success') }}
+												</div>
+											@endif
+											@if($errors->any())
+												<div class="alert alert-danger mb-3">
+													@foreach($errors->all() as $error)
+														<div>{{ $error }}</div>
+													@endforeach
+												</div>
+											@endif
 											<div class="newsletter-form">
-												<form method="post" action="">
+												<form method="post" action="{{ route('subscribe_submit') }}">
+													@csrf
 													<div class="form-group">
-														<input type="email" name="email" value="" placeholder="Enter Email Address" required>
+														<input type="email" name="email" value="{{ old('email') }}" placeholder="Enter Email Address" required>
 													</div>
 													<div class="form-group">
-														<div class="global_btn"><a class="btn_two" href="#">SUBSCRIBE</a> </div>
+														<button type="submit" class="btn_two">SUBSCRIBE</button>
 													</div>
 												</form>
 											</div>
