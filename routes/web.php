@@ -31,6 +31,7 @@ use App\Http\Controllers\Admin\AdminAttendeeController;
 use App\Http\Controllers\Admin\AdminMessageController;
 use App\Http\Controllers\Admin\AdminOtherPageController;
 use App\Http\Controllers\Admin\AdminSubscriberController;
+use App\Http\Controllers\Admin\AdminSettingController;
 
 // Front
 Route::get('/', [FrontController::class, 'home'])->name('front.home');
@@ -271,6 +272,20 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::get('/subscribers/delete/{id}',[AdminSubscriberController::class,'delete'])->name('admin_subscriber_delete');
     Route::get('/subscribers/message-all',[AdminSubscriberController::class,'message_all'])->name('admin_subscriber_message_all');
     Route::post('/subscribers/message-all',[AdminSubscriberController::class,'message_all_submit'])->name('admin_subscriber_message_all_submit');
+
+    // Settings Routes
+    Route::get('/setting/logo',[AdminSettingController::class,'logo'])->name('admin_setting_logo');
+    Route::post('/setting/logo',[AdminSettingController::class,'logo_submit'])->name('admin_setting_logo_submit');
+    Route::get('/setting/favicon',[AdminSettingController::class,'favicon'])->name('admin_setting_favicon');
+    Route::post('/setting/favicon',[AdminSettingController::class,'favicon_submit'])->name('admin_setting_favicon_submit');
+    Route::get('/setting/banner',[AdminSettingController::class,'banner'])->name('admin_setting_banner');
+    Route::post('/setting/banner',[AdminSettingController::class,'banner_submit'])->name('admin_setting_banner_submit');
+    Route::get('/setting/footer',[AdminSettingController::class,'footer'])->name('admin_setting_footer');
+    Route::post('/setting/footer',[AdminSettingController::class,'footer_submit'])->name('admin_setting_footer_submit');
+    Route::get('/setting/ticket',[AdminSettingController::class,'ticket'])->name('admin_setting_ticket');
+    Route::post('/setting/ticket',[AdminSettingController::class,'ticket_submit'])->name('admin_setting_ticket_submit');
+    Route::get('/setting/theme-color',[AdminSettingController::class,'theme_color'])->name('admin_setting_theme_color');
+    Route::post('/setting/theme-color',[AdminSettingController::class,'theme_color_submit'])->name('admin_setting_theme_color_submit');
 });
 Route::prefix('admin')->group(function () {
     Route::get('/', function () {return redirect('/admin/login');});

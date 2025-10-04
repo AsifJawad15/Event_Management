@@ -5,7 +5,7 @@
 @section('content')
 @include('front.layout.navigation')
 
-<div class="common-banner" style="background-image: url('{{ asset('dist-front/images/banner.jpg') }}');">
+<div class="common-banner" style="background-image: url('{{ asset('uploads/'.$setting_data->banner) }}');">
     <div class="container">
         <div class="row">
             <div class="col-md-12">

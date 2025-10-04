@@ -34,6 +34,8 @@ class AdminTicketController extends Controller
     public function invoice($id)
     {
         $ticket = Ticket::with(['package','user'])->where('id',$id)->first();
-        return view('admin.ticket.invoice', compact('ticket'));
+        $setting = \App\Models\Setting::where('id',1)->first();
+        $admin = \App\Models\Admin::where('id',1)->first();
+        return view('admin.ticket.invoice', compact('ticket', 'setting', 'admin'));
     }
 }

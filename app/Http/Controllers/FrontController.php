@@ -219,9 +219,9 @@ class FrontController extends Controller
 
     public function buy_ticket($id)
     {
-        // Check if ticket purchase is still available (static date for now)
-        $expireDate = '2025-12-31'; // You can change this date as needed
-        if ($expireDate < date('Y-m-d')) {
+        // Check if ticket purchase is still available from settings
+        $setting = \App\Models\Setting::where('id', 1)->first();
+        if ($setting && $setting->ticket_purchase_expire_date < date('Y-m-d')) {
             return redirect()->route('front.home')->with('error', 'Ticket purchase date is expired!');
         }
 
@@ -483,7 +483,7 @@ class FrontController extends Controller
         }
 
         $admin = Admin::first();
-        $setting = Admin::first(); // Assuming setting data is in admin table
+        $setting = \App\Models\Setting::where('id', 1)->first();
 
         // Create setting_data object for banner
         $setting_data = (object) [

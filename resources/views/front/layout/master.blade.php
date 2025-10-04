@@ -96,7 +96,7 @@
 			</div>
 			<div class="footer-bottom">
 				<div class="auto-container container">
-				<div class="text">Copyright 2024, SingleEvent. All Rights Reserved.</div>
+				<div class="text">{{ $setting_data->copyright }}</div>
 				</div>
 			</div>
 		</footer>

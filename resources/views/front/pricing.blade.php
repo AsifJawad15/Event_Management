@@ -130,11 +130,15 @@
                             </ul>
                         </div>
                         <div class="pricing-footer">
-                            @auth
-                                <a href="{{ route('front.buy_ticket', $package->id) }}" class="btn-buy">Buy Ticket</a>
+                            @if($setting_data->ticket_purchase_expire_date < date('Y-m-d'))
+                                <a href="javascript:void(0);" class="btn-buy" style="background-color:#c03030;color:#fff;cursor:not-allowed;">TICKET PURCHASE EXPIRED</a>
                             @else
-                                <a href="{{ route('login') }}" class="btn-buy">Login to Buy</a>
-                            @endauth
+                                @auth
+                                    <a href="{{ route('front.buy_ticket', $package->id) }}" class="btn-buy">Buy Ticket</a>
+                                @else
+                                    <a href="{{ route('login') }}" class="btn-buy">Login to Buy</a>
+                                @endauth
+                            @endif
                         </div>
                     </div>
                 </div>
