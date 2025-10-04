@@ -13,7 +13,7 @@
 
                 <ul class="sidebar-menu">
 
-                    <li class="{{ Request::is('admin/dashboard' )?'active':''}}"><a class="nav-link" href="{{ route('admin_dashboard') }}"><i class="fas fa-hand-point-right"></i> <span>Dashboard</span></a></li>
+                    <li class="{{ Request::is('admin/dashboard' )?'active':''}}"><a class="nav-link" href="{{ route('admin_dashboard') }}"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a></li>
 
                     <li class="nav-item dropdown {{ Request::is('admin/home-banner') || Request::is('admin/home-welcome') || Request::is('admin/homecounter') || Request::is('admin/home-speaker') || Request::is('admin/home-pricing') || Request::is('admin/home-blog') || Request::is('admin/home-sponsor') ? 'active' : '' }}">
                         <a href="#" class="nav-link has-dropdown"><i class="fas fa-home"></i><span>Home Section</span></a>
@@ -28,33 +28,33 @@
                         </ul>
                     </li>
 
-                    <li class="{{ Request::is('admin/speakers*' )?'active':''}}"><a class="nav-link" href="{{ route('admin_speaker_index') }}"><i class="fas fa-hand-point-right"></i> <span>Speakers</span></a></li>
+                    <li class="{{ Request::is('admin/speakers*' )?'active':''}}"><a class="nav-link" href="{{ route('admin_speaker_index') }}"><i class="fas fa-microphone"></i> <span>Speakers</span></a></li>
 
-                    <li class="{{ Request::is('admin/schedule-days*' )?'active':''}}"><a class="nav-link" href="{{ route('admin_schedule_day_index') }}"><i class="fas fa-hand-point-right"></i> <span>Schedule Days</span></a></li>
+                    <li class="{{ Request::is('admin/schedule-days*' )?'active':''}}"><a class="nav-link" href="{{ route('admin_schedule_day_index') }}"><i class="fas fa-calendar-alt"></i> <span>Schedule Days</span></a></li>
 
-                    <li class="{{ Request::is('admin/schedules*' )?'active':''}}"><a class="nav-link" href="{{ route('admin_schedule_index') }}"><i class="fas fa-hand-point-right"></i> <span>Schedules</span></a></li>
+                    <li class="{{ Request::is('admin/schedules*' )?'active':''}}"><a class="nav-link" href="{{ route('admin_schedule_index') }}"><i class="fas fa-clock"></i> <span>Schedules</span></a></li>
 
-                    <li class="{{ Request::is('admin/speaker_schedule_index*' )?'active':''}}"><a class="nav-link" href="{{ route('admin_speaker_schedule_index') }}"><i class="fas fa-hand-point-right"></i> <span>Speaker Schedule</span></a></li>
+                    <li class="{{ Request::is('admin/speaker_schedule_index*' )?'active':''}}"><a class="nav-link" href="{{ route('admin_speaker_schedule_index') }}"><i class="fas fa-calendar-check"></i> <span>Speaker Schedule</span></a></li>
 
-                    <li class="{{ Request::is('admin/sponsors*' )?'active':''}}"><a class="nav-link" href="{{ route('admin_sponsor_index') }}"><i class="fas fa-hand-point-right"></i> <span>Sponsors</span></a></li>
+                    <li class="{{ Request::is('admin/sponsors*' )?'active':''}}"><a class="nav-link" href="{{ route('admin_sponsor_index') }}"><i class="fas fa-handshake"></i> <span>Sponsors</span></a></li>
 
-                    <li class="{{ Request::is('admin/sponsor-categories*' )?'active':''}}"><a class="nav-link" href="{{ route('admin_sponsor_categories_index') }}"><i class="fas fa-hand-point-right"></i> <span>Sponsor Categories</span></a></li>
+                    <li class="{{ Request::is('admin/sponsor-categories*' )?'active':''}}"><a class="nav-link" href="{{ route('admin_sponsor_categories_index') }}"><i class="fas fa-layer-group"></i> <span>Sponsor Categories</span></a></li>
 
-                    <li class="{{ Request::is('admin/organisers*' )?'active':''}}"><a class="nav-link" href="{{ route('admin_organiser_index') }}"><i class="fas fa-hand-point-right"></i> <span>Organisers</span></a></li>
+                    <li class="{{ Request::is('admin/organisers*' )?'active':''}}"><a class="nav-link" href="{{ route('admin_organiser_index') }}"><i class="fas fa-user-tie"></i> <span>Organisers</span></a></li>
 
-                    <li class="{{ Request::is('admin/accommodations*' )?'active':''}}"><a class="nav-link" href="{{ route('admin_accommodation_index') }}"><i class="fas fa-hand-point-right"></i> <span>Accommodations</span></a></li>
+                    <li class="{{ Request::is('admin/accommodations*' )?'active':''}}"><a class="nav-link" href="{{ route('admin_accommodation_index') }}"><i class="fas fa-hotel"></i> <span>Accommodations</span></a></li>
 
-                    <li class="{{ Request::is('admin/photo-gallery*' )?'active':''}}"><a class="nav-link" href="{{ route('admin_photo_index') }}"><i class="fas fa-hand-point-right"></i> <span>Photo Gallery</span></a></li>
+                    <li class="{{ Request::is('admin/photo-gallery*' )?'active':''}}"><a class="nav-link" href="{{ route('admin_photo_index') }}"><i class="fas fa-images"></i> <span>Photo Gallery</span></a></li>
 
-                    <li class="{{ Request::is('admin/video-gallery*' )?'active':''}}"><a class="nav-link" href="{{ route('admin_video_index') }}"><i class="fas fa-hand-point-right"></i> <span>Video Gallery</span></a></li>
+                    <li class="{{ Request::is('admin/video-gallery*' )?'active':''}}"><a class="nav-link" href="{{ route('admin_video_index') }}"><i class="fas fa-video"></i> <span>Video Gallery</span></a></li>
 
-                    <li class="{{ Request::is('admin/faq*' )?'active':''}}"><a class="nav-link" href="{{ route('admin_faq_index') }}"><i class="fas fa-hand-point-right"></i> <span>FAQ Management</span></a></li>
+                    <li class="{{ Request::is('admin/faq*' )?'active':''}}"><a class="nav-link" href="{{ route('admin_faq_index') }}"><i class="fas fa-question-circle"></i> <span>FAQ Management</span></a></li>
 
-                    <li class="{{ Request::is('admin/testimonials*' )?'active':''}}"><a class="nav-link" href="{{ route('admin_testimonial_index') }}"><i class="fas fa-hand-point-right"></i> <span>Testimonials</span></a></li>
+                    <li class="{{ Request::is('admin/testimonials*' )?'active':''}}"><a class="nav-link" href="{{ route('admin_testimonial_index') }}"><i class="fas fa-comments"></i> <span>Testimonials</span></a></li>
 
-                    <li class="{{ Request::is('admin/posts*' )?'active':''}}"><a class="nav-link" href="{{ route('admin_post_index') }}"><i class="fas fa-hand-point-right"></i> <span>Posts</span></a></li>
+                    <li class="{{ Request::is('admin/posts*' )?'active':''}}"><a class="nav-link" href="{{ route('admin_post_index') }}"><i class="fas fa-blog"></i> <span>Posts</span></a></li>
 
-                    <li class="{{ Request::is('admin/packages*' )?'active':''}}"><a class="nav-link" href="{{ route('admin_package_index') }}"><i class="fas fa-hand-point-right"></i> <span>Packages</span></a></li>
+                    <li class="{{ Request::is('admin/packages*' )?'active':''}}"><a class="nav-link" href="{{ route('admin_package_index') }}"><i class="fas fa-box"></i> <span>Packages</span></a></li>
 
                     <li class="{{ Request::is('admin/tickets*' )?'active':''}}"><a class="nav-link" href="{{ route('admin_ticket_index') }}"><i class="fas fa-ticket-alt"></i> <span>Ticket Management</span></a></li>
 
@@ -62,7 +62,7 @@
 
                     <li class="{{ Request::is('admin/message*' )?'active':''}}"><a class="nav-link" href="{{ route('admin_message_index') }}"><i class="fas fa-envelope"></i> <span>Messages</span></a></li>
 
-                    <li class="{{ Request::is('admin/subscribers*' )?'active':''}}"><a class="nav-link" href="{{ route('admin_subscriber_index') }}"><i class="fas fa-users"></i> <span>Subscribers</span></a></li>
+                    <li class="{{ Request::is('admin/subscribers*' )?'active':''}}"><a class="nav-link" href="{{ route('admin_subscriber_index') }}"><i class="fas fa-envelope-open-text"></i> <span>Subscribers</span></a></li>
 
                     <li class="nav-item dropdown {{ Request::is('admin/contact-page') || Request::is('admin/term-page') || Request::is('admin/privacy-page') ? 'active' : '' }}">
                         <a href="#" class="nav-link has-dropdown"><i class="fas fa-file-alt"></i><span>Other Pages</span></a>
@@ -73,7 +73,7 @@
                         </ul>
                     </li>
 
-                    <li class="{{ Request::is('admin/profile' )?'active':''}}"><a class="nav-link" href="{{ route('admin_profile') }}"><i class="fas fa-hand-point-right"></i> <span>Profile</span></a></li>
+                    <li class="{{ Request::is('admin/profile' )?'active':''}}"><a class="nav-link" href="{{ route('admin_profile') }}"><i class="fas fa-user-cog"></i> <span>Profile</span></a></li>
 
                 </ul>
             </aside>

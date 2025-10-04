@@ -1,173 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit                                                <td class="pt_10 pb_10">
-                                                    <a href="{{ route('admin_sponsor_categories_edit', $category) }}" class="btn btn-primary btn-sm">Edit</a>
-                                                    <form action="{{ route('admin_sponsor_categories_destroy', $category) }}" method="POST" style="display: inline;">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
-                                                    </form>
-                                                </td>="viewport">
+@extends('admin.layout.master')
 
-    <link rel="icon" type="image/png" href="{{ asset('uploads/favicon.png') }}">
+@section('heading', 'Sponsor Categories')
 
-    <title>Admin Panel - Sponsor Categories</title>
+@section('main_content')
+@include('admin.layout.nav')
+@include('admin.layout.sidebar')
 
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="{{ asset('dist/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('dist/css/font_awesome_5_free.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('dist/css/select2.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('dist/css/bootstrap-tagsinput.css') }}">
-    <link rel="stylesheet" href="{{ asset('dist/css/duotone-dark.css') }}">
-    <link rel="stylesheet" href="{{ asset('dist/css/dataTables.bootstrap4.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('dist/css/iziToast.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('dist/css/fontawesome-iconpicker.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('dist/css/bootstrap4-toggle.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('dist/css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('dist/css/components.css') }}">
-    <link rel="stylesheet" href="{{ asset('dist/css/air-datepicker.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('dist/css/spacing.css') }}">
-    <link rel="stylesheet" href="{{ asset('dist/css/custom.css') }}">
-
-    <script src="{{ asset('dist/js/jquery-3.7.0.min.js') }}"></script>
-    <script src="{{ asset('dist/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('dist/js/popper.min.js') }}"></script>
-    <script src="{{ asset('dist/js/tooltip.js') }}"></script>
-    <script src="{{ asset('dist/js/jquery.nicescroll.min.js') }}"></script>
-    <script src="{{ asset('dist/js/moment.min.js') }}"></script>
-    <script src="{{ asset('dist/js/stisla.js') }}"></script>
-    <script src="{{ asset('dist/js/jscolor.js') }}"></script>
-    <script src="{{ asset('dist/js/bootstrap-tagsinput.min.js') }}"></script>
-    <script src="{{ asset('dist/js/select2.full.min.js') }}"></script>
-    <script src="{{ asset('dist/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('dist/js/dataTables.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('dist/js/iziToast.min.js') }}"></script>
-    <script src="{{ asset('dist/js/fontawesome-iconpicker.js') }}"></script>
-    <script src="{{ asset('dist/js/air-datepicker.min.js') }}"></script>
-    <script src="{{ asset('dist/tinymce/tinymce.min.js') }}"></script>
-    <script src="{{ asset('dist/js/bootstrap4-toggle.min.js') }}"></script>
-</head>
-
-<body>
-
-@if($errors->any())
-    @foreach($errors->all() as $error)
-        <script>
-            iziToast.error({
-                title: '',
-                position: 'topRight',
-                message: '{{ $error }}',
-            });
-        </script>
-    @endforeach
-@endif
-
-@if(session()->get('success'))
-    <script>
-        iziToast.success({
-            title: '',
-            position: 'topRight',
-            message: '{{ session()->get('success') }}',
-        });
-    </script>
-@endif
-
-<div class="main-wrapper">
-
-    <div class="navbar-bg"></div>
-    <nav class="navbar navbar-expand-lg main-navbar">
-        <form class="form-inline mr-auto">
-            <ul class="navbar-nav mr-3">
-                <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
-                <li><a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i class="fas fa-search"></i></a></li>
-            </ul>
-        </form>
-        <ul class="navbar-nav navbar-right">
-            <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                <img alt="image" src="{{ asset('uploads/'.Auth::guard('admin')->user()->photo) }}" class="rounded-circle mr-1">
-                <div class="d-sm-none d-lg-inline-block">Hi, {{ Auth::guard('admin')->user()->name }}</div></a>
-                <div class="dropdown-menu dropdown-menu-right">
-                    <div class="dropdown-title">Logged in 5 min ago</div>
-                    <a href="{{ route('admin_profile') }}" class="dropdown-item has-icon">
-                        <i class="far fa-user"></i> Profile
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="{{ route('admin_logout') }}" class="dropdown-item has-icon text-danger">
-                        <i class="fas fa-sign-out-alt"></i> Logout
-                    </a>
-                </div>
-            </li>
-        </ul>
-    </nav>
-
-    <div class="main-sidebar sidebar-style-2">        @include('admin.layout.sidebar')
-    </div>
-
-    <div class="main-content">
-        <section class="section">
-            <div class="section-header">
-                <h1>Sponsor Categories</h1>
-                <div class="section-header-button">
-                    <a href="{{ route('admin_sponsor_categories_create') }}" class="btn btn-primary">Add New Category</a>
-                </div>
+<div class="main-content">
+    <section class="section">
+        <div class="section-header justify-content-between">
+            <h1>Sponsor Categories</h1>
+            <div class="ml-auto">
+                <a href="{{ route('admin_sponsor_categories_create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add New</a>
             </div>
-            <div class="section-body">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered" id="example1">
-                                        <thead>
-                                            <tr>
-                                                <th>SL</th>
-                                                <th>Category Name</th>
-                                                <th>Description</th>
-                                                <th>Created At</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach($sponsorCategories as $category)
-                                            <tr>
-                                                <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $category->name }}</td>
-                                                <td>{{ $category->description ?? 'No description' }}</td>
-                                                <td>{{ $category->created_at->format('M d, Y') }}</td>
-                                                <td class="pt_10 pb_10">
-                                                    <a href="{{ route('admin.sponsor-categories.show', $category) }}" class="btn btn-info btn-sm">View</a>
-                                                    <a href="{{ route('admin.sponsor-categories.edit', $category) }}" class="btn btn-primary btn-sm">Edit</a>
-                                                    <form action="{{ route('admin.sponsor-categories.destroy', $category) }}" method="POST" style="display: inline;">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger btn-sm" onClick="return confirm('Are you sure?');">Delete</button>
-                                                    </form>
-                                                </td>
-                                            </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
+        </div>
+        <div class="section-body">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                        <table class="table table-bordered" id="example1">
+                            <thead>
+                                <tr>
+                                    <th>SL</th>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Created At</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($sponsorCategories as $category)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $category->name }}</td>
+                                    <td>{{ Str::limit($category->description, 100) }}</td>
+                                    <td>{{ $category->created_at->format('M d, Y') }}</td>
+                                    <td class="pt_10 pb_10">
+                                        <a href="{{ route('admin_sponsor_categories_edit', $category->id) }}" class="btn btn-primary">Edit</a>
+                                        <form action="{{ route('admin_sponsor_categories_destroy', $category->id) }}" method="POST" style="display: inline-block;" onsubmit="return confirm('Are you sure you want to delete this sponsor category?');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
     </div>
-
+    </section>
 </div>
-
-<script src="{{ asset('dist/js/scripts.js') }}"></script>
-<script src="{{ asset('dist/js/custom.js') }}"></script>
-<script>
-    $(document).ready(function () {
-        $('#example1').DataTable();
-    });
-</script>
-
-</body>
-</html>
+@endsection

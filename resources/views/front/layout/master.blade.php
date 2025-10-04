@@ -75,18 +75,6 @@
 									<div class="footer-widget subscribe-widget">
 										<h2>Newsletter</h2>
 										<div class="widget-content">
-											@if(session('success'))
-												<div class="alert alert-success mb-3">
-													{{ session('success') }}
-												</div>
-											@endif
-											@if($errors->any())
-												<div class="alert alert-danger mb-3">
-													@foreach($errors->all() as $error)
-														<div>{{ $error }}</div>
-													@endforeach
-												</div>
-											@endif
 											<div class="newsletter-form">
 												<form method="post" action="{{ route('subscribe_submit') }}">
 													@csrf
@@ -127,6 +115,37 @@
 		<script src="{{ asset('dist-front/js/custom.js') }}"></script>
 		<!-- iziToast JS -->
 		<script src="https://cdn.jsdelivr.net/npm/izitoast@1.4.0/dist/js/iziToast.min.js"></script>
+
+		<script>
+		document.addEventListener('DOMContentLoaded', function() {
+			@if(session('success'))
+				iziToast.success({
+					title: 'Success!',
+					message: '{{ session('success') }}',
+					position: 'topRight'
+				});
+			@endif
+
+			@if(session('error'))
+				iziToast.error({
+					title: 'Error!',
+					message: '{{ session('error') }}',
+					position: 'topRight'
+				});
+			@endif
+
+			@if($errors->any())
+				@foreach ($errors->all() as $error)
+					iziToast.warning({
+						title: 'Validation Error!',
+						message: '{{ $error }}',
+						position: 'topRight'
+					});
+				@endforeach
+			@endif
+		});
+		</script>
+
 		@yield('scripts')
 	</body>
 </html>

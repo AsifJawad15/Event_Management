@@ -556,19 +556,19 @@ class FrontController extends Controller
 
         \Mail::to($request->email)->send(new Websitemail($subject,$message));
 
-        return redirect()->back()->with('success','An email is sent to your email. Please check your email. If you do not find the email in your inbox, please check your spam folder.');
+        return redirect()->back()->with('success','Verification email sent! Please check your inbox to verify your subscription.');
     }
 
     public function subscriber_verify($token,$email)
     {
         $subscriber = Subscriber::where('token',$token)->where('email',$email)->first();
         if(!$subscriber) {
-            return redirect()->route('front.home');
+            return redirect()->route('front.home')->with('error', 'Invalid verification link!');
         }
         $subscriber->token = '';
         $subscriber->status = 'active';
         $subscriber->update();
 
-        return redirect()->route('front.home')->with('success', 'Your email is verified. You will receive the latest news and updates.');
+        return redirect()->route('front.home')->with('success', 'Subscription verified successfully! You will receive future updates and latest news from us.');
     }
 }
