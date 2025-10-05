@@ -2,7 +2,7 @@
 
 @section('title', 'Schedule - Event & Conference Management Website')
 
-@section('content')
+@section('main_content')
 <style>
     .speakers-list {
         margin-bottom: 15px;
@@ -21,45 +21,7 @@
         margin-right: 5px;
     }
 </style>
-<div class="container main-menu" id="navbar">
-    <div class="row">
-        <div class="col-lg-2 col-sm-12">
-            <a href="{{ route('front.home') }}" id="logo" class="grid_2"> <img src="{{ asset('dist-front/images/logo.png') }}"> </a>
-        </div>
-        <div class="col-lg-10 col-sm-12">
-            <nav class="navbar navbar-expand-lg navbar-light">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul id="navContent" class="navbar-nav mr-auto navigation">
-                        <li>
-                            <a class="smooth-scroll nav-link" href="{{ route('front.home') }}">Home</a>
-                        </li>
-                        <li>
-                            <a class="smooth-scroll nav-link" href="{{ route('front.speakers') }}">Speakers</a>
-                        </li>
-                        <li>
-                            <a class="smooth-scroll nav-link active" href="{{ route('front.schedule') }}">Schedule</a>
-                        </li>
-                        <li>
-                            <a class="smooth-scroll nav-link" href="#">Pricing</a>
-                        </li>
-                        <li>
-                            <a class="smooth-scroll nav-link" href="#">Blog</a>
-                        </li>
-                        <li>
-                            <a class="smooth-scroll nav-link" href="{{ route('front.about') }}">About</a>
-                        </li>
-                        <li>
-                            <a class="smooth-scroll nav-link" href="{{ route('front.contact') }}">Contact</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
-    </div>
-</div>
-
-        <section>
+<section>
             <div class="wpo-blog-single-section section-padding pb-xs-70">
                 <div class="container">
                     <div class="row">

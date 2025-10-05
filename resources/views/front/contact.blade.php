@@ -2,9 +2,7 @@
 
 @section('title', 'Contact | SingleEvent')
 
-@section('content')
-@include('front.layout.navigation')
-
+@section('main_content')
 <div class="common-banner" style="background-image: url('{{ asset('uploads/'.$setting_data->banner) }}');">
     <div class="container">
         <div class="row">

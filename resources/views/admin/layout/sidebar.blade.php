@@ -1,12 +1,13 @@
-<aside id="sidebar-wrapper">
-                <div class="sidebar-brand">
-                    <a href="{{ route('admin_dashboard') }}">Admin Panel</a>
-                </div>
-                <div class="sidebar-brand sidebar-brand-sm">
-                    <a href="{{ route('admin_dashboard') }}"></a>
-                </div>
+<div class="main-sidebar sidebar-style-2">
+    <aside id="sidebar-wrapper">
+        <div class="sidebar-brand">
+            <a href="{{ route('admin_dashboard') }}">Admin Panel</a>
+        </div>
+        <div class="sidebar-brand sidebar-brand-sm">
+            <a href="{{ route('admin_dashboard') }}"></a>
+        </div>
 
-                <ul class="sidebar-menu">
+        <ul class="sidebar-menu">
 
                     <li class="{{ Request::is('admin/dashboard' )?'active':''}}"><a class="nav-link" href="{{ route('admin_dashboard') }}"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a></li>
 
@@ -20,6 +21,18 @@
                             <li class="{{ Request::is('admin/home-pricing' )?'active':''}}"><a class="nav-link" href="{{ route('admin_home_pricing') }}"><i class="fas fa-dollar-sign"></i> <span>Home Pricing</span></a></li>
                             <li class="{{ Request::is('admin/home-blog' )?'active':''}}"><a class="nav-link" href="{{ route('admin_home_blog') }}"><i class="fas fa-blog"></i> <span>Home Blog</span></a></li>
                             <li class="{{ Request::is('admin/home-sponsor' )?'active':''}}"><a class="nav-link" href="{{ route('admin_home_sponsor') }}"><i class="fas fa-handshake"></i> <span>Home Sponsor</span></a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item dropdown {{ Request::is('admin/setting/*') ? 'active' : '' }}">
+                        <a href="#" class="nav-link has-dropdown"><i class="fas fa-cog"></i><span>Settings</span></a>
+                        <ul class="dropdown-menu">
+                            <li class="{{ Request::is('admin/setting/logo' )?'active':''}}"><a class="nav-link" href="{{ route('admin_setting_logo') }}"><i class="fas fa-image"></i> <span>Logo</span></a></li>
+                            <li class="{{ Request::is('admin/setting/favicon' )?'active':''}}"><a class="nav-link" href="{{ route('admin_setting_favicon') }}"><i class="fas fa-star"></i> <span>Favicon</span></a></li>
+                            <li class="{{ Request::is('admin/setting/banner' )?'active':''}}"><a class="nav-link" href="{{ route('admin_setting_banner') }}"><i class="fas fa-image"></i> <span>Banner</span></a></li>
+                            <li class="{{ Request::is('admin/setting/footer' )?'active':''}}"><a class="nav-link" href="{{ route('admin_setting_footer') }}"><i class="fas fa-info-circle"></i> <span>Footer</span></a></li>
+                            <li class="{{ Request::is('admin/setting/ticket' )?'active':''}}"><a class="nav-link" href="{{ route('admin_setting_ticket') }}"><i class="fas fa-ticket-alt"></i> <span>Ticket</span></a></li>
+                            <li class="{{ Request::is('admin/setting/theme-color' )?'active':''}}"><a class="nav-link" href="{{ route('admin_setting_theme_color') }}"><i class="fas fa-palette"></i> <span>Theme Color</span></a></li>
                         </ul>
                     </li>
 
@@ -68,19 +81,8 @@
                         </ul>
                     </li>
 
-                    <li class="nav-item dropdown {{ Request::is('admin/setting/*') ? 'active' : '' }}">
-                        <a href="#" class="nav-link has-dropdown"><i class="fas fa-cog"></i><span>Settings</span></a>
-                        <ul class="dropdown-menu">
-                            <li class="{{ Request::is('admin/setting/logo' )?'active':''}}"><a class="nav-link" href="{{ route('admin_setting_logo') }}"><i class="fas fa-image"></i> <span>Logo</span></a></li>
-                            <li class="{{ Request::is('admin/setting/favicon' )?'active':''}}"><a class="nav-link" href="{{ route('admin_setting_favicon') }}"><i class="fas fa-star"></i> <span>Favicon</span></a></li>
-                            <li class="{{ Request::is('admin/setting/banner' )?'active':''}}"><a class="nav-link" href="{{ route('admin_setting_banner') }}"><i class="fas fa-image"></i> <span>Banner</span></a></li>
-                            <li class="{{ Request::is('admin/setting/footer' )?'active':''}}"><a class="nav-link" href="{{ route('admin_setting_footer') }}"><i class="fas fa-info-circle"></i> <span>Footer</span></a></li>
-                            <li class="{{ Request::is('admin/setting/ticket' )?'active':''}}"><a class="nav-link" href="{{ route('admin_setting_ticket') }}"><i class="fas fa-ticket-alt"></i> <span>Ticket</span></a></li>
-                            <li class="{{ Request::is('admin/setting/theme-color' )?'active':''}}"><a class="nav-link" href="{{ route('admin_setting_theme_color') }}"><i class="fas fa-palette"></i> <span>Theme Color</span></a></li>
-                        </ul>
-                    </li>
+            <li class="{{ Request::is('admin/profile' )?'active':''}}"><a class="nav-link" href="{{ route('admin_profile') }}"><i class="fas fa-user-cog"></i> <span>Profile</span></a></li>
 
-                    <li class="{{ Request::is('admin/profile' )?'active':''}}"><a class="nav-link" href="{{ route('admin_profile') }}"><i class="fas fa-user-cog"></i> <span>Profile</span></a></li>
-
-                </ul>
-            </aside>
+        </ul>
+    </aside>
+</div>

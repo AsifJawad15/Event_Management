@@ -2,9 +2,7 @@
 
 @section('title', 'Privacy Policy | SingleEvent')
 
-@section('content')
-@include('front.layout.navigation')
-
+@section('main_content')
 <div class="common-banner" style="background-image: url('{{ asset('dist-front/images/banner.jpg') }}');">
     <div class="container">
         <div class="row">
