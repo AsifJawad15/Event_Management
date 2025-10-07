@@ -39,7 +39,6 @@
                                 <a class="dropdown-item" href="{{ route('front.photo_gallery') }}">Photo Gallery</a>
                                 <a class="dropdown-item" href="{{ route('front.video_gallery') }}">Video Gallery</a>
                                 <a class="dropdown-item" href="{{ route('front.faq') }}">FAQ</a>
-                                <a class="dropdown-item" href="{{ route('front.testimonials') }}">Testimonials</a>
                             </div>
                         </li>
                         <li>

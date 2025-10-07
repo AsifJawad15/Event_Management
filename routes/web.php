@@ -23,7 +23,6 @@ use App\Http\Controllers\Admin\AdminAccommodationController;
 use App\Http\Controllers\Admin\AdminPhotoController;
 use App\Http\Controllers\Admin\AdminVideoController;
 use App\Http\Controllers\Admin\AdminFaqController;
-use App\Http\Controllers\Admin\AdminTestimonialController;
 use App\Http\Controllers\Admin\AdminPostController;
 use App\Http\Controllers\Admin\AdminPackageController;
 use App\Http\Controllers\Admin\AdminTicketController;
@@ -34,7 +33,8 @@ use App\Http\Controllers\Admin\AdminSubscriberController;
 use App\Http\Controllers\Admin\AdminSettingController;
 
 // Front
-Route::get('/', [FrontController::class, 'home'])->name('front.home');
+Route::get('/', [FrontController::class, 'welcome'])->name('front.welcome');
+Route::get('/home', [FrontController::class, 'home'])->name('front.home');
 Route::get('/about', [FrontController::class, 'about'])->name('front.about');
 Route::get('/contact', [FrontController::class, 'contact'])->name('front.contact');
 Route::post('/contact', [FrontController::class, 'contact_submit'])->name('contact.submit');
@@ -53,7 +53,6 @@ Route::get('/accommodations', [FrontController::class, 'accommodations'])->name(
 Route::get('/photo-gallery', [FrontController::class, 'photo_gallery'])->name('front.photo_gallery');
 Route::get('/video-gallery', [FrontController::class, 'video_gallery'])->name('front.video_gallery');
 Route::get('/faq', [FrontController::class, 'faq'])->name('front.faq');
-Route::get('/testimonials', [FrontController::class, 'testimonials'])->name('front.testimonials');
 Route::get('/blog', [FrontController::class, 'blog'])->name('front.blog');
 Route::get('/post/{slug}', [FrontController::class, 'post'])->name('front.post');
 Route::get('/pricing', [FrontController::class, 'pricing'])->name('front.pricing');
@@ -200,14 +199,6 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::get('/faq/{faq}/edit',[AdminFaqController::class,'edit'])->name('admin_faq_edit');
     Route::put('/faq/{faq}',[AdminFaqController::class,'update'])->name('admin_faq_update');
     Route::delete('/faq/{faq}',[AdminFaqController::class,'destroy'])->name('admin_faq_destroy');
-
-    // Testimonial routes
-    Route::get('/testimonials',[AdminTestimonialController::class,'index'])->name('admin_testimonial_index');
-    Route::get('/testimonials/create',[AdminTestimonialController::class,'create'])->name('admin_testimonial_create');
-    Route::post('/testimonials',[AdminTestimonialController::class,'store'])->name('admin_testimonial_store');
-    Route::get('/testimonials/{testimonial}/edit',[AdminTestimonialController::class,'edit'])->name('admin_testimonial_edit');
-    Route::put('/testimonials/{testimonial}',[AdminTestimonialController::class,'update'])->name('admin_testimonial_update');
-    Route::delete('/testimonials/{testimonial}',[AdminTestimonialController::class,'destroy'])->name('admin_testimonial_destroy');
 
     // Post routes
     Route::get('/posts',[AdminPostController::class,'index'])->name('admin_post_index');

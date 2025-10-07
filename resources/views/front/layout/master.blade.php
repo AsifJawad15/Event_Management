@@ -99,7 +99,7 @@
 
     <body data-spy="scroll" data-target=".navbar" data-offset="50">
 
-        @if(!Request::is('/'))
+        @if(!Request::is('/') && !Request::is('welcome'))
             @include('front.layout.nav')
         @endif
 

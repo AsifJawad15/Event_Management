@@ -58,8 +58,6 @@
 
                     <li class="{{ Request::is('admin/faq*' )?'active':''}}"><a class="nav-link" href="{{ route('admin_faq_index') }}"><i class="fas fa-question-circle"></i> <span>FAQ Management</span></a></li>
 
-                    <li class="{{ Request::is('admin/testimonials*' )?'active':''}}"><a class="nav-link" href="{{ route('admin_testimonial_index') }}"><i class="fas fa-comments"></i> <span>Testimonials</span></a></li>
-
                     <li class="{{ Request::is('admin/posts*' )?'active':''}}"><a class="nav-link" href="{{ route('admin_post_index') }}"><i class="fas fa-blog"></i> <span>Posts</span></a></li>
 
                     <li class="{{ Request::is('admin/packages*' )?'active':''}}"><a class="nav-link" href="{{ route('admin_package_index') }}"><i class="fas fa-box"></i> <span>Packages</span></a></li>

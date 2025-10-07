@@ -20,7 +20,6 @@ use App\Models\Accommodation;
 use App\Models\Photo;
 use App\Models\Video;
 use App\Models\Faq;
-use App\Models\Testimonial;
 use App\Models\Post;
 use App\Models\Package;
 use App\Models\PackageFacility;
@@ -39,6 +38,12 @@ use Xenon\NagadApi\Base;
 
 class FrontController extends Controller
 {
+    public function welcome()
+    {
+        $setting_data = \App\Models\Setting::where('id',1)->first();
+        return view('front.welcome', compact('setting_data'));
+    }
+
     public function home()
     {
         $home_banner = HomeBanner::where('id',1)->first();
@@ -172,12 +177,6 @@ class FrontController extends Controller
     {
         $faqs = Faq::latest()->get(); // Get all FAQs for accordion display
         return view('front.faq', compact('faqs'));
-    }
-
-    public function testimonials()
-    {
-        $testimonials = Testimonial::latest()->get(); // Get all testimonials for carousel
-        return view('front.testimonials', compact('testimonials'));
     }
 
     public function blog()
