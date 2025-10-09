@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use App\Models\Post;
-use App\Models\Testimonial;
 use App\Models\Speaker;
 use App\Models\ScheduleDay;
 use App\Models\Sponsor;
@@ -24,7 +23,6 @@ class AdminDashboardController extends Controller
     public function dashboard()
     {
         $total_posts = Post::count();
-        $total_testimonials = Testimonial::count();
         $total_speakers = Speaker::count();
         $total_schedule_days = ScheduleDay::count();
         $total_sponsors = Sponsor::count();
@@ -38,7 +36,7 @@ class AdminDashboardController extends Controller
 
         $tickets = Ticket::with(['package','user'])->orderBy('id','desc')->get()->take(3);
 
-        return view('admin.dashboard', compact('total_posts', 'total_testimonials', 'total_speakers', 'total_schedule_days', 'total_sponsors', 'total_organisers', 'total_attendees', 'total_packages', 'total_tickets', 'total_subscribers', 'total_photos', 'total_videos', 'tickets'));
+        return view('admin.dashboard', compact('total_posts', 'total_speakers', 'total_schedule_days', 'total_sponsors', 'total_organisers', 'total_attendees', 'total_packages', 'total_tickets', 'total_subscribers', 'total_photos', 'total_videos', 'tickets'));
     }
 
     public function profile_update(Request $request)

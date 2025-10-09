@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EVENTO - Event Management Platform</title>
-    <link rel="icon" type="image/png" href="{{ asset('uploads/'.$setting_data->favicon) }}">
+
 
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
@@ -93,20 +93,24 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
             margin-bottom: 20px;
         }
 
-        .site-logo {
-            width: 80px;
-            height: 80px;
-            animation: rotate3d 3s ease-in-out infinite;
+        .brand-name {
+            display: flex;
+            align-items: center;
+            gap: 20px;
         }
 
-        @keyframes rotate3d {
-            0%, 100% { transform: rotateY(0deg); }
-            50% { transform: rotateY(180deg); }
+        .brand-icon {
+            width: 70px;
+            height: 70px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
         }
 
         .site-name {
@@ -353,9 +357,13 @@
                 letter-spacing: 3px;
             }
 
-            .site-logo {
-                width: 60px;
-                height: 60px;
+            .brand-icon {
+                width: 50px;
+                height: 50px;
+            }
+
+            .brand-name {
+                gap: 15px;
             }
 
             .swiper-slide {
@@ -388,6 +396,11 @@
                 font-size: 2.5rem;
             }
 
+            .brand-icon {
+                width: 40px;
+                height: 40px;
+            }
+
             .tagline {
                 font-size: 1rem;
             }
@@ -415,10 +428,12 @@
         <!-- Header Section -->
         <div class="header-section">
             <div class="logo-title">
-                <img src="{{ asset('uploads/'.$setting_data->logo) }}" alt="EVENTO Logo" class="site-logo">
-                <h1 class="site-name">EVENTO</h1>
+                <div class="brand-name">
+                    <img src="{{ asset('Welcome_gallery/icon.png') }}" alt="Icon" class="brand-icon">
+                    <h1 class="site-name">EVENTO</h1>
+                </div>
             </div>
-            <p class="tagline">Your Ultimate Multi-Event Management Platform</p>
+            <p class="tagline">Beyond Management, We Create Experiences</p>
         </div>
 
         <!-- Gallery Section -->
@@ -435,7 +450,7 @@
                             'annevarsary.jpeg' => 'Anniversary Celebrations',
                             'people-festival.jpg' => 'Festival Events',
                             'nightlife-with-people-dancing-club.jpg' => 'Night Events',
-                            '1759855975433.jpg' => 'Special Events'
+
                         ];
                     @endphp
                     @foreach($galleryImages as $image => $title)
@@ -501,11 +516,7 @@
             </div>
         </div>
 
-        <!-- Footer -->
-        <div class="welcome-footer">
-            <p>&copy; {{ date('Y') }} EVENTO. All rights reserved. | Powered by Event Management System</p>
-        </div>
-    </div>
+
 
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
