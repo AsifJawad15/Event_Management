@@ -1,6 +1,42 @@
 @extends('front.layout.master')
 
 @section('title', 'Pricing | SingleEvent')
+
+@section('styles')
+<style>
+    .section-title {
+        color: #{{ $setting_data->theme_color }} !important;
+    }
+
+    .pricing-card.popular {
+        border-color: #{{ $setting_data->theme_color }} !important;
+    }
+
+    .popular-badge {
+        background: #{{ $setting_data->theme_color }} !important;
+    }
+
+    .package-price {
+        color: #{{ $setting_data->theme_color }} !important;
+    }
+
+    .feature-check {
+        color: #{{ $setting_data->theme_color }} !important;
+    }
+
+    .btn-buy {
+        background: #{{ $setting_data->theme_color }} !important;
+        box-shadow: 0 5px 15px rgba({{ hexdec(substr($setting_data->theme_color, 0, 2)) }}, {{ hexdec(substr($setting_data->theme_color, 2, 2)) }}, {{ hexdec(substr($setting_data->theme_color, 4, 2)) }}, 0.3) !important;
+    }
+
+    .btn-buy:hover {
+        background: #{{ $setting_data->theme_color }} !important;
+        filter: brightness(0.9);
+        box-shadow: 0 8px 25px rgba({{ hexdec(substr($setting_data->theme_color, 0, 2)) }}, {{ hexdec(substr($setting_data->theme_color, 2, 2)) }}, {{ hexdec(substr($setting_data->theme_color, 4, 2)) }}, 0.4) !important;
+    }
+</style>
+@endsection
+
 @section('main_content')
 <section class="page-header" style="background-image: url('{{ asset($banner->background) }}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
     <div class="container-fluid">
@@ -154,7 +190,6 @@
 .section-title {
     font-size: 42px;
     font-weight: 700;
-    color: #4CAF50;
     margin-bottom: 20px;
     text-align: center;
 }
@@ -187,7 +222,7 @@
 }
 
 .pricing-card.popular {
-    border: 2px solid #4CAF50;
+    border: 2px solid #333;
     transform: scale(1.05);
 }
 
@@ -195,7 +230,7 @@
     position: absolute;
     top: 20px;
     right: -30px;
-    background: #4CAF50;
+    background: #333;
     color: white;
     padding: 5px 35px;
     font-size: 12px;
@@ -222,7 +257,6 @@
 .package-price {
     font-size: 56px;
     font-weight: 700;
-    color: #4CAF50;
     line-height: 1;
 }
 
@@ -269,7 +303,7 @@
 }
 
 .feature-check {
-    color: #4CAF50;
+    color: #333;
 }
 
 .feature-cross {
@@ -293,7 +327,7 @@
 
 .btn-buy {
     display: inline-block;
-    background: #4CAF50;
+    background: #333;
     color: white !important;
     padding: 15px 40px;
     font-size: 16px;
@@ -304,15 +338,13 @@
     text-transform: uppercase;
     letter-spacing: 1px;
     border: none;
-    box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
     width: 100%;
     max-width: 200px;
 }
 
 .btn-buy:hover {
-    background: #45a049;
+    background: #222;
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(76, 175, 80, 0.4);
     text-decoration: none;
     color: white !important;
 }

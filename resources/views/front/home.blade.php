@@ -431,6 +431,9 @@
     </div>
 </div>
 @endif
+
+@endsection
+
 @section('scripts')
 <script>
     $(".countDown").downCount({
