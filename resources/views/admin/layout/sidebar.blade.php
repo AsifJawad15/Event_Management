@@ -1,10 +1,245 @@
+<style>
+    /* Modern Sidebar Styling */
+    .main-sidebar {
+        background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%) !important;
+        box-shadow: 4px 0 20px rgba(0, 0, 0, 0.15) !important;
+        transition: all 0.3s ease;
+    }
+
+    .sidebar-brand {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        padding: 25px 20px !important;
+        border-bottom: 3px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+    }
+
+    .sidebar-brand:hover {
+        background: linear-gradient(135deg, #764ba2 0%, #667eea 100%) !important;
+        box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+    }
+
+    .sidebar-brand a {
+        color: white !important;
+        font-size: 22px !important;
+        font-weight: 700 !important;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .sidebar-brand a:before {
+        content: "🎯";
+        font-size: 24px;
+    }
+
+    /* Sidebar Menu Items */
+    .sidebar-menu > li > a {
+        color: #cbd5e1 !important;
+        padding: 14px 20px !important;
+        border-left: 4px solid transparent;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .sidebar-menu > li > a:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 0;
+        height: 100%;
+        background: linear-gradient(90deg, rgba(102, 126, 234, 0.2), transparent);
+        transition: width 0.3s ease;
+        z-index: 0;
+    }
+
+    .sidebar-menu > li > a:hover:before {
+        width: 100%;
+    }
+
+    .sidebar-menu > li > a:hover {
+        color: #ffffff !important;
+        background: rgba(102, 126, 234, 0.15) !important;
+        border-left-color: #667eea;
+        transform: translateX(5px);
+        padding-left: 25px !important;
+    }
+
+    .sidebar-menu > li > a i {
+        color: #667eea;
+        font-size: 18px;
+        margin-right: 12px;
+        transition: all 0.3s ease;
+        width: 24px;
+        text-align: center;
+    }
+
+    .sidebar-menu > li > a:hover i {
+        color: #fff;
+        transform: scale(1.2) rotate(5deg);
+    }
+
+    .sidebar-menu > li > a span {
+        position: relative;
+        z-index: 1;
+        font-weight: 500;
+    }
+
+    /* Active Menu Item */
+    .sidebar-menu > li.active > a {
+        background: linear-gradient(90deg, rgba(102, 126, 234, 0.3), rgba(118, 75, 162, 0.2)) !important;
+        color: #ffffff !important;
+        border-left-color: #667eea;
+        box-shadow: inset 0 0 20px rgba(102, 126, 234, 0.2);
+    }
+
+    .sidebar-menu > li.active > a i {
+        color: #fff !important;
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+        0%, 100% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.1);
+        }
+    }
+
+    /* Dropdown Menu */
+    .sidebar-menu .dropdown-menu {
+        background: rgba(15, 23, 42, 0.8) !important;
+        border-left: 3px solid #667eea;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        backdrop-filter: blur(10px);
+    }
+
+    .sidebar-menu .dropdown-menu li a {
+        color: #94a3b8 !important;
+        padding: 10px 20px 10px 45px !important;
+        transition: all 0.3s ease;
+        position: relative;
+    }
+
+    .sidebar-menu .dropdown-menu li a:before {
+        content: '▸';
+        position: absolute;
+        left: 25px;
+        opacity: 0;
+        transition: all 0.3s ease;
+    }
+
+    .sidebar-menu .dropdown-menu li a:hover {
+        color: #ffffff !important;
+        background: rgba(102, 126, 234, 0.2) !important;
+        padding-left: 50px !important;
+    }
+
+    .sidebar-menu .dropdown-menu li a:hover:before {
+        opacity: 1;
+        left: 30px;
+    }
+
+    .sidebar-menu .dropdown-menu li a i {
+        color: #667eea;
+        font-size: 14px;
+        margin-right: 10px;
+        transition: all 0.3s ease;
+    }
+
+    .sidebar-menu .dropdown-menu li a:hover i {
+        color: #fff;
+        transform: translateX(3px);
+    }
+
+    .sidebar-menu .dropdown-menu li.active a {
+        background: rgba(102, 126, 234, 0.3) !important;
+        color: #ffffff !important;
+        border-left: 3px solid #667eea;
+    }
+
+    /* Dropdown Toggle Arrow */
+    .sidebar-menu .has-dropdown:after {
+        transition: all 0.3s ease;
+    }
+
+    .sidebar-menu .nav-item.active .has-dropdown:after {
+        transform: rotate(90deg);
+    }
+
+    /* Scrollbar Styling */
+    .sidebar-wrapper::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .sidebar-wrapper::-webkit-scrollbar-track {
+        background: rgba(15, 23, 42, 0.5);
+    }
+
+    .sidebar-wrapper::-webkit-scrollbar-thumb {
+        background: linear-gradient(180deg, #667eea, #764ba2);
+        border-radius: 10px;
+    }
+
+    .sidebar-wrapper::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(180deg, #764ba2, #667eea);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 991px) {
+        .main-sidebar {
+            transform: translateX(-250px);
+        }
+
+        .main-sidebar.active {
+            transform: translateX(0);
+        }
+
+        .sidebar-menu > li > a:hover {
+            transform: translateX(0);
+            padding-left: 20px !important;
+        }
+    }
+
+    /* Section Dividers */
+    .sidebar-menu > li:not(:last-child) {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    /* Badge for notifications (optional) */
+    .sidebar-badge {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        color: white;
+        padding: 2px 8px;
+        border-radius: 12px;
+        font-size: 11px;
+        font-weight: 700;
+        margin-left: auto;
+        animation: badge-pulse 2s infinite;
+    }
+
+    @keyframes badge-pulse {
+        0%, 100% {
+            box-shadow: 0 0 0 0 rgba(245, 87, 108, 0.7);
+        }
+        50% {
+            box-shadow: 0 0 0 5px rgba(245, 87, 108, 0);
+        }
+    }
+</style>
+
 <div class="main-sidebar sidebar-style-2">
-    <aside id="sidebar-wrapper">
+    <aside id="sidebar-wrapper" class="sidebar-wrapper">
         <div class="sidebar-brand">
-            <a href="{{ route('admin_dashboard') }}">Admin Panel</a>
+            <a href="{{ route('admin_dashboard') }}">EVENTO</a>
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
-            <a href="{{ route('admin_dashboard') }}"></a>
+            <a href="{{ route('admin_dashboard') }}">EV</a>
         </div>
 
         <ul class="sidebar-menu">
