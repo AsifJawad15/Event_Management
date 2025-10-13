@@ -5,6 +5,7 @@ use App\Http\Controllers\FrontController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminAuthController;
+use App\Http\Controllers\Admin\AdminEventController;
 use App\Http\Controllers\Admin\AdminHomeBannerController;
 use App\Http\Controllers\Admin\AdminHomeWelcomeController;
 use App\Http\Controllers\Admin\AdminHomeCounterController;
@@ -107,6 +108,15 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::get('/dashboard',[AdminDashboardController::class,'dashboard'])->name('admin_dashboard');
     Route::get('/profile',[AdminAuthController::class,'profile'])->name('admin_profile');
     Route::post('/profile',[AdminDashboardController::class,'profile_update'])->name('admin_profile_update');
+
+    // Event Management Routes
+    Route::get('/events',[AdminEventController::class,'index'])->name('admin_event_index');
+    Route::get('/events/create',[AdminEventController::class,'create'])->name('admin_event_create');
+    Route::post('/events',[AdminEventController::class,'store'])->name('admin_event_store');
+    Route::get('/events/{id}/edit',[AdminEventController::class,'edit'])->name('admin_event_edit');
+    Route::put('/events/{id}',[AdminEventController::class,'update'])->name('admin_event_update');
+    Route::delete('/events/{id}',[AdminEventController::class,'destroy'])->name('admin_event_delete');
+
     Route::get('/home-banner',[AdminHomeBannerController::class,'index'])->name('admin_home_banner');
     Route::post('/home-banner',[AdminHomeBannerController::class,'update'])->name('admin_home_banner_update');
     Route::get('/home-welcome',[AdminHomeWelcomeController::class,'index'])->name('admin_home_welcome');

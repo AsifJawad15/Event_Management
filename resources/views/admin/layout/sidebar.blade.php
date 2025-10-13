@@ -246,6 +246,8 @@
 
                     <li class="{{ Request::is('admin/dashboard' )?'active':''}}"><a class="nav-link" href="{{ route('admin_dashboard') }}"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a></li>
 
+                    <li class="{{ Request::is('admin/events*' )?'active':''}}"><a class="nav-link" href="{{ route('admin_event_index') }}"><i class="fas fa-calendar-check"></i> <span>Events</span></a></li>
+
                     <li class="nav-item dropdown {{ Request::is('admin/home-banner') || Request::is('admin/home-welcome') || Request::is('admin/homecounter') || Request::is('admin/home-speaker') || Request::is('admin/home-pricing') || Request::is('admin/home-blog') || Request::is('admin/home-sponsor') ? 'active' : '' }}">
                         <a href="#" class="nav-link has-dropdown"><i class="fas fa-home"></i><span>Home Section</span></a>
                         <ul class="dropdown-menu">

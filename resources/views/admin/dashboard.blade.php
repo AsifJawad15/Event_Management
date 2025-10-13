@@ -159,14 +159,14 @@
     }
 
     .table thead th {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-        border: none;
-        padding: 15px;
-        font-weight: 600;
-        text-transform: uppercase;
-        font-size: 12px;
-        letter-spacing: 0.5px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        color: #ffffff !important;
+        border: none !important;
+        padding: 15px !important;
+        font-weight: 600 !important;
+        text-transform: uppercase !important;
+        font-size: 12px !important;
+        letter-spacing: 0.5px !important;
     }
 
     .table tbody tr {
@@ -226,9 +226,9 @@
                     <p>Welcome back! Manage all your events, attendees, and activities from one central hub.</p>
                 </div>
                 <div class="col-lg-4 col-md-12 text-lg-end text-center">
-                    <a href="{{ route('admin_home_banner') }}" class="create-event-btn">
+                    <a href="{{ route('admin_event_create') }}" class="create-event-btn">
                         <i class="fas fa-plus-circle"></i>
-                        Manage Event
+                        Create New Event
                     </a>
                 </div>
             </div>
