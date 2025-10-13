@@ -5,34 +5,11 @@
     <section class="section">
         <div class="section-header">
             <h1>Accommodations</h1>
+            <div class="section-header-button">
+                <a href="{{ route('admin_accommodation_create') }}" class="btn btn-primary">Add Accommodation</a>
+            </div>
         </div>
         <div class="section-body">
-            <div class="row">
-                <div class="col-md-12">
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('admin_dashboard') }}">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Accommodations</li>
-                        </ol>
-                    </nav>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <div class="btn-group btn-group-sm" role="group" aria-label="">
-                                        <a href="{{ route('admin_accommodation_create') }}" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Add New Accommodation</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
