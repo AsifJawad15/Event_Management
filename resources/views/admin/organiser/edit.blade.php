@@ -1,33 +1,23 @@
-@extends('layouts.admin')
+@extends('admin.layout.master')
 
-@section('title', 'Edit Organiser')
-
-@section('content')
-<div class="content-wrapper">
-    <section class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1>Edit Organiser</h1>
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{ route('admin_dashboard') }}">Home</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('admin_organiser_index') }}">Organisers</a></li>
-                        <li class="breadcrumb-item active">Edit</li>
-                    </ol>
-                </div>
+@section('main_content')
+<div class="main-content">
+    <section class="section">
+        <div class="section-header">
+            <h1>Edit Organiser</h1>
+            <div class="section-header-breadcrumb">
+                <div class="breadcrumb-item"><a href="{{ route('admin_dashboard') }}">Dashboard</a></div>
+                <div class="breadcrumb-item"><a href="{{ route('admin_organiser_index') }}">Organisers</a></div>
+                <div class="breadcrumb-item">Edit</div>
             </div>
         </div>
-    </section>
 
-    <section class="content">
-        <div class="container-fluid">
+        <div class="section-body">
             <div class="row">
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Edit Organiser Information</h3>
+                            <h4>Edit Organiser Information</h4>
                         </div>
 
                         <form action="{{ route('admin_organiser_update', $organiser->id) }}" method="POST" enctype="multipart/form-data">

@@ -26,6 +26,47 @@
     <link rel="stylesheet" href="{{ asset('dist/css/spacing.css') }}">
     <link rel="stylesheet" href="{{ asset('dist/css/custom.css') }}">
 
+    <style>
+        /* Fix content overlap with sidebar */
+        .main-content {
+            padding-left: 30px !important;
+            padding-right: 30px !important;
+        }
+
+        /* Ensure proper spacing for cards and tables */
+        .main-content .card {
+            margin-left: 0 !important;
+        }
+
+        .main-content .section {
+            padding-left: 0 !important;
+        }
+
+        /* Fix table image positioning */
+        .table img {
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* Add spacing to prevent sidebar overlap */
+        @media (min-width: 992px) {
+            .main-wrapper .main-content {
+                margin-left: 0 !important;
+                padding-left: 30px !important;
+            }
+        }
+
+        /* Prevent content from going under sidebar */
+        .section-body {
+            width: 100%;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+            margin-right: 15px;
+        }
+    </style>
+
     <script src="{{ asset('dist/js/jquery-3.7.0.min.js') }}"></script>
     <script src="{{ asset('dist/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('dist/js/popper.min.js') }}"></script>
