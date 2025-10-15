@@ -471,7 +471,7 @@
             <h2 style="font-size: 2rem; margin-bottom: 20px;">Explore Our Platform</h2>
 
             <div class="action-buttons">
-                <a href="{{ route('front.home') }}" class="btn btn-primary">
+                <a href="{{ route('front.upcoming_events') }}" class="btn btn-primary">
                     <i class="fas fa-calendar-alt"></i>
                     Upcoming Events
                 </a>

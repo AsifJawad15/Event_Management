@@ -450,6 +450,9 @@ header,
                         <li class="nav-item dropdown">
                             <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
                             <div class="dropdown-menu" id="dropmenu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('front.upcoming_events') }}">
+                                    <i class="fas fa-calendar-alt"></i> Upcoming Events
+                                </a>
                                 <a class="dropdown-item" href="{{ route('front.sponsors') }}">Sponsors</a>
                                 <a class="dropdown-item" href="{{ route('front.organisers') }}">Organizers</a>
                                 <a class="dropdown-item" href="{{ route('front.accommodations') }}">Accommodations</a>
@@ -665,11 +668,14 @@ header,
                 <div class="welcome-content-card">
                     <h2><span>{{ $home_welcome->heading }}</span></h2>
                     <p>{{ $home_welcome->description }}</p>
-                    @if(!empty($home_welcome->button_text) && !empty($home_welcome->button_link))
-                    <div class="global_btn mt_20">
+                    <div class="global_btn mt_20" style="display: flex; gap: 15px; flex-wrap: wrap;">
+                        @if(!empty($home_welcome->button_text) && !empty($home_welcome->button_link))
                         <a class="btn_one" href="{{ $home_welcome->button_link }}">{{ $home_welcome->button_text }}</a>
+                        @endif
+                        <a class="btn_one" href="{{ route('front.upcoming_events') }}" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                            <i class="fas fa-calendar-alt"></i> Upcoming Events
+                        </a>
                     </div>
-                    @endif
                 </div>
             </div>
             <div class="col-lg-5 col-sm-12 col-xs-12">

@@ -161,6 +161,15 @@ class FrontController extends Controller
         return view('front.accommodations', compact('accommodations'));
     }
 
+    public function upcoming_events()
+    {
+        $upcomingEvents = \App\Models\UpcomingEvent::where('status', 'active')
+            ->orderBy('order', 'asc')
+            ->orderBy('event_date', 'asc')
+            ->get();
+        return view('front.upcoming_events', compact('upcomingEvents'));
+    }
+
     public function photo_gallery()
     {
         $photos = Photo::latest()->paginate(6); // 6 photos per page

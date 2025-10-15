@@ -21,6 +21,7 @@ use App\Http\Controllers\Admin\SponsorCategoryController;
 use App\Http\Controllers\Admin\AdminSponsorController;
 use App\Http\Controllers\Admin\AdminOrganiserController;
 use App\Http\Controllers\Admin\AdminAccommodationController;
+use App\Http\Controllers\Admin\AdminUpcomingEventController;
 use App\Http\Controllers\Admin\AdminPhotoController;
 use App\Http\Controllers\Admin\AdminVideoController;
 use App\Http\Controllers\Admin\AdminFaqController;
@@ -51,6 +52,7 @@ Route::get('/sponsor/{slug}', [FrontController::class, 'sponsor'])->name('front.
 Route::get('/organisers', [FrontController::class, 'organisers'])->name('front.organisers');
 Route::get('/organiser/{slug}', [FrontController::class, 'organiser'])->name('front.organiser.detail');
 Route::get('/accommodations', [FrontController::class, 'accommodations'])->name('front.accommodations');
+Route::get('/upcoming-events', [FrontController::class, 'upcoming_events'])->name('front.upcoming_events');
 Route::get('/photo-gallery', [FrontController::class, 'photo_gallery'])->name('front.photo_gallery');
 Route::get('/video-gallery', [FrontController::class, 'video_gallery'])->name('front.video_gallery');
 Route::get('/faq', [FrontController::class, 'faq'])->name('front.faq');
@@ -184,6 +186,14 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::get('/accommodations/{id}/edit',[AdminAccommodationController::class,'edit'])->name('admin_accommodation_edit');
     Route::put('/accommodations/{id}',[AdminAccommodationController::class,'update'])->name('admin_accommodation_update');
     Route::delete('/accommodations/{id}',[AdminAccommodationController::class,'destroy'])->name('admin_accommodation_destroy');
+
+    // Upcoming Events routes
+    Route::get('/upcoming-events',[AdminUpcomingEventController::class,'index'])->name('admin_upcoming_event_index');
+    Route::get('/upcoming-events/create',[AdminUpcomingEventController::class,'create'])->name('admin_upcoming_event_create');
+    Route::post('/upcoming-events',[AdminUpcomingEventController::class,'store'])->name('admin_upcoming_event_store');
+    Route::get('/upcoming-events/{id}/edit',[AdminUpcomingEventController::class,'edit'])->name('admin_upcoming_event_edit');
+    Route::put('/upcoming-events/{id}',[AdminUpcomingEventController::class,'update'])->name('admin_upcoming_event_update');
+    Route::delete('/upcoming-events/{id}',[AdminUpcomingEventController::class,'destroy'])->name('admin_upcoming_event_destroy');
 
     // Photo Gallery routes
     Route::get('/photo-gallery',[AdminPhotoController::class,'index'])->name('admin_photo_index');
