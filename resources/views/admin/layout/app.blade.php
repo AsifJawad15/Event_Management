@@ -12,6 +12,7 @@
         <li class="nav-link">
             <a href="{{ url('/') }}" target="_blank" class="btn btn-warning">Front End</a>
         </li>
+        @if(Auth::guard('admin')->check())
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 @if(Auth::guard('admin')->user()->photo)
@@ -25,6 +26,7 @@
                 <li><a class="dropdown-item" href="{{ route('admin_logout') }}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
             </ul>
         </li>
+        @endif
     </ul>
 </nav>
 

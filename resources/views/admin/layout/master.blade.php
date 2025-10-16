@@ -27,10 +27,51 @@
     <link rel="stylesheet" href="{{ asset('dist/css/custom.css') }}">
 
     <style>
-        /* Fix content overlap with sidebar */
+        /* Main wrapper adjustments */
+        .main-wrapper {
+            position: relative;
+        }
+
+        /* Sidebar styling - Fixed position on the left */
+        .main-sidebar {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 250px !important;
+            height: 100vh !important;
+            z-index: 1000 !important;
+            overflow-y: auto !important;
+            padding-top: 70px !important;
+        }
+
+        /* Navbar adjustment - Fixed at top, starts after sidebar */
+        .navbar-bg {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 70px !important;
+            z-index: 1001 !important;
+        }
+
+        .main-navbar {
+            position: fixed !important;
+            top: 0 !important;
+            left: 250px !important;
+            right: 0 !important;
+            z-index: 1001 !important;
+            margin-left: 0 !important;
+            width: calc(100% - 250px) !important;
+        }
+
+        /* Main content - Push to the right of sidebar and below navbar */
         .main-content {
-            padding-left: 30px !important;
-            padding-right: 30px !important;
+            margin-left: 250px !important;
+            margin-top: 70px !important;
+            padding: 30px !important;
+            min-height: calc(100vh - 70px);
+            position: relative;
+            z-index: 1 !important;
         }
 
         /* Ensure proper spacing for cards and tables */
@@ -46,6 +87,29 @@
         .table img {
             display: block;
             margin: 0 auto;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+            .main-content {
+                margin-left: 0 !important;
+                margin-top: 70px !important;
+            }
+            .main-navbar {
+                left: 0 !important;
+                width: 100% !important;
+            }
+            .main-sidebar {
+                margin-left: -250px !important;
+                transition: margin-left 0.3s ease;
+            }
+            .main-sidebar.active {
+                margin-left: 0 !important;
+            }
+        }
+            .main-sidebar.active {
+                margin-left: 0 !important;
+            }
         }
 
         /* Add spacing to prevent sidebar overlap */
@@ -132,6 +196,7 @@
                 </ul>
             </form>
             <ul class="navbar-nav navbar-right">
+                @if(Auth::guard('admin')->check())
                 <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
                     <img alt="image" src="{{ asset('uploads/'.Auth::guard('admin')->user()->photo) }}" class="rounded-circle mr-1">
                     <div class="d-sm-none d-lg-inline-block">Hi, {{ Auth::guard('admin')->user()->name }}</div></a>
@@ -146,6 +211,7 @@
                         </a>
                     </div>
                 </li>
+                @endif
             </ul>
         </nav>
 
