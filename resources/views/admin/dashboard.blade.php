@@ -51,6 +51,16 @@
         color: #667eea;
     }
 
+    .upcoming-events-btn {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        color: white !important;
+    }
+
+    .upcoming-events-btn:hover {
+        color: white !important;
+        background: linear-gradient(135deg, #764ba2 0%, #667eea 100%) !important;
+    }
+
     .stats-card {
         background: white;
         border-radius: 15px;
@@ -212,6 +222,11 @@
         .create-event-btn {
             width: 100%;
             justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        .d-flex.gap-2 {
+            gap: 0 !important;
         }
     }
 </style>
@@ -226,10 +241,16 @@
                     <p>Welcome back! Manage all your events, attendees, and activities from one central hub.</p>
                 </div>
                 <div class="col-lg-4 col-md-12 text-lg-end text-center">
-                    <a href="{{ route('admin_event_create') }}" class="create-event-btn">
-                        <i class="fas fa-plus-circle"></i>
-                        Create New Event
-                    </a>
+                    <div class="d-flex flex-wrap gap-2 justify-content-lg-end justify-content-center">
+                        <a href="{{ route('admin_event_create') }}" class="create-event-btn">
+                            <i class="fas fa-plus-circle"></i>
+                            Create New Event
+                        </a>
+                        <a href="{{ route('admin_upcoming_event_index') }}" class="create-event-btn upcoming-events-btn">
+                            <i class="fas fa-calendar-star"></i>
+                            Upcoming Events
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

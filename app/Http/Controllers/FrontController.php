@@ -163,9 +163,9 @@ class FrontController extends Controller
 
     public function upcoming_events()
     {
-        $upcomingEvents = \App\Models\UpcomingEvent::where('status', 'active')
-            ->orderBy('order', 'asc')
-            ->orderBy('event_date', 'asc')
+        $upcomingEvents = \App\Models\UpcomingEvent::select(['id', 'title', 'description', 'image', 'event_date'])
+            ->active()
+            ->ordered()
             ->get();
         return view('front.upcoming_events', compact('upcomingEvents'));
     }
