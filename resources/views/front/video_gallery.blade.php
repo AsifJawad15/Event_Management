@@ -3,71 +3,165 @@
 @section('title', 'Video Gallery | SingleEvent')
 
 @section('main_content')
-<div class="common-banner" style="background-image:url({{ asset('dist-front/images/banner.jpg') }})">
+
+@include('front.layout.dark-theme')
+@include('front.layout.dark-nav')
+
+<style>
+.video-hero {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%);
+    padding: 120px 0 80px;
+    text-align: center;
+}
+
+.video-hero h1 {
+    font-size: 56px;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.video-card {
+    background: rgba(26, 31, 58, 0.8);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(102, 126, 234, 0.3);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    transition: all 0.4s ease;
+    margin-bottom: 30px;
+}
+
+.video-card:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 20px 60px rgba(102, 126, 234, 0.4);
+    border-color: rgba(102, 126, 234, 0.6);
+}
+
+.video-thumbnail {
+    position: relative;
+    overflow: hidden;
+    height: 250px;
+}
+
+.video-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.5s ease;
+}
+
+.video-card:hover .video-thumbnail img {
+    transform: scale(1.1);
+}
+
+.video-play-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.video-card:hover .video-play-overlay {
+    background: rgba(102, 126, 234, 0.8);
+}
+
+.play-button {
+    width: 70px;
+    height: 70px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 28px;
+    transition: all 0.3s ease;
+    border: 3px solid rgba(255, 255, 255, 0.5);
+    text-decoration: none;
+}
+
+.video-card:hover .play-button {
+    transform: scale(1.2);
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.video-info {
+    padding: 20px;
+}
+
+.video-info h4 {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+}
+
+@media (max-width: 991px) {
+    .video-hero h1 { font-size: 36px; }
+    .video-thumbnail { height: 220px; }
+}
+</style>
+
+<div class="video-hero">
     <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="item">
-                    <h2>Video Gallery</h2>
-                    <div class="breadcrumb-container">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('front.home') }}">Home</a></li>
-                            <li class="breadcrumb-item active">Video Gallery</li>
-                        </ol>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <h1 class="animate-on-scroll">Video Gallery</h1>
     </div>
 </div>
 
-<div id="gallery-section" class="pt_50 pb_50 gray projects">
+<section id="videos">
     <div class="container">
-        @if($videos->count() > 0)
-        <div class="row gallery_item">
-            @foreach($videos as $video)
-            <div class="col-lg-4 col-sm-6 col-xs-12 main-gallery">
-                <div class="project-single">
-                    <div class="project-inner">
-                        <div class="project-head">
+        <div class="section-heading animate-on-scroll">
+            <h2>Event Highlights</h2>
+            <p>Watch highlights and memorable moments from our events</p>
+        </div>
+
+        <div class="row">
+            @if($videos->count() > 0)
+                @foreach($videos as $video)
+                <div class="col-lg-4 col-md-6">
+                    <div class="video-card animate-on-scroll">
+                        <div class="video-thumbnail">
                             <img src="{{ $video->thumbnail_url }}" alt="{{ $video->caption }}">
+                            <div class="video-play-overlay">
+                                <a class="play-button" href="{{ $video->watch_url }}" target="_blank">
+                                    <i class="fas fa-play"></i>
+                                </a>
+                            </div>
                         </div>
-                        <div class="project-bottom">
+                        <div class="video-info">
                             <h4>{{ $video->caption }}</h4>
-                        </div>
-                        <div class="button">
-                            <a class="video-button btn" href="{{ $video->watch_url }}" target="_blank">
-                                <i class="fa fa-play"></i>
-                            </a>
                         </div>
                     </div>
                 </div>
-            </div>
-            @endforeach
+                @endforeach
+            @else
+                <div class="col-12">
+                    <div class="dark-card text-center p-5">
+                        <i class="fas fa-video" style="font-size: 60px; color: rgba(102, 126, 234, 0.5); margin-bottom: 20px;"></i>
+                        <h3 style="color: #fff;">No Videos Yet</h3>
+                        <p style="color: rgba(224, 224, 224, 0.8);">Check back later for exciting video content!</p>
+                    </div>
+                </div>
+            @endif
         </div>
 
-        <!-- Pagination -->
         @if($videos->hasPages())
         <div class="row">
             <div class="col-12">
-                <div class="d-flex justify-content-center mt-4">
+                <div class="pagination-container animate-on-scroll">
                     {{ $videos->links() }}
                 </div>
             </div>
         </div>
         @endif
-
-        @else
-        <div class="row">
-            <div class="col-12">
-                <div class="text-center py-5">
-                    <i class="fa fa-video-camera fa-3x text-muted mb-3"></i>
-                    <h4 class="text-muted">No videos available</h4>
-                    <p class="text-muted">Check back later for exciting video content!</p>
-                </div>
-            </div>
-        </div>
-        @endif
     </div>
-</div>
+</section>
 @endsection

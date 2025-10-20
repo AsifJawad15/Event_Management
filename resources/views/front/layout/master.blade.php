@@ -99,10 +99,6 @@
 
     <body data-spy="scroll" data-target=".navbar" data-offset="50">
 
-        @if(!Request::is('/') && !Request::is('welcome') && !Request::is('home'))
-            @include('front.layout.nav')
-        @endif
-
         @yield('main_content')
 
         <footer class="main-footer">

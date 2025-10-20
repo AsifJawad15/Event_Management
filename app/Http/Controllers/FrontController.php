@@ -69,8 +69,9 @@ class FrontController extends Controller
 
     public function contact()
     {
+        $setting_data = \App\Models\Setting::where('id',1)->first();
         $contact_page_data = ContactPageItem::where('id',1)->first();
-        return view('front.contact', compact('contact_page_data'));
+        return view('front.contact', compact('contact_page_data', 'setting_data'));
     }
 
     public function contact_submit(Request $request)
@@ -82,20 +83,43 @@ class FrontController extends Controller
             'message' => ['required'],
         ]);
 
+        // Get admin email
         $admin = Admin::first();
 
-        $subject = "Contact Message";
-        $message = "Visitor Information:<br><br>";
-        $message .= "<b>Name:</b><br>".$request->name."<br><br>";
-        $message .= "<b>Email:</b><br>".$request->email."<br><br>";
-        $message .= "<b>Subject:</b><br>".$request->subject."<br><br>";
-        $message .= "<b>Message:</b><br>".$request->message."<br><br>";
-
-        if($admin) {
-            \Mail::to($admin->email)->send(new Websitemail($subject,$message));
+        if(!$admin || !$admin->email) {
+            return redirect()->back()->with('error','Unable to send message. Admin email not configured.');
         }
 
-        return redirect()->back()->with('success','Message is sent successfully!');
+        // Prepare email content
+        $subject = "Contact Form: " . $request->subject;
+        $message = "<div style='font-family: Arial, sans-serif; padding: 20px; background-color: #f5f5f5;'>";
+        $message .= "<div style='background-color: #fff; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);'>";
+        $message .= "<h2 style='color: #667eea; border-bottom: 2px solid #667eea; padding-bottom: 10px;'>New Contact Message</h2>";
+        $message .= "<table style='width: 100%; margin-top: 20px;'>";
+        $message .= "<tr><td style='padding: 10px; background-color: #f9f9f9; font-weight: bold; width: 100px;'>Name:</td><td style='padding: 10px;'>".$request->name."</td></tr>";
+        $message .= "<tr><td style='padding: 10px; background-color: #fff; font-weight: bold;'>Email:</td><td style='padding: 10px;'><a href='mailto:".$request->email."'>".$request->email."</a></td></tr>";
+        $message .= "<tr><td style='padding: 10px; background-color: #f9f9f9; font-weight: bold;'>Subject:</td><td style='padding: 10px;'>".$request->subject."</td></tr>";
+        $message .= "</table>";
+        $message .= "<div style='margin-top: 20px; padding: 20px; background-color: #f9f9f9; border-left: 4px solid #667eea;'>";
+        $message .= "<h3 style='margin-top: 0; color: #333;'>Message:</h3>";
+        $message .= "<p style='color: #666; line-height: 1.6;'>".nl2br(htmlspecialchars($request->message))."</p>";
+        $message .= "</div>";
+        $message .= "<hr style='margin: 30px 0; border: none; border-top: 1px solid #ddd;'>";
+        $message .= "<p style='color: #999; font-size: 12px; text-align: center;'>This message was sent via the contact form on ".config('app.name')."</p>";
+        $message .= "</div>";
+        $message .= "</div>";
+
+        try {
+            // Send email to admin
+            \Mail::to($admin->email)->send(new Websitemail($subject, $message));
+
+            return redirect()->back()->with('success','Thank you for contacting us! Your message has been sent successfully. We will get back to you soon.');
+        } catch (\Exception $e) {
+            // Log the error
+            \Log::error('Failed to send contact email: ' . $e->getMessage());
+
+            return redirect()->back()->with('error','Sorry, there was an error sending your message. Please try again later or contact us directly via email.');
+        }
     }
 
     public function term()
