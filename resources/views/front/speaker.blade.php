@@ -313,22 +313,22 @@
                                     <ul class="social-links">
                                         @if($speaker->facebook)
                                         <li>
-                                            <a href="{{ $speaker->facebook }}" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                            <a href="{{ $speaker->facebook }}" target="_blank"><i class="fa-brands fa-square-facebook"></i></a>
                                         </li>
                                         @endif
                                         @if($speaker->twitter)
                                         <li>
-                                            <a href="{{ $speaker->twitter }}" target="_blank"><i class="fab fa-twitter"></i></a>
+                                            <a href="{{ $speaker->twitter }}" target="_blank"><i class="fa-brands fa-square-twitter"></i></a>
                                         </li>
                                         @endif
                                         @if($speaker->linkedin)
                                         <li>
-                                            <a href="{{ $speaker->linkedin }}" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                                            <a href="{{ $speaker->linkedin }}" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
                                         </li>
                                         @endif
                                         @if($speaker->instagram)
                                         <li>
-                                            <a href="{{ $speaker->instagram }}" target="_blank"><i class="fab fa-instagram"></i></a>
+                                            <a href="{{ $speaker->instagram }}" target="_blank"><i class="fa-brands fa-square-instagram"></i></a>
                                         </li>
                                         @endif
                                     </ul>

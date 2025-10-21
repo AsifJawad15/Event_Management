@@ -117,6 +117,7 @@
         margin-top: 5px;
         margin-bottom: 5px;
         backdrop-filter: blur(10px);
+        display: none;
     }
 
     .sidebar-menu .dropdown-menu li a {
@@ -321,3 +322,30 @@
         </ul>
     </aside>
 </div>
+
+<script>
+$(document).ready(function() {
+    // Handle dropdown toggles
+    $('.sidebar-menu .has-dropdown').on('click', function(e) {
+        e.preventDefault();
+
+        var parent = $(this).parent('.nav-item');
+        var dropdownMenu = parent.find('.dropdown-menu');
+
+        // Close other dropdowns
+        $('.sidebar-menu .nav-item.dropdown').not(parent).removeClass('active').find('.dropdown-menu').slideUp(300);
+
+        // Toggle current dropdown
+        parent.toggleClass('active');
+        dropdownMenu.slideToggle(300);
+    });
+
+    // Keep dropdown open if current page is in it
+    $('.sidebar-menu .nav-item.dropdown').each(function() {
+        if ($(this).find('.dropdown-menu li.active').length > 0) {
+            $(this).addClass('active');
+            $(this).find('.dropdown-menu').show();
+        }
+    });
+});
+</script>

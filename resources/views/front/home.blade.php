@@ -1131,18 +1131,27 @@ header,
                 <div class="col-md-4 col-sm-12">
                     <div class="pricing-card-modern">
                         <h5>{{ $package->name }}</h5>
-                        <h3>${{ number_format($package->price, 0) }}</h3>
+                        <h3><i class="fa-solid fa-bangladeshi-taka-sign"></i>{{ number_format($package->price, 0) }}</h3>
                         <ul>
-                            @foreach($allFacilities->take(4) as $facility)
-                                <li>
-                                    @if($package->facilities->contains($facility->id))
+                            @if($package->facilities && $package->facilities->count() > 0)
+                                @foreach($package->facilities->sortBy('item_order')->take(5) as $facility)
+                                    <li>
                                         <i class="fa fa-check" style="color: #4CAF50;"></i>
-                                    @else
-                                        <i class="fa fa-times" style="color: #f44336;"></i>
-                                    @endif
-                                    {{ $facility->name }}
+                                        {{ $facility->name }}
+                                    </li>
+                                @endforeach
+                                @if($package->facilities->count() > 5)
+                                    <li style="color: #667eea; font-weight: 600;">
+                                        <i class="fa fa-plus-circle"></i>
+                                        {{ $package->facilities->count() - 5 }} more features
+                                    </li>
+                                @endif
+                            @else
+                                <li>
+                                    <i class="fa fa-check" style="color: #4CAF50;"></i>
+                                    Full Event Access
                                 </li>
-                            @endforeach
+                            @endif
                         </ul>
                         <div class="global_btn mt_20">
                             @auth

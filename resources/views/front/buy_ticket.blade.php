@@ -70,7 +70,7 @@
                     <table class="table table-bordered cart">
                         <tr>
                             <td class="w_150">Ticket Price</td>
-                            <td>${{ number_format($package->price, 0) }}</td>
+                            <td><i class="fa-solid fa-bangladeshi-taka-sign"></i>{{ number_format($package->price, 0) }}</td>
                         </tr>
                         <tr>
                             <td>Total Tickets</td>
@@ -82,7 +82,7 @@
                         <tr>
                             <td>Total Price</td>
                             <td>
-                                <input type="text" name="total_price" class="form-control" id="totalAmount" value="${{ number_format($package->price, 0) }}" readonly>
+                                <input type="text" name="total_price" class="form-control" id="totalAmount" value="৳{{ number_format($package->price, 0) }}" readonly>
                             </td>
                         </tr>
                     </table>
@@ -93,7 +93,7 @@
                         const ticketPrice = parseFloat(document.getElementById('ticketPrice').value);
                         const numPersons = parseInt(document.getElementById('numPersons').value);
                         const totalAmount = ticketPrice * numPersons;
-                        document.getElementById('totalAmount').value = `$${totalAmount}`;
+                        document.getElementById('totalAmount').value = `৳${totalAmount}`;
                     }
                 </script>
 

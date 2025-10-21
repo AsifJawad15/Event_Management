@@ -1,6 +1,7 @@
 <link href="{{ asset('dist-front/css/animate.css') }}" type="text/css" rel="stylesheet">
 <link href="{{ asset('dist-front/css/bootstrap.min.css') }}" type="text/css" rel="stylesheet">
 <link href="{{ asset('dist-front/css/font-awesome.min.css') }}" type="text/css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link href="{{ asset('dist-front/css/magnific-popup.css') }}" type="text/css" rel="stylesheet">
 <link href="{{ asset('dist-front/css/owl.carousel.min.css') }}" type="text/css" rel="stylesheet">
 <link href="{{ asset('dist/css/iziToast.min.css') }}" type="text/css" rel="stylesheet">

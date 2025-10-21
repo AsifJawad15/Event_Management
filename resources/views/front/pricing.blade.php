@@ -139,23 +139,15 @@
 
                         <h3 class="package-name">{{ $package->name }}</h3>
                         <div class="package-price">
-                            ${{ number_format($package->price, 0) }}
+                            <i class="fa-solid fa-bangladeshi-taka-sign"></i>{{ number_format($package->price, 0) }}
                             <small>/ticket</small>
                         </div>
 
                         <ul class="package-features">
-                            @php
-                                $packageFacilities = $package->packageFacilities ? $package->packageFacilities->pluck('id')->toArray() : [];
-                                $allFacilities = \App\Models\PackageFacility::active()->orderByItemOrder()->get();
-                            @endphp
-                            @if($allFacilities->count() > 0)
-                                @foreach($allFacilities as $facility)
+                            @if($package->facilities && $package->facilities->count() > 0)
+                                @foreach($package->facilities->sortBy('item_order') as $facility)
                                     <li>
-                                        @if(in_array($facility->id, $packageFacilities))
-                                            <i class="fas fa-check-circle"></i>
-                                        @else
-                                            <i class="fas fa-times-circle" style="color: rgba(224, 224, 224, 0.3);"></i>
-                                        @endif
+                                        <i class="fas fa-check-circle"></i>
                                         {{ $facility->name }}
                                     </li>
                                 @endforeach

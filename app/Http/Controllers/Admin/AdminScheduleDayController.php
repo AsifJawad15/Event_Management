@@ -35,8 +35,8 @@ class AdminScheduleDayController extends Controller
 
     public function edit($id)
     {
-        $scheduleDay = ScheduleDay::findOrFail($id);
-        return view('admin.schedule_day.edit', compact('scheduleDay'));
+        $schedule_day = ScheduleDay::findOrFail($id);
+        return view('admin.schedule_day.edit', compact('schedule_day'));
     }
 
     public function update(Request $request, $id)
@@ -47,22 +47,22 @@ class AdminScheduleDayController extends Controller
             'order1' => 'required|integer'
         ]);
 
-        $scheduleDay = ScheduleDay::findOrFail($id);
-        $scheduleDay->update($request->all());
+        $schedule_day = ScheduleDay::findOrFail($id);
+        $schedule_day->update($request->all());
 
         return redirect()->route('admin_schedule_day_index')->with('success', 'Schedule Day updated successfully!');
     }
 
     public function destroy($id)
     {
-        $scheduleDay = ScheduleDay::findOrFail($id);
+        $schedule_day = ScheduleDay::findOrFail($id);
 
         // Check if schedule day has schedules
-        if ($scheduleDay->schedules()->count() > 0) {
+        if ($schedule_day->schedules()->count() > 0) {
             return redirect()->route('admin_schedule_day_index')->with('error', 'Cannot delete schedule day! It has schedules associated with it.');
         }
 
-        $scheduleDay->delete();
+        $schedule_day->delete();
 
         return redirect()->route('admin_schedule_day_index')->with('success', 'Schedule Day deleted successfully!');
     }
