@@ -1,7 +1,7 @@
 @extends('front.layout.master')
 
-@section('content')
-@include('front.layout.navigation')
+@section('main_content')
+@include('front.layout.dark-nav')
 
 <!-- Banner Section -->
 <section class="page-title" style="background-image: url({{ asset('dist-front/images/banner.jpg') }}); background-size: cover; background-position: center; position: relative; padding: 150px 0; text-align: center;">

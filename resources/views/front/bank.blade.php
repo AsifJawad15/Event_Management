@@ -32,7 +32,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6">
-                                <h5>Payment Amount: ৳{{ number_format(session()->get('price') * 85, 2) }}</h5>
+                                <h5>Payment Amount: ৳{{ number_format(session()->get('price'), 2) }}</h5>
                                 <h6 class="mt-4">Bank Details:</h6>
                                 <div class="table-responsive">
                                     <table class="table table-bordered">
@@ -42,7 +42,7 @@
                                         </tr>
                                         <tr>
                                             <td><strong>Account Name:</strong></td>
-                                            <td>SingleEvent Conference</td>
+                                            <td>Evento</td>
                                         </tr>
                                         <tr>
                                             <td><strong>Account Number:</strong></td>
@@ -77,7 +77,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Amount Transferred</label>
-                                        <input type="text" class="form-control" value="৳{{ number_format(session()->get('price') * 85, 2) }}" readonly>
+                                        <input type="text" class="form-control" value="৳{{ number_format(session()->get('price'), 2) }}" readonly>
                                     </div>
                                     <div class="form-group">
                                         <label>Additional Notes (Optional)</label>
@@ -93,14 +93,6 @@
                                         </a>
                                     </div>
                                 </form>
-                            </div>
-                        </div>
-
-                        <div class="mt-4 text-center">
-                            <div class="alert alert-warning">
-                                <i class="fas fa-exclamation-triangle"></i>
-                                <strong>Note:</strong> This is a demo payment system for educational purposes.
-                                Your payment will be marked as "Pending" and reviewed by the admin.
                             </div>
                         </div>
                     </div>

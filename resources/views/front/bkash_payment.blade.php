@@ -40,7 +40,7 @@
                         <div class="merchant-info">
                             <p class="merchant-label">Merchant: <strong>{{ config('app.name') }}</strong></p>
                             <p class="invoice-label">Invoice no: <strong>{{ 'INV-' . time() }}</strong></p>
-                            <p class="amount-label">Amount: <strong>BDT {{ number_format($price * 85, 2) }}</strong></p>
+                            <p class="amount-label">Amount: <strong>BDT {{ number_format($price, 2) }}</strong></p>
                         </div>
 
                         <div class="account-input-section">

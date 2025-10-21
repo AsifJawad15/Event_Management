@@ -11,6 +11,24 @@
     background: linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%);
     padding: 120px 0 80px;
     text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.pricing-hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    animation: rotateGlow 20s linear infinite;
+}
+
+@keyframes rotateGlow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
 .pricing-hero h1 {
@@ -130,7 +148,12 @@
 
         <div class="row justify-content-center">
             @if($packages->count() > 0)
-                @foreach($packages as $package)
+                @php
+                    // Define facility limits per package based on order: Basic=3, Standard=6, VIP=10
+                    $facilityLimits = [3, 6, 10];
+                @endphp
+
+                @foreach($packages as $index => $package)
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="pricing-card {{ $loop->iteration == 2 ? 'popular' : '' }} animate-on-scroll">
                         @if($loop->iteration == 2)
@@ -145,7 +168,10 @@
 
                         <ul class="package-features">
                             @if($package->facilities && $package->facilities->count() > 0)
-                                @foreach($package->facilities->sortBy('item_order') as $facility)
+                                @php
+                                    $limit = $facilityLimits[$index] ?? 5;
+                                @endphp
+                                @foreach($package->facilities->sortBy('item_order')->take($limit) as $facility)
                                     <li>
                                         <i class="fas fa-check-circle"></i>
                                         {{ $facility->name }}

@@ -189,9 +189,6 @@
                             <li class="nav-item">
                                 <a class="nav-link {{ Request::is('pricing') ? 'active' : '' }}" href="{{ route('front.pricing') }}">Pricing</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link {{ Request::is('blog') ? 'active' : '' }}" href="{{ route('front.blog') }}">Blog</a>
-                            </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Pages
@@ -199,7 +196,6 @@
                                 <div class="dropdown-menu" id="dropmenu" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('front.sponsors') }}">Sponsors</a>
                                     <a class="dropdown-item" href="{{ route('front.organisers') }}">Organizers</a>
-                                    <a class="dropdown-item" href="{{ route('front.accommodations') }}">Accommodations</a>
                                     <a class="dropdown-item" href="{{ route('front.photo_gallery') }}">Photo Gallery</a>
                                     <a class="dropdown-item" href="{{ route('front.video_gallery') }}">Video Gallery</a>
                                     <a class="dropdown-item" href="{{ route('front.faq') }}">FAQ</a>

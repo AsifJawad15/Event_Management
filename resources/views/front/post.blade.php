@@ -231,7 +231,6 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb justify-content-center" style="background: transparent;">
                 <li class="breadcrumb-item"><a href="{{ route('front.home') }}" style="color: rgba(255,255,255,0.8);">Home</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('front.blog') }}" style="color: rgba(255,255,255,0.8);">Blog</a></li>
                 <li class="breadcrumb-item active" style="color: #fff;">Post</li>
             </ol>
         </nav>
@@ -257,8 +256,8 @@
                     <div class="post-content">
                         {!! $post->description !!}
 
-                        <a href="{{ route('front.blog') }}" class="back-to-blog">
-                            <i class="fas fa-arrow-left"></i> Back to Blog
+                        <a href="{{ route('front.home') }}" class="back-to-blog">
+                            <i class="fas fa-arrow-left"></i> Back to Home
                         </a>
                     </div>
                 </div>

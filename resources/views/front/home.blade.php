@@ -444,9 +444,6 @@ header,
                         <li>
                             <a class="smooth-scroll nav-link" href="{{ route('front.pricing') }}">Pricing</a>
                         </li>
-                        <li>
-                            <a class="smooth-scroll nav-link" href="{{ route('front.blog') }}">Blog</a>
-                        </li>
                         <li class="nav-item dropdown">
                             <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
                             <div class="dropdown-menu" id="dropmenu" aria-labelledby="navbarDropdown">
@@ -455,7 +452,6 @@ header,
                                 </a>
                                 <a class="dropdown-item" href="{{ route('front.sponsors') }}">Sponsors</a>
                                 <a class="dropdown-item" href="{{ route('front.organisers') }}">Organizers</a>
-                                <a class="dropdown-item" href="{{ route('front.accommodations') }}">Accommodations</a>
                                 <a class="dropdown-item" href="{{ route('front.photo_gallery') }}">Photo Gallery</a>
                                 <a class="dropdown-item" href="{{ route('front.video_gallery') }}">Video Gallery</a>
                                 <a class="dropdown-item" href="{{ route('front.faq') }}">FAQ</a>
@@ -1123,29 +1119,26 @@ header,
         <div class="row pt_40">
             @if($packages && $packages->count() > 0)
                 @php
-                    // Get all available active facilities for comparison
-                    $allFacilities = \App\Models\PackageFacility::active()->orderByItemOrder()->get();
+                    // Define facility limits per package based on order: Basic=3, Standard=6, VIP=10
+                    $facilityLimits = [3, 6, 10];
                 @endphp
 
-                @foreach($packages as $package)
+                @foreach($packages as $index => $package)
                 <div class="col-md-4 col-sm-12">
                     <div class="pricing-card-modern">
                         <h5>{{ $package->name }}</h5>
                         <h3><i class="fa-solid fa-bangladeshi-taka-sign"></i>{{ number_format($package->price, 0) }}</h3>
                         <ul>
                             @if($package->facilities && $package->facilities->count() > 0)
-                                @foreach($package->facilities->sortBy('item_order')->take(5) as $facility)
+                                @php
+                                    $limit = $facilityLimits[$index] ?? 5;
+                                @endphp
+                                @foreach($package->facilities->sortBy('item_order')->take($limit) as $facility)
                                     <li>
                                         <i class="fa fa-check" style="color: #4CAF50;"></i>
                                         {{ $facility->name }}
                                     </li>
                                 @endforeach
-                                @if($package->facilities->count() > 5)
-                                    <li style="color: #667eea; font-weight: 600;">
-                                        <i class="fa fa-plus-circle"></i>
-                                        {{ $package->facilities->count() - 5 }} more features
-                                    </li>
-                                @endif
                             @else
                                 <li>
                                     <i class="fa fa-check" style="color: #4CAF50;"></i>

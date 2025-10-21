@@ -288,15 +288,11 @@
 
                     <li class="{{ Request::is('admin/organisers*' )?'active':''}}"><a class="nav-link" href="{{ route('admin_organiser_index') }}"><i class="fas fa-user-tie"></i> <span>Organisers</span></a></li>
 
-                    <li class="{{ Request::is('admin/accommodations*' )?'active':''}}"><a class="nav-link" href="{{ route('admin_accommodation_index') }}"><i class="fas fa-hotel"></i> <span>Accommodations</span></a></li>
-
                     <li class="{{ Request::is('admin/photo-gallery*' )?'active':''}}"><a class="nav-link" href="{{ route('admin_photo_index') }}"><i class="fas fa-images"></i> <span>Photo Gallery</span></a></li>
 
                     <li class="{{ Request::is('admin/video-gallery*' )?'active':''}}"><a class="nav-link" href="{{ route('admin_video_index') }}"><i class="fas fa-video"></i> <span>Video Gallery</span></a></li>
 
                     <li class="{{ Request::is('admin/faq*' )?'active':''}}"><a class="nav-link" href="{{ route('admin_faq_index') }}"><i class="fas fa-question-circle"></i> <span>FAQ Management</span></a></li>
-
-                    <li class="{{ Request::is('admin/posts*' )?'active':''}}"><a class="nav-link" href="{{ route('admin_post_index') }}"><i class="fas fa-blog"></i> <span>Posts</span></a></li>
 
                     <li class="{{ Request::is('admin/packages*' )?'active':''}}"><a class="nav-link" href="{{ route('admin_package_index') }}"><i class="fas fa-box"></i> <span>Packages</span></a></li>
 

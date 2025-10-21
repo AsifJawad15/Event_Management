@@ -39,37 +39,16 @@
                     <div class="nagad-body">
                         <div class="payment-info">
                             <p class="invoice-label">Invoice No: <strong>{{ 'INV-' . time() }}</strong></p>
-                            <p class="amount-label">Total Amount: <strong>BDT {{ number_format($price * 85, 2) }}</strong></p>
+                            <p class="amount-label">Total Amount: <strong>BDT {{ number_format($price, 2) }}</strong></p>
                             <p class="charge-label">Charge: <strong>BDT 0</strong></p>
                         </div>
 
                         <div class="account-input-section">
                             <label class="account-label">Your Nagad Account Number</label>
-                            <div class="mobile-input-container">
-                                <div class="mobile-number-display">
-                                    <span class="number-boxes">
-                                        <span class="box">0</span>
-                                        <span class="box">1</span>
-                                        <span class="box"></span>
-                                        <span class="box"></span>
-                                        <span class="box"></span>
-                                        <span class="box"></span>
-                                        <span class="box"></span>
-                                        <span class="box"></span>
-                                        <span class="box"></span>
-                                        <span class="box"></span>
-                                        <span class="box"></span>
-                                    </span>
-                                </div>
-                                <input type="text" class="nagad-input" placeholder="Enter mobile number" maxlength="11">
-                            </div>
+                            <input type="text" class="nagad-input" placeholder="Enter mobile number (e.g. 01XXXXXXXXX)" maxlength="11">
 
-                            <div class="terms-section">
-                                <p class="terms-text">
-                                    By clicking "Proceed" you are agreeing to the
-                                    <a href="#" class="terms-link">Nagad Terms and Conditions</a>
-                                </p>
-                            </div>
+                            <label class="account-label" style="margin-top: 20px;">Your Nagad PIN</label>
+                            <input type="password" class="nagad-input" placeholder="Enter your PIN" maxlength="4">
                         </div>
 
                         <!-- Action Buttons -->
@@ -153,39 +132,9 @@
 
 .account-label {
     display: block;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     font-size: 14px;
     color: rgba(255,255,255,0.9);
-    text-align: center;
-}
-
-.mobile-input-container {
-    margin-bottom: 20px;
-}
-
-.mobile-number-display {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 15px;
-}
-
-.number-boxes {
-    display: flex;
-    gap: 3px;
-}
-
-.box {
-    width: 25px;
-    height: 30px;
-    border: 1px solid rgba(255,255,255,0.4);
-    background: rgba(255,255,255,0.1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 14px;
-    font-weight: bold;
-    border-radius: 3px;
 }
 
 .nagad-input {
@@ -196,7 +145,7 @@
     background: rgba(255,255,255,0.1);
     color: white;
     font-size: 16px;
-    text-align: center;
+    margin-bottom: 15px;
 }
 
 .nagad-input::placeholder {
@@ -207,23 +156,6 @@
     outline: none;
     border-color: rgba(255,255,255,0.6);
     background: rgba(255,255,255,0.15);
-}
-
-.terms-section {
-    margin-top: 20px;
-    text-align: center;
-}
-
-.terms-text {
-    font-size: 12px;
-    line-height: 1.4;
-    color: rgba(255,255,255,0.8);
-    margin: 0;
-}
-
-.terms-link {
-    color: rgba(255,255,255,0.9);
-    text-decoration: underline;
 }
 
 .action-buttons {
@@ -291,17 +223,6 @@
 
     .nagad-payment-container {
         margin: 0 10px;
-    }
-
-    .number-boxes {
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    .box {
-        width: 22px;
-        height: 28px;
-        font-size: 12px;
     }
 }
 </style>

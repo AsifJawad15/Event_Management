@@ -2,7 +2,7 @@
 
 @section('title', 'User Profile')
 
-@section('content')
+@section('main_content')
 <!-- Navigation -->
 <div class="container main-menu" id="navbar">
     <div class="row">

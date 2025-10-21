@@ -153,16 +153,16 @@
                                             </ul>
                                             <ul class="social-icon mt_15">
                                                 @if($setting_data->footer_facebook != '')
-                                                <li><a href="{{ $setting_data->footer_facebook }}" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                                                <li><a href="{{ $setting_data->footer_facebook }}" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
                                                 @endif
                                                 @if($setting_data->footer_twitter != '')
-                                                <li><a href="{{ $setting_data->footer_twitter }}" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                                                <li><a href="{{ $setting_data->footer_twitter }}" target="_blank"><i class="fab fa-twitter"></i></a></li>
                                                 @endif
                                                 @if($setting_data->footer_linkedin != '')
-                                                <li><a href="{{ $setting_data->footer_linkedin }}" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+                                                <li><a href="{{ $setting_data->footer_linkedin }}" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
                                                 @endif
                                                 @if($setting_data->footer_instagram != '')
-                                                <li><a href="{{ $setting_data->footer_instagram }}" target="_blank"><i class="fa fa-instagram"></i></a></li>
+                                                <li><a href="{{ $setting_data->footer_instagram }}" target="_blank"><i class="fab fa-instagram"></i></a></li>
                                                 @endif
                                             </ul>
                                         </div>
