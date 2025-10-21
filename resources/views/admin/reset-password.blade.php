@@ -1,8 +1,4 @@
-@extends('admin.layout.master')
-
-@section('main_content')
-
-@extends('admin.layout.master')
+@extends('admin.layout.auth')
 
 @section('main_content')
         <section class="section">

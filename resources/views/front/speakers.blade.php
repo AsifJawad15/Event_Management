@@ -108,13 +108,29 @@
     position: relative;
     overflow: hidden;
     border-radius: 20px 20px 0 0;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.3) 0%, rgba(118, 75, 162, 0.3) 100%);
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .speaker-img img {
     width: 100%;
     height: 300px;
     object-fit: cover;
+    object-position: center;
+    display: block;
     transition: all 0.5s ease;
+    background-color: #1a1f3a;
+    min-width: 100%;
+    max-width: 100%;
+}
+
+.speaker-img a {
+    display: block;
+    width: 100%;
+    height: 100%;
 }
 
 .speaker-card:hover .speaker-img img {
@@ -226,7 +242,11 @@
                     <div class="speaker-card">
                         <div class="speaker-img">
                             <a href="{{ route('front.speaker', $speaker->slug) }}">
-                                <img src="{{ asset('uploads/'.$speaker->photo) }}" alt="{{ $speaker->name }}">
+                                @if($speaker->photo && file_exists(public_path('uploads/'.$speaker->photo)))
+                                    <img src="{{ asset('uploads/'.$speaker->photo) }}" alt="{{ $speaker->name }}" onerror="this.src='{{ asset('uploads/default-speaker.jpg') }}'">
+                                @else
+                                    <img src="{{ asset('dist-front/images/default-speaker.jpg') }}" alt="{{ $speaker->name }}">
+                                @endif
                             </a>
                         </div>
                         <div class="speaker-info">

@@ -34,9 +34,6 @@
                                 <a class="dropdown-item" href="{{ route('front.faq') }}">FAQ</a>
                             </div>
                         </li>
-                        <li>
-                            <a class="smooth-scroll nav-link" href="{{ route('front.contact') }}">Contact</a>
-                        </li>
                         <li class="member-login-button">
                             <div class="inner">
                                 @if(Auth::guard('web')->check())

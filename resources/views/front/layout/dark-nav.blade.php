@@ -206,13 +206,10 @@
                                     <a class="dropdown-item" href="{{ route('front.upcoming_events') }}">Upcoming Events</a>
                                 </div>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link {{ Request::is('contact') ? 'active' : '' }}" href="{{ route('front.contact') }}">Contact</a>
-                            </li>
                             <li class="nav-item member-login-button">
                                 @if(Auth::guard('web')->check())
                                 <a class="nav-link" href="{{ route('user.dashboard') }}">
-                                    <i class="fa fa-user"></i> Dashboard
+                                    <i class="fa fa-user"></i> Dashboard</a>
                                 </a>
                                 @else
                                 <a class="nav-link" href="{{ route('login') }}">
