@@ -149,7 +149,7 @@
                                                 <div class="mb-4">
                                                     <label class="form-label"></label>
                                                     <button type="submit" class="btn btn-primary">Update Home Banner</button>
-                                                    <a href="{{ route('admin_dashboard') }}" class="btn btn-secondary">Back to Dashboard</a>
+                                                    <a href="{{ route('admin_event_selection') }}" class="btn btn-secondary">Back to Dashboard</a>
                                                 </div>
                                             </div>
                                         </div>

@@ -35,7 +35,7 @@ class AdminAuthController extends Controller
         ];
 
         if(Auth::guard('admin')->attempt($data)) {
-            return redirect()->route('admin_dashboard')->with('success','Login successful! Welcome to admin dashboard.');
+            return redirect()->route('admin_event_selection')->with('success','Login successful! Please select an event to manage.');
         } else {
             return redirect()->route('admin_login')->with('error','The information you entered is incorrect! Please try again!');
         }

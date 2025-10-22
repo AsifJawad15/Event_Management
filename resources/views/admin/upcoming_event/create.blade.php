@@ -7,7 +7,7 @@
             <h1>Add New Upcoming Event</h1>
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active">
-                    <a href="{{ route('admin_dashboard') }}">Dashboard</a>
+                    <a href="{{ route('admin_event_selection') }}">Event Selection</a>
                 </div>
                 <div class="breadcrumb-item active">
                     <a href="{{ route('admin_upcoming_event_index') }}">Upcoming Events</a>
@@ -113,7 +113,7 @@
                                     <button type="submit" class="btn btn-primary">
                                         <i class="fas fa-save"></i> Save Event
                                     </button>
-                                    <a href="{{ route('admin_upcoming_event_index') }}" class="btn btn-secondary">
+                                    <a href="{{ route('admin_event_selection') }}" class="btn btn-secondary">
                                         <i class="fas fa-times"></i> Cancel
                                     </a>
                                 </div>

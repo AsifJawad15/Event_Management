@@ -167,7 +167,13 @@
         <div class="row align-items-center">
             <div class="col-lg-2 col-sm-6 col-6">
                 <a href="{{ route('front.home') }}" id="logo" class="grid_2">
-                    <img src="{{ asset('uploads/'.$setting_data->logo) }}" alt="Logo">
+                    @if(isset($setting_data->logo) && $setting_data->logo)
+                        <img src="{{ asset('uploads/'.$setting_data->logo) }}" alt="Logo">
+                    @else
+                        <h3 style="color: #{{ $setting_data->theme_color ?? '6bc24a' }}; margin: 0; font-weight: bold;">
+                            <i class="fas fa-calendar-alt"></i> {{ config('app.name', 'Event Management') }}
+                        </h3>
+                    @endif
                 </a>
             </div>
             <div class="col-lg-10 col-sm-6 col-6 menu-area">

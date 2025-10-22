@@ -17,11 +17,22 @@ use App\Models\Ticket;
 use App\Models\Subscriber;
 use App\Models\Photo;
 use App\Models\Video;
+use App\Models\UpcomingEvent;
 
 class AdminDashboardController extends Controller
 {
-    public function dashboard()
+    public function event_selection()
     {
+        // Use model scopes to ensure correct ordering by 'order' then 'event_date'
+        $upcoming_events = UpcomingEvent::active()->ordered()->get();
+        return view('admin.event_selection', compact('upcoming_events'));
+    }
+
+    public function dashboard($event_id)
+    {
+        // Verify event exists
+        $event = UpcomingEvent::findOrFail($event_id);
+
         $total_posts = Post::count();
         $total_speakers = Speaker::count();
         $total_schedule_days = ScheduleDay::count();
@@ -36,7 +47,7 @@ class AdminDashboardController extends Controller
 
         $tickets = Ticket::with(['package','user'])->orderBy('id','desc')->get()->take(3);
 
-        return view('admin.dashboard', compact('total_posts', 'total_speakers', 'total_schedule_days', 'total_sponsors', 'total_organisers', 'total_attendees', 'total_packages', 'total_tickets', 'total_subscribers', 'total_photos', 'total_videos', 'tickets'));
+        return view('admin.dashboard', compact('event', 'total_posts', 'total_speakers', 'total_schedule_days', 'total_sponsors', 'total_organisers', 'total_attendees', 'total_packages', 'total_tickets', 'total_subscribers', 'total_photos', 'total_videos', 'tickets'));
     }
 
     public function profile_update(Request $request)

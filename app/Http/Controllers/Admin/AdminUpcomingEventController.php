@@ -49,7 +49,7 @@ class AdminUpcomingEventController extends Controller
 
         UpcomingEvent::create($validated);
 
-        return redirect()->route('admin_upcoming_event_index')
+        return redirect()->route('admin_event_selection')
                         ->with('success', 'Upcoming event added successfully!');
     }
 
@@ -86,7 +86,7 @@ class AdminUpcomingEventController extends Controller
 
         $upcomingEvent->update($validated);
 
-        return redirect()->route('admin_upcoming_event_index')
+        return redirect()->route('admin_event_selection')
                         ->with('success', 'Upcoming event updated successfully!');
     }
 
@@ -100,7 +100,7 @@ class AdminUpcomingEventController extends Controller
         $this->deleteImage($upcomingEvent->image);
         $upcomingEvent->delete();
 
-        return redirect()->route('admin_upcoming_event_index')
+        return redirect()->route('admin_event_selection')
                         ->with('success', 'Upcoming event deleted successfully!');
     }
 

@@ -107,7 +107,8 @@ Route::post('/reset-password/{token}/{email}',[UserController::class,'reset_pass
 
 // Admin
 Route::middleware('admin')->prefix('admin')->group(function () {
-    Route::get('/dashboard',[AdminDashboardController::class,'dashboard'])->name('admin_dashboard');
+    Route::get('/event-selection',[AdminDashboardController::class,'event_selection'])->name('admin_event_selection');
+    Route::get('/event/{event_id}/dashboard',[AdminDashboardController::class,'dashboard'])->name('admin_event_dashboard');
     Route::get('/profile',[AdminAuthController::class,'profile'])->name('admin_profile');
     Route::post('/profile',[AdminDashboardController::class,'profile_update'])->name('admin_profile_update');
 
@@ -193,6 +194,7 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::post('/upcoming-events',[AdminUpcomingEventController::class,'store'])->name('admin_upcoming_event_store');
     Route::get('/upcoming-events/{id}/edit',[AdminUpcomingEventController::class,'edit'])->name('admin_upcoming_event_edit');
     Route::put('/upcoming-events/{id}',[AdminUpcomingEventController::class,'update'])->name('admin_upcoming_event_update');
+    Route::get('/upcoming-events/{id}/delete',[AdminUpcomingEventController::class,'destroy'])->name('admin_upcoming_event_delete');
     Route::delete('/upcoming-events/{id}',[AdminUpcomingEventController::class,'destroy'])->name('admin_upcoming_event_destroy');
 
     // Photo Gallery routes

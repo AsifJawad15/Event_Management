@@ -8,11 +8,11 @@
 <style>
 /* Modern Dashboard with Glowing Effects & Animations */
 :root {
-    --primary: #667eea;
-    --secondary: #764ba2;
+    --primary: #{{ $setting_data->theme_color }};
+    --secondary: #{{ $setting_data->theme_color }}dd;
     --dark-bg: #0f172a;
     --card-bg: rgba(30, 41, 59, 0.85);
-    --glow: rgba(102, 126, 234, 0.6);
+    --glow: rgba({{ hexdec(substr($setting_data->theme_color, 0, 2)) }}, {{ hexdec(substr($setting_data->theme_color, 2, 2)) }}, {{ hexdec(substr($setting_data->theme_color, 4, 2)) }}, 0.6);
 }
 
 * {
@@ -101,9 +101,18 @@
     font-size: 48px;
     color: white;
     font-weight: 700;
-    box-shadow: 0 0 40px rgba(102, 126, 234, 0.6);
+    box-shadow: 0 0 40px var(--glow);
     animation: float 3s ease-in-out infinite;
     position: relative;
+    overflow: hidden;
+    border: 4px solid rgba(255, 255, 255, 0.2);
+}
+
+.hero-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
 }
 
 .hero-avatar::after {
@@ -294,8 +303,17 @@
     color: white;
     font-weight: 700;
     margin: 0 auto 15px;
-    box-shadow: 0 0 30px rgba(102, 126, 234, 0.6);
+    box-shadow: 0 0 30px var(--glow);
     animation: float 3s ease-in-out infinite;
+    overflow: hidden;
+    border: 3px solid rgba(255, 255, 255, 0.2);
+}
+
+.sidebar-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
 }
 
 .sidebar-name {
@@ -591,7 +609,11 @@
                     <p class="tagline">Manage your events and stay updated</p>
                 </div>
                 <div class="hero-avatar">
-                    {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+                    @if(Auth::user()->photo)
+                        <img src="{{ asset('uploads/' . Auth::user()->photo) }}" alt="{{ Auth::user()->name }}">
+                    @else
+                        {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+                    @endif
                 </div>
             </div>
         </div>
@@ -666,7 +688,11 @@
                 <div class="sidebar-card">
                     <div class="sidebar-header">
                         <div class="sidebar-avatar">
-                            {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+                            @if(Auth::user()->photo)
+                                <img src="{{ asset('uploads/' . Auth::user()->photo) }}" alt="{{ Auth::user()->name }}">
+                            @else
+                                {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+                            @endif
                         </div>
                         <h3 class="sidebar-name">{{ Auth::user()->name }}</h3>
                         <p class="sidebar-email">{{ Auth::user()->email }}</p>

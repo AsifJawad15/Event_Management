@@ -4,7 +4,9 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <link rel="icon" type="image/png" href="{{ asset('uploads/'.$setting_data->favicon) }}">
+        @if(isset($setting_data->favicon) && $setting_data->favicon)
+            <link rel="icon" type="image/png" href="{{ asset('uploads/'.$setting_data->favicon) }}">
+        @endif
 
         <title>@yield('title', 'SingleEvent - Event & Conference Management Website')</title>
 
@@ -29,6 +31,83 @@
             .user-sidebar li.active-item a,
             .user-sidebar li a:hover {
                 background: #{{ $setting_data->theme_color }};
+            }
+
+            /* Modern Privacy & Terms Links Styling */
+            .footer-legal-links {
+                display: inline-flex;
+                gap: 8px;
+                align-items: center;
+                margin: 0;
+                padding: 0;
+                list-style: none;
+            }
+
+            .footer-legal-links li {
+                position: relative;
+            }
+
+            .footer-legal-links li:not(:last-child)::after {
+                content: '•';
+                margin-left: 8px;
+                color: rgba(255, 255, 255, 0.4);
+                font-weight: 300;
+            }
+
+            .footer-legal-links a {
+                font-family: 'Nunito Sans', sans-serif;
+                font-weight: 600;
+                font-size: 15px;
+                color: rgba(255, 255, 255, 0.85);
+                text-decoration: none;
+                position: relative;
+                padding: 4px 8px;
+                border-radius: 6px;
+                transition: all 0.3s ease;
+                letter-spacing: 0.3px;
+                display: inline-flex;
+                align-items: center;
+                gap: 6px;
+            }
+
+            .footer-legal-links a::before {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 8px;
+                right: 8px;
+                height: 2px;
+                background: linear-gradient(90deg, #{{ $setting_data->theme_color }}, #{{ $setting_data->theme_color }}aa);
+                transform: scaleX(0);
+                transition: transform 0.3s ease;
+                border-radius: 2px;
+            }
+
+            .footer-legal-links a:hover {
+                color: #fff;
+                background: rgba({{ hexdec(substr($setting_data->theme_color, 0, 2)) }}, {{ hexdec(substr($setting_data->theme_color, 2, 2)) }}, {{ hexdec(substr($setting_data->theme_color, 4, 2)) }}, 0.15);
+                transform: translateY(-2px);
+            }
+
+            .footer-legal-links a:hover::before {
+                transform: scaleX(1);
+            }
+
+            .footer-legal-links .legal-icon {
+                font-size: 14px;
+                opacity: 0.8;
+            }
+
+            @media (max-width: 768px) {
+                .footer-legal-links {
+                    flex-wrap: wrap;
+                    gap: 8px;
+                    justify-content: center;
+                }
+
+                .footer-legal-links li:not(:last-child)::after {
+                    content: '•';
+                }
             }
             .static-banner-detail h4,
             .single-count h1,
@@ -124,11 +203,31 @@
 
                                 <div class="footer-column col-lg-2 col-sm-6 col-xs-12">
                                     <div class="footer-widget links-widget">
-                                        <h2>Pages</h2>
+                                        <h2>Legal</h2>
+                                        <div class="widget-content">
+                                            <ul class="list footer-legal-links">
+                                                <li>
+                                                    <a href="{{ route('front.term') }}">
+                                                        <i class="fas fa-file-contract legal-icon"></i>
+                                                        Terms of Use
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{ route('front.privacy') }}">
+                                                        <i class="fas fa-shield-alt legal-icon"></i>
+                                                        Privacy Policy
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="footer-column col-lg-2 col-sm-6 col-xs-12">
+                                    <div class="footer-widget links-widget">
+                                        <h2>Quick Links</h2>
                                         <div class="widget-content">
                                             <ul class="list">
-                                                <li><a href="{{ route('front.term') }}">Terms of Use</a></li>
-                                                <li><a href="{{ route('front.privacy') }}">Privacy Policy</a></li>
                                                 <li><a href="{{ route('front.schedule') }}">Schedule</a></li>
                                                 <li><a href="{{ route('front.contact') }}">Contact Us</a></li>
                                             </ul>

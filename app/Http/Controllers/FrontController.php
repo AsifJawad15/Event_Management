@@ -31,6 +31,7 @@ use App\Models\PrivacyPageItem;
 use App\Models\Subscriber;
 use App\Mail\Websitemail;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Xenon\NagadApi\Helper;
@@ -517,12 +518,23 @@ class FrontController extends Controller
         $admin = Admin::first();
         $setting = \App\Models\Setting::where('id', 1)->first();
 
-        // Create setting_data object for banner
+        // Create setting_data object with all necessary properties
         $setting_data = (object) [
-            'banner' => 'dist-front/images/banner.jpg'
+            'banner' => 'dist-front/images/banner.jpg',
+            'theme_color' => ($setting && isset($setting->theme_color)) ? $setting->theme_color : '6bc24a',
+            'logo' => ($setting && isset($setting->logo)) ? $setting->logo : null,
+            'favicon' => ($setting && isset($setting->favicon)) ? $setting->favicon : null,
+            'footer_address' => ($setting && isset($setting->footer_address)) ? $setting->footer_address : '',
+            'footer_email' => ($setting && isset($setting->footer_email)) ? $setting->footer_email : '',
+            'footer_phone' => ($setting && isset($setting->footer_phone)) ? $setting->footer_phone : '',
+            'footer_facebook' => ($setting && isset($setting->footer_facebook)) ? $setting->footer_facebook : '',
+            'footer_twitter' => ($setting && isset($setting->footer_twitter)) ? $setting->footer_twitter : '',
+            'footer_linkedin' => ($setting && isset($setting->footer_linkedin)) ? $setting->footer_linkedin : '',
+            'footer_instagram' => ($setting && isset($setting->footer_instagram)) ? $setting->footer_instagram : '',
+            'copyright' => ($setting && isset($setting->copyright)) ? $setting->copyright : '© ' . date('Y') . ' Evento. All rights reserved.'
         ];
 
-        return view('user.invoice', compact('ticket', 'admin', 'setting', 'setting_data'));
+        return view('user.invoice', compact('ticket', 'admin', 'setting_data'));
     }
 
     public function message()

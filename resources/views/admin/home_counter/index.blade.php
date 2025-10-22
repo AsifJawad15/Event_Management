@@ -255,7 +255,7 @@
                                                     </div>
                                                     <div class="mb-4">
                                                         <button type="submit" class="btn btn-primary">Update Home Counter</button>
-                                                        <a href="{{ route('admin_dashboard') }}" class="btn btn-secondary">Back to Dashboard</a>
+                                                        <a href="{{ route('admin_event_selection') }}" class="btn btn-secondary">Back to Dashboard</a>
                                                     </div>
                                                 </div>
                                             </div>

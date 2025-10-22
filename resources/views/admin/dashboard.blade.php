@@ -6,69 +6,140 @@
 
 <style>
     .main-content {
-        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
         min-height: 100vh;
     }
 
+    /* Modern Dashboard Header */
     .dashboard-header {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        padding: 30px;
-        border-radius: 15px;
+        background: linear-gradient(135deg, rgba(102, 126, 234, 0.95), rgba(118, 75, 162, 0.95));
+        padding: 40px;
+        border-radius: 25px;
         color: white;
-        margin-bottom: 30px;
-        box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        margin-bottom: 40px;
+        box-shadow: 0 15px 50px rgba(102, 126, 234, 0.4);
+        position: relative;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .dashboard-header::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+        animation: rotateGlow 20s linear infinite;
+    }
+
+    @keyframes rotateGlow {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+
+    .header-content {
+        position: relative;
+        z-index: 2;
+    }
+
+    .evento-brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 25px;
+        font-size: 28px;
+        font-weight: 800;
+        color: white;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .evento-icon {
+        width: 70px;
+        height: 70px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .evento-icon img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3));
+    }
+
+    .event-title-section {
+        text-align: center;
+        padding: 20px 0;
     }
 
     .dashboard-header h1 {
-        font-size: 32px;
-        font-weight: 700;
-        margin-bottom: 10px;
+        font-size: 42px;
+        font-weight: 800;
+        margin-bottom: 15px;
+        text-shadow: 0 3px 15px rgba(0, 0, 0, 0.3);
+        letter-spacing: 1px;
     }
 
-    .dashboard-header p {
+    .event-meta {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 25px;
+        flex-wrap: wrap;
         font-size: 16px;
-        opacity: 0.9;
-        margin-bottom: 20px;
+        opacity: 0.95;
+    }
+
+    .meta-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(255, 255, 255, 0.15);
+        padding: 10px 20px;
+        border-radius: 25px;
+        backdrop-filter: blur(10px);
+    }
+
+    .meta-item i {
+        font-size: 18px;
     }
 
     .create-event-btn {
-        background: white;
-        color: #667eea;
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(10px);
+        color: white;
         padding: 12px 30px;
-        border-radius: 50px;
-        font-weight: 600;
-        border: none;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        border-radius: 25px;
+        font-weight: 700;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
         transition: all 0.3s ease;
         display: inline-flex;
         align-items: center;
         gap: 10px;
+        text-decoration: none;
     }
 
     .create-event-btn:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        background: white;
         color: #667eea;
-    }
-
-    .upcoming-events-btn {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-        color: white !important;
-    }
-
-    .upcoming-events-btn:hover {
-        color: white !important;
-        background: linear-gradient(135deg, #764ba2 0%, #667eea 100%) !important;
+        transform: translateY(-3px);
+        box-shadow: 0 8px 30px rgba(255, 255, 255, 0.3);
+        border-color: white;
     }
 
     .stats-card {
-        background: white;
-        border-radius: 15px;
-        padding: 25px;
-        margin-bottom: 20px;
-        box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        background: rgba(30, 41, 59, 0.85);
+        backdrop-filter: blur(20px);
+        border-radius: 20px;
+        padding: 30px;
+        margin-bottom: 25px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
         transition: all 0.3s ease;
-        border: none;
+        border: 1px solid rgba(102, 126, 234, 0.2);
         position: relative;
         overflow: hidden;
     }
@@ -79,13 +150,14 @@
         top: 0;
         left: 0;
         width: 100%;
-        height: 4px;
+        height: 5px;
         background: linear-gradient(90deg, var(--card-color-start), var(--card-color-end));
     }
 
     .stats-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        transform: translateY(-8px);
+        box-shadow: 0 15px 50px rgba(102, 126, 234, 0.4);
+        border-color: var(--card-color-start);
     }
 
     .stats-card.purple {
@@ -132,60 +204,73 @@
     }
 
     .stats-card h4 {
-        font-size: 14px;
-        color: #6c757d;
-        font-weight: 600;
-        margin-bottom: 8px;
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.7);
+        font-weight: 700;
+        margin-bottom: 12px;
         text-transform: uppercase;
-        letter-spacing: 0.5px;
+        letter-spacing: 1px;
     }
 
     .stats-card .stats-number {
-        font-size: 32px;
-        font-weight: 700;
-        color: #2d3748;
+        font-size: 36px;
+        font-weight: 800;
+        color: #ffffff;
         margin: 0;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     }
 
     .section-title {
-        font-size: 24px;
-        font-weight: 700;
+        font-size: 26px;
+        font-weight: 800;
         color: #ffffff;
-        margin-bottom: 25px;
+        margin-bottom: 30px;
         display: flex;
         align-items: center;
-        gap: 10px;
+        gap: 12px;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     }
 
     .section-title i {
-        color: #ffffff;
+        color: #667eea;
+        font-size: 28px;
     }
 
     .table-container {
-        background: white;
-        border-radius: 15px;
-        padding: 25px;
-        box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        background: rgba(30, 41, 59, 0.85);
+        backdrop-filter: blur(20px);
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(102, 126, 234, 0.2);
     }
 
     .table thead th {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
         color: #ffffff !important;
         border: none !important;
-        padding: 15px !important;
-        font-weight: 600 !important;
+        padding: 18px 15px !important;
+        font-weight: 700 !important;
         text-transform: uppercase !important;
         font-size: 12px !important;
-        letter-spacing: 0.5px !important;
+        letter-spacing: 1px !important;
     }
 
     .table tbody tr {
         transition: all 0.3s ease;
+        background: rgba(15, 23, 42, 0.5);
+        border-bottom: 1px solid rgba(102, 126, 234, 0.1);
+        color: #ffffff;
     }
 
     .table tbody tr:hover {
-        background-color: #f8f9fa;
+        background: rgba(102, 126, 234, 0.2);
         transform: scale(1.01);
+    }
+
+    .table tbody td {
+        color: rgba(255, 255, 255, 0.9);
+        padding: 15px;
     }
 
     .badge {
@@ -233,23 +318,41 @@
 
 <div class="main-content">
     <section class="section">
-        <!-- Dashboard Header with Create Event Button -->
+        <!-- Modern Dashboard Header -->
         <div class="dashboard-header">
-            <div class="row align-items-center">
-                <div class="col-lg-8 col-md-12 mb-3 mb-lg-0">
-                    <h1><i class="fas fa-tachometer-alt"></i> EVENTO Dashboard</h1>
-                    <p>Welcome back! Manage all your events, attendees, and activities from one central hub.</p>
+            <div class="header-content">
+                <div class="row align-items-center">
+                    <div class="col-lg-4 col-md-12 mb-3 mb-lg-0">
+                        <div class="evento-brand">
+                            <div class="evento-icon">
+                                <img src="{{ asset('uploads/logo.png') }}" alt="Evento Logo">
+                            </div>
+                            <span>EVENTO</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-md-12 text-lg-end text-center">
+                        <a href="{{ route('admin_event_selection') }}" class="create-event-btn">
+                            <i class="fas fa-arrow-left"></i>
+                            Back to Events
+                        </a>
+                    </div>
                 </div>
-                <div class="col-lg-4 col-md-12 text-lg-end text-center">
-                    <div class="d-flex flex-wrap gap-2 justify-content-lg-end justify-content-center">
-                        <a href="{{ route('admin_event_create') }}" class="create-event-btn">
-                            <i class="fas fa-plus-circle"></i>
-                            Create New Event
-                        </a>
-                        <a href="{{ route('admin_upcoming_event_index') }}" class="create-event-btn upcoming-events-btn">
-                            <i class="fas fa-calendar-star"></i>
-                            Upcoming Events
-                        </a>
+
+                <div class="event-title-section">
+                    <h1>{{ $event->title }}</h1>
+                    <div class="event-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-calendar"></i>
+                            <span>{{ \Carbon\Carbon::parse($event->event_date)->format('M d, Y') }}</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-circle"></i>
+                            <span class="text-capitalize">{{ $event->status }}</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-sort-numeric-down"></i>
+                            <span>Order: {{ $event->order }}</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -444,7 +547,7 @@
                                                 <strong style="color: #667eea;">{{ $ticket->total_tickets }}</strong>
                                             </td>
                                             <td>
-                                                <strong style="color: #43e97b; font-size: 16px;">${{ number_format($ticket->total_price, 2) }}</strong>
+                                                <strong style="color: #43e97b; font-size: 16px;">৳{{ number_format($ticket->total_price, 2) }}</strong>
                                             </td>
                                             <td>
                                                 @if($ticket->payment_status == 'Pending')
@@ -462,19 +565,21 @@
                                                 <small class="text-muted">{{ $ticket->created_at->format('h:i A') }}</small>
                                             </td>
                                             <td class="text-center">
-                                                <a href="javascript:void(0)" class="btn btn-sm btn-primary btn-action" data-bs-toggle="modal" data-bs-target="#modal_{{ $loop->iteration }}" title="View Details">
+                                                <a href="javascript:void(0)" class="btn btn-sm btn-primary btn-action" data-toggle="modal" data-target="#modal_{{ $ticket->id }}" title="View Details">
                                                     <i class="fas fa-eye"></i>
                                                 </a>
-                                                <div class="modal fade" id="modal_{{ $loop->iteration }}" tabindex="-1" aria-hidden="true">
+                                                <div class="modal fade" id="modal_{{ $ticket->id }}" tabindex="-1" role="dialog" aria-hidden="true">
                                                     <div class="modal-dialog modal-lg">
-                                                        <div class="modal-content" style="border-radius: 15px; border: none;">
+                                                        <div class="modal-content" style="border-radius: 15px; border: none; background: rgba(30, 41, 59, 0.95);">
                                                             <div class="modal-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 15px 15px 0 0;">
                                                                 <h5 class="modal-title">
                                                                     <i class="fas fa-receipt"></i> Payment Details
                                                                 </h5>
-                                                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: white; opacity: 1;">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
                                                             </div>
-                                                            <div class="modal-body" style="padding: 30px;">
+                                                            <div class="modal-body" style="padding: 30px; color: #ffffff;">
 
                                                                 <div class="row mb-4">
                                                                     <div class="col-md-12">
@@ -486,7 +591,7 @@
 
                                                                 <div class="row mb-3">
                                                                     <div class="col-md-4">
-                                                                        <strong style="color: #6c757d;">User Name</strong>
+                                                                        <strong style="color: rgba(255, 255, 255, 0.7);">User Name</strong>
                                                                     </div>
                                                                     <div class="col-md-8">
                                                                         {{ $ticket->user->name }}
@@ -495,7 +600,7 @@
 
                                                                 <div class="row mb-3">
                                                                     <div class="col-md-4">
-                                                                        <strong style="color: #6c757d;">User Email</strong>
+                                                                        <strong style="color: rgba(255, 255, 255, 0.7);">User Email</strong>
                                                                     </div>
                                                                     <div class="col-md-8">
                                                                         {{ $ticket->user->email }}
@@ -512,7 +617,7 @@
 
                                                                 <div class="row mb-3">
                                                                     <div class="col-md-4">
-                                                                        <strong style="color: #6c757d;">Name</strong>
+                                                                        <strong style="color: rgba(255, 255, 255, 0.7);">Name</strong>
                                                                     </div>
                                                                     <div class="col-md-8">
                                                                         {{ $ticket->billing_name }}
@@ -521,7 +626,7 @@
 
                                                                 <div class="row mb-3">
                                                                     <div class="col-md-4">
-                                                                        <strong style="color: #6c757d;">Email</strong>
+                                                                        <strong style="color: rgba(255, 255, 255, 0.7);">Email</strong>
                                                                     </div>
                                                                     <div class="col-md-8">
                                                                         {{ $ticket->billing_email }}
@@ -530,7 +635,7 @@
 
                                                                 <div class="row mb-3">
                                                                     <div class="col-md-4">
-                                                                        <strong style="color: #6c757d;">Phone</strong>
+                                                                        <strong style="color: rgba(255, 255, 255, 0.7);">Phone</strong>
                                                                     </div>
                                                                     <div class="col-md-8">
                                                                         {{ $ticket->billing_phone }}
@@ -539,7 +644,7 @@
 
                                                                 <div class="row mb-3">
                                                                     <div class="col-md-4">
-                                                                        <strong style="color: #6c757d;">Address</strong>
+                                                                        <strong style="color: rgba(255, 255, 255, 0.7);">Address</strong>
                                                                     </div>
                                                                     <div class="col-md-8">
                                                                         {{ $ticket->billing_address }}<br>
@@ -558,7 +663,7 @@
 
                                                                 <div class="row mb-3">
                                                                     <div class="col-md-4">
-                                                                        <strong style="color: #6c757d;">Payment Method</strong>
+                                                                        <strong style="color: rgba(255, 255, 255, 0.7);">Payment Method</strong>
                                                                     </div>
                                                                     <div class="col-md-8">
                                                                         <span class="badge bg-secondary">{{ $ticket->payment_method }}</span>
@@ -567,7 +672,7 @@
 
                                                                 <div class="row mb-3">
                                                                     <div class="col-md-4">
-                                                                        <strong style="color: #6c757d;">Currency</strong>
+                                                                        <strong style="color: rgba(255, 255, 255, 0.7);">Currency</strong>
                                                                     </div>
                                                                     <div class="col-md-8">
                                                                         {{ $ticket->payment_currency }}
@@ -576,7 +681,7 @@
 
                                                                 <div class="row mb-3">
                                                                     <div class="col-md-4">
-                                                                        <strong style="color: #6c757d;">Transaction ID</strong>
+                                                                        <strong style="color: rgba(255, 255, 255, 0.7);">Transaction ID</strong>
                                                                     </div>
                                                                     <div class="col-md-8">
                                                                         <code>{{ $ticket->transaction_id }}</code>
@@ -586,7 +691,7 @@
                                                                 @if($ticket->bank_transaction_info)
                                                                 <div class="row mb-3">
                                                                     <div class="col-md-4">
-                                                                        <strong style="color: #6c757d;">Bank Info</strong>
+                                                                        <strong style="color: rgba(255, 255, 255, 0.7);">Bank Info</strong>
                                                                     </div>
                                                                     <div class="col-md-8">
                                                                         {{ $ticket->bank_transaction_info }}

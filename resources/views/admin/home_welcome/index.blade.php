@@ -114,10 +114,10 @@
     <div class="main-sidebar">
         <aside id="sidebar-wrapper">
             <div class="sidebar-brand">
-                <a href="{{ route('admin_dashboard') }}">Admin Panel</a>
+                <a href="{{ route('admin_event_selection') }}">Admin Panel</a>
             </div>
             <div class="sidebar-brand sidebar-brand-sm">
-                <a href="{{ route('admin_dashboard') }}"></a>
+                <a href="{{ route('admin_event_selection') }}"></a>
             </div>
 
         @include('admin.layout.sidebar')
@@ -184,7 +184,7 @@
                                             <div class="mb-4">
                                                 <label class="form-label"></label>
                                                 <button type="submit" class="btn btn-primary">Update Home Welcome</button>
-                                                <a href="{{ route('admin_dashboard') }}" class="btn btn-secondary">Back to Dashboard</a>
+                                                <a href="{{ route('admin_event_selection') }}" class="btn btn-secondary">Back to Dashboard</a>
                                             </div>
                                         </div>
                                     </div>
